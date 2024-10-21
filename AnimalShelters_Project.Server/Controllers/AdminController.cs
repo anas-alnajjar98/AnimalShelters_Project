@@ -12,7 +12,15 @@ namespace AnimalShelters_Project.Server.Controllers
         public AdminController(MyDbContext context)
         {
             _context = context;
-            
+
         }
+        [HttpGet("GetAllCategory")]
+        public async Task<IActionResult> GetAllCategory() {
+        
+        var categorys= _context.Categories.ToList();
+            if (!categorys.Any()) { return NotFound("no ctaegory in our dataBase"); }
+            return Ok(categorys);
+        }
+        
     }
 }
