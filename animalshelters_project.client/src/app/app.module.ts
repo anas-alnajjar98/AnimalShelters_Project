@@ -6,12 +6,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { TuqaComponent } from './tuqa/tuqa.component';
+import { FooterComponent } from './Tuqa/footer/footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    TuqaComponent
+    TuqaComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,
