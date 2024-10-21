@@ -15,18 +15,18 @@
         <h2 class="text-center mb-4">Post Your Success Pet Story</h2>
         <div class="tab-content" id="myTabContent">
           <div class="tab-pane fade show active" id="register" role="tabpanel" aria-labelledby="register-tab">
-            <form class="row mt-4 mb-5 align-items-center">
+            <form #addNewPost="ngForm" (ngSubmit)="addPost(addNewPost.value)" class="row mt-4 mb-5 align-items-center">
               <div class="mb-3 col-sm-12">
                 <label class="form-label">Title:</label>
-                <input type="text" class="form-control" placeholder="Enter the title of your story">
+                <input name="title" type="text" class="form-control" placeholder="Enter the title of your story" ngModel>
               </div>
               <div class="mb-3 col-sm-12">
                 <label class="form-label">Description:</label>
-                <textarea class="form-control" rows="5" placeholder="Describe your pet's success story"></textarea>
+                <textarea class="form-control" name="content" rows="5" placeholder="Describe your pet's success story" ngModel></textarea>
               </div>
               <div class="mb-3 col-sm-12">
                 <label class="form-label">Image:</label>
-                <input type="file" class="form-control" placeholder="">
+                <input (change)="changeImage($event)" name="image" type="file" class="form-control" placeholder="" ngModel>
               </div>
               <div class="col-sm-6">
                 <div class="d-grid">

@@ -18,8 +18,8 @@ namespace AnimalShelters_Project.Server.Controllers
         public IActionResult Login([FromForm] UserLoginDto user)
         {
 
-            var dbuser = context.Users.FirstOrDefault(u => u.Email == user.Email);
-            if (dbuser == null || !PasswordHasher.VerifyPasswordHash(user.Password, dbuser.PasswordHash, dbuser.PasswordSalt))
+            var dbuser = authRepository.GetUser(user);
+            if (dbuser == null)
             {
                 return Unauthorized(new { message = "Bad Credentials" });
             }
@@ -49,7 +49,7 @@ namespace AnimalShelters_Project.Server.Controllers
         {
             get
             {
-                var userId = Convert.ToInt64(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+                var userId = Convert.ToInt32(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
                 var user = context.Users.Find(userId);
                 return user;
             }
@@ -62,7 +62,7 @@ namespace AnimalShelters_Project.Server.Controllers
         //}
 
         [HttpGet("GetUserById/{id}")]
-        public IActionResult GetUserById(long id)
+        public IActionResult GetUserById(int id)
         {
             var user = context.Users.Find(id);
             if (user == null)

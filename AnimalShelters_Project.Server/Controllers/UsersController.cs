@@ -12,13 +12,11 @@ namespace AnimalShelters_Project.Server.Controllers
     public class UsersController : ControllerBase
     {
         private MyDbContext _db;
-        private TokenGenerator _tokenGenerator;
         private AuthRepository _authRepository;
         private GenerateJwtToken _generateJwtToken;
-        public UsersController(MyDbContext db, TokenGenerator tokenGenerator, AuthRepository authRepository, GenerateJwtToken generateJwt)
+        public UsersController(MyDbContext db, AuthRepository authRepository, GenerateJwtToken generateJwt)
         {
             _db = db;
-            _tokenGenerator = tokenGenerator;
             _authRepository = authRepository;
             _generateJwtToken = generateJwt;
 
