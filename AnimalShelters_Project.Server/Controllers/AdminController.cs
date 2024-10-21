@@ -164,6 +164,46 @@ namespace AnimalShelters_Project.Server.Controllers
             }
             return BadRequest("Invalid data or missing image.");
         }
+        [HttpPut("UpdateCategory/{id}")]
+        public async Task<IActionResult> UpdateCategory(int id ,[FromForm] AddCategoryDto upd) {
+            if (id <= 0) { BadRequest("ID can't be less or equal 0"); }
+            var Category = _context.Categories.FirstOrDefault(x => x.Id == id);
+            if (Category == null) {
+                return NotFound("no category under this id");
+            }
+            if (upd.Image != null && upd.Image.Length > 0)
+            {
+                var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
 
+
+
+                if (!Directory.Exists(uploadsFolder))
+                {
+                    Directory.CreateDirectory(uploadsFolder);
+                }
+
+                var uniqueFileName = Guid.NewGuid().ToString() + "_" + upd.Image.FileName;
+                var filePathWwwroot = Path.Combine(uploadsFolder, uniqueFileName);
+
+
+                using (var fileStream = new FileStream(filePathWwwroot, FileMode.Create))
+                {
+                    await upd.Image.CopyToAsync(fileStream);
+                }
+                Category.Image = $"/images/{uniqueFileName}";
+                Category.Species = upd.Species ?? Category.Species;
+                await _context.SaveChangesAsync();
+                return Ok(Category);
+            }
+            else
+            {
+                Category.Image = Category.Image;
+                Category.Species = upd.Species ?? Category.Species;
+                await _context.SaveChangesAsync();
+                return Ok(Category);
+            }
+         
+
+        }
     }
 }

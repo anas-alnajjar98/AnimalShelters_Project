@@ -7,13 +7,15 @@ import { HomeComponent } from './Tuqa/home/home.component';
 import { NavbarComponent } from './Tuqa/navbar/navbar.component';
 import { FooterComponent } from './Tuqa/footer/footer.component';
 import { RouterModule } from '@angular/router';
+import { PostFormComponent } from './Fawareh/post-form/post-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    PostFormComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,
@@ -21,6 +23,8 @@ import { RouterModule } from '@angular/router';
     RouterModule.forRoot([
 
       { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: 'postForm', component: PostFormComponent },
+
     ]),
   ],
   providers: [],
