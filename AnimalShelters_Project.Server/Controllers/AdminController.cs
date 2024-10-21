@@ -400,7 +400,13 @@ namespace AnimalShelters_Project.Server.Controllers
         public async Task<IActionResult> DeletCategoryById(int id) {
             if (id <= 0) { return BadRequest("id can't be zero or less"); }
             var category=_context.Categories.FirstOrDefault(c => c.Id == id);
-            if (category == null) { return NotFound("no category found "); }
+            if (category != null) {
+
+                var animal =  _context.Animals.Where(x => x.CategoryId == id).ToList();
+                if (animal.Any()) {
+                    _context.Animals.RemoveRange(animal);
+                }
+            }
             _context.Categories.Remove(category);
             _context.SaveChanges();
             return Ok(category);
