@@ -23,7 +23,7 @@ namespace AnimalShelters_Project.Server.DTOs
 
         public string? AdoptionStatus { get; set; }
 
-        public FormFile? ImageUrl { get; set; }
+        public IFormFile? ImageUrl { get; set; }
 
       
        

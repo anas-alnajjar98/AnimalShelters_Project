@@ -17,16 +17,17 @@ namespace AnimalShelters_Project.Server.Controllers
 
         }
         [HttpGet("/getAllAnimals")]
-        public IActionResult GetAnimals() { 
-        
-        var animals=_context.Animals.ToList();
-            if (animals!= null)
+        public IActionResult GetAnimals()
+        {
+
+            var animals = _context.Animals.ToList();
+            if (animals != null)
             {
 
                 return Ok(animals);
             }
             return NoContent();
-        
+
         }
 
 
@@ -57,44 +58,60 @@ namespace AnimalShelters_Project.Server.Controllers
         public IActionResult addAnimal([FromForm] AnimalDto animal)
         {
 
-            var folder = Path.Combine(Directory.GetCurrentDirectory(), "Uploads");
-            if (!Directory.Exists(folder))
+
+            if (animal.ImageUrl != null && animal.ImageUrl.Length > 0)
             {
-                Directory.CreateDirectory(folder);
+                var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
+
+
+
+                if (!Directory.Exists(uploadsFolder))
+                {
+                    Directory.CreateDirectory(uploadsFolder);
+                }
+
+                var uniqueFileName = Guid.NewGuid().ToString() + "_" + animal.ImageUrl.FileName;
+                var filePathWwwroot = Path.Combine(uploadsFolder, uniqueFileName);
+
+
+                using (var fileStream = new FileStream(filePathWwwroot, FileMode.Create))
+                {
+                    animal.ImageUrl.CopyToAsync(fileStream);
+                }
+
+
+
+                var newAnimal = new Animal
+                {
+                    Name = animal.Name,
+                    CategoryId = animal.CategoryId,
+                    Breed = animal.Breed,
+                    Age = animal.Age,
+                    ShelterId = animal.ShelterId,
+                    Size = animal.Size,
+                    Temperament = animal.Temperament,
+                    SpecialNeeds = animal.SpecialNeeds,
+                    ImageUrl = $"/images/{uniqueFileName}",
+                    AdoptionStatus = animal.AdoptionStatus
+                };
+
+                _context.Animals.Add(newAnimal);
+                _context.SaveChanges();
+                return Ok(newAnimal);
             }
-            var fileImage = Path.Combine(folder, animal.ImageUrl.FileName);
-            using (var stream = new FileStream(fileImage, FileMode.Create))
-            {
-                animal.ImageUrl.CopyToAsync(stream);
-
-            }
-
-            var newAnimal = new Animal
-            {
-                Name = animal.Name,
-                CategoryId = animal.CategoryId,
-                Breed=animal.Breed,
-                Age=animal.Age,
-                ShelterId= animal.ShelterId,
-                Size = animal.Size,
-                Temperament = animal.Temperament,
-                SpecialNeeds=animal.SpecialNeeds,
-                AdoptionStatus = animal.AdoptionStatus
-            };
-
-            _context.Animals.Add(newAnimal);
-            _context.SaveChanges();
-            return Ok(newAnimal);
-        }
 
 
-
-
-        }
-        [HttpGet("GetAllCategory")]
-        public async Task<IActionResult> GetAllCategory() {
         
-        var categorys= _context.Categories.ToList();
+            
+            return BadRequest("Invalid data or missing image.");
+        }
+
+
+            [HttpGet("GetAllCategory")]
+        public async Task<IActionResult> GetAllCategory()
+        {
+
+            var categorys = _context.Categories.ToList();
             if (!categorys.Any()) { return NotFound("no ctaegory in our dataBase"); }
             return Ok(categorys);
         }
