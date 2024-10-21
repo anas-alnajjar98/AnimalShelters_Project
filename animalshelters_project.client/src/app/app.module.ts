@@ -8,6 +8,7 @@ import { NavbarComponent } from './Tuqa/navbar/navbar.component';
 import { FooterComponent } from './Tuqa/footer/footer.component';
 import { RouterModule } from '@angular/router';
 import { PostFormComponent } from './Fawareh/post-form/post-form.component';
+import { LoginComponent } from './hosam/login/login.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { PostFormComponent } from './Fawareh/post-form/post-form.component';
     HomeComponent,
     NavbarComponent,
     FooterComponent,
-    PostFormComponent
+    PostFormComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,
