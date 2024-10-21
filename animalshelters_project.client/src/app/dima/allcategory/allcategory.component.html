@@ -1,0 +1,37 @@
+<section class="header-inner bg-dark text-center">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 ">
+        <ol class="breadcrumb mb-0 p-0">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item active">Categories</li>
+        </ol>
+        <h2 class="inner-banner-title">Categories</h2>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="space-pb">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10 col-md-12 ">
+        <div class="section-title text-center">
+          <h2 class="title">Explore different types of Categories who provide the animals for your requirements.</h2>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+    
+      <div class="col-md-4" *ngFor="let item of Array">
+        <div class="service-style-01 mb-5">
+          <img class="img-fluid" src="https://localhost:7208/{{item.image}}" alt="">
+          <a [routerLink]="['/getanimal', item.id]" class="service-title">{{item.species}}</a>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
