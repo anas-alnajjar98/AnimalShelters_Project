@@ -28,6 +28,7 @@ import { LoginComponent } from './hosam/login/login.component';
 
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'postForm', component: PostFormComponent },
+      { path: 'login', component: LoginComponent },
 
     ]),
   ],
