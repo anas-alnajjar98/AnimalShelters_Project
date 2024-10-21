@@ -18,7 +18,7 @@ namespace AnimalShelters_Project.Server.Controllers
 
         // add post from form api
         [HttpPost("addPost")]
-        public IActionResult addPost([FromForm] PostFormDto postForm)
+        public async Task <IActionResult> addPost([FromForm] PostFormDto postForm)
         {
             if (!ModelState.IsValid)
             {
@@ -32,7 +32,7 @@ namespace AnimalShelters_Project.Server.Controllers
             var fileImage = Path.Combine(folder, postForm.Image.FileName);
             using (var stream = new FileStream(fileImage, FileMode.Create))
             {
-                postForm.Image.CopyToAsync(stream);
+                await postForm.Image.CopyToAsync(stream);
 
             }
             var post = new Post
