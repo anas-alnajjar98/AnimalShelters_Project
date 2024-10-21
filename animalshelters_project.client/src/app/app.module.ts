@@ -4,16 +4,12 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
-import { TuqaComponent } from './tuqa/tuqa.component';
-import { FooterComponent } from './Tuqa/footer/footer.component';
+import { HomeComponent } from './Tuqa/home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    TuqaComponent,
-    FooterComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,
