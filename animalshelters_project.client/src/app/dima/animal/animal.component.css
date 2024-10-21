@@ -63,3 +63,22 @@
   background-color: #6c757d;
   color: white;
 }
+
+
+.page-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.filter-container {
+  width: 250px;
+  margin-right: 20px;
+  
+  margin-top: 5rem;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+}
