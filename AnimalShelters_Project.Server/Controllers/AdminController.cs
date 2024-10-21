@@ -265,15 +265,37 @@ namespace AnimalShelters_Project.Server.Controllers
                 _context.SaveChanges();
 
                 return Ok(newedit);
-            
-
-           
+                   
         }
 
+        [HttpDelete("deleteShelter/{id}")]
+        public IActionResult DeleteShelter(int id) {
+
+
+            var shelter = _context.Shelters.Find(id);
+
+            if (shelter != null)
+            {
+                var animals = _context.Animals.Where(a => a.ShelterId == id).ToList();
+
+                if (animals.Any())
+                {
+                    _context.Animals.RemoveRange(animals);
+                }
+
+                _context.Shelters.Remove(shelter);
+                _context.SaveChanges();
+
+                return NoContent();
+            }
+
+            return NotFound($"there is no shelter with id {id}");
 
 
 
+        }
 
+           
 
 
         [HttpGet("GetAllCategory")]
