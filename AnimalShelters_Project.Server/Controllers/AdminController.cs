@@ -54,6 +54,31 @@ namespace AnimalShelters_Project.Server.Controllers
 
         }
 
+        [HttpGet("AnimalsbyShelterId/{id}")]
+
+        public IActionResult AnimalsShelter(int id)
+        {
+
+            var animals = _context.Animals.Where(a => a.ShelterId == id).ToList();
+
+            if (id <= 0)
+            {
+                return BadRequest();
+
+            }
+            if (animals != null)
+            {
+                return Ok(animals);
+
+            }
+
+            return NotFound();
+
+
+        }
+
+
+
         [HttpPut("updateAnimals/{id}")]
         public IActionResult updateAnimals(int id, [FromForm] AnimalDto animal)
         {
