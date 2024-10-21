@@ -1,3 +1,4 @@
+
 using AnimalShelters_Project.Server.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,6 +19,16 @@ namespace AnimalShelters_Project.Server
             builder.Services.AddDbContext<MyDbContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("YourConnectionString")));
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("Development", builder =>
+                {
+                    builder.AllowAnyHeader()
+                           .AllowAnyMethod()
+                           .AllowAnyOrigin();
+                });
+            });
+
             var app = builder.Build();
 
             app.UseDefaultFiles();
@@ -33,6 +44,9 @@ namespace AnimalShelters_Project.Server
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
+
+            app.UseCors("Development");
+
 
 
             app.MapControllers();
