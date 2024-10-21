@@ -2,7 +2,7 @@
 {
     public class AddCategoryDto
     {
-        public string Species { get; set; } = null!;
+        public string? Species { get; set; }
 
         public IFormFile? Image { get; set; }
     }

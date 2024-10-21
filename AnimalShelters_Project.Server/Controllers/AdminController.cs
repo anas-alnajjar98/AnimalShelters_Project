@@ -17,16 +17,16 @@ namespace AnimalShelters_Project.Server.Controllers
 
         }
         [HttpGet("/getAllAnimals")]
-        public IActionResult GetAnimals() { 
-        
-        var animals=_context.Animals.ToList();
-            if (animals!= null)
+        public IActionResult GetAnimals() {
+
+            var animals = _context.Animals.ToList();
+            if (animals != null)
             {
 
                 return Ok(animals);
             }
             return NoContent();
-        
+
         }
 
 
@@ -73,12 +73,12 @@ namespace AnimalShelters_Project.Server.Controllers
             {
                 Name = animal.Name,
                 CategoryId = animal.CategoryId,
-                Breed=animal.Breed,
-                Age=animal.Age,
-                ShelterId= animal.ShelterId,
+                Breed = animal.Breed,
+                Age = animal.Age,
+                ShelterId = animal.ShelterId,
                 Size = animal.Size,
                 Temperament = animal.Temperament,
-                SpecialNeeds=animal.SpecialNeeds,
+                SpecialNeeds = animal.SpecialNeeds,
                 AdoptionStatus = animal.AdoptionStatus
             };
 
@@ -90,11 +90,11 @@ namespace AnimalShelters_Project.Server.Controllers
 
 
 
-        }
+
         [HttpGet("GetAllCategory")]
         public async Task<IActionResult> GetAllCategory() {
-        
-        var categorys= _context.Categories.ToList();
+
+            var categorys = _context.Categories.ToList();
             if (!categorys.Any()) { return NotFound("no ctaegory in our dataBase"); }
             return Ok(categorys);
         }
@@ -147,6 +147,46 @@ namespace AnimalShelters_Project.Server.Controllers
             }
             return BadRequest("Invalid data or missing image.");
         }
+        [HttpPut("UpdateCategory/{id}")]
+        public async Task<IActionResult> UpdateCategory(int id ,[FromForm] AddCategoryDto upd) {
+            if (id <= 0) { BadRequest("ID can't be less or equal 0"); }
+            var Category = _context.Categories.FirstOrDefault(x => x.Id == id);
+            if (Category == null) {
+                return NotFound("no category under this id");
+            }
+            if (upd.Image != null && upd.Image.Length > 0)
+            {
+                var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
 
+
+
+                if (!Directory.Exists(uploadsFolder))
+                {
+                    Directory.CreateDirectory(uploadsFolder);
+                }
+
+                var uniqueFileName = Guid.NewGuid().ToString() + "_" + upd.Image.FileName;
+                var filePathWwwroot = Path.Combine(uploadsFolder, uniqueFileName);
+
+
+                using (var fileStream = new FileStream(filePathWwwroot, FileMode.Create))
+                {
+                    await upd.Image.CopyToAsync(fileStream);
+                }
+                Category.Image = $"/images/{uniqueFileName}";
+                Category.Species = upd.Species ?? Category.Species;
+                await _context.SaveChangesAsync();
+                return Ok(Category);
+            }
+            else
+            {
+                Category.Image = Category.Image;
+                Category.Species = upd.Species ?? Category.Species;
+                await _context.SaveChangesAsync();
+                return Ok(Category);
+            }
+         
+
+        }
     }
 }
