@@ -8,6 +8,7 @@ import { NavbarComponent } from './Tuqa/navbar/navbar.component';
 import { FooterComponent } from './Tuqa/footer/footer.component';
 import { RouterModule } from '@angular/router';
 import { PostFormComponent } from './Fawareh/post-form/post-form.component';
+import { FormsModule } from '@angular/forms';  // <-- Import FormsModule
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { PostFormComponent } from './Fawareh/post-form/post-form.component';
     PostFormComponent
   ],
   imports: [
+    FormsModule,
     BrowserModule, HttpClientModule,
     AppRoutingModule,
     RouterModule.forRoot([
