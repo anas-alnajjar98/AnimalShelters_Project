@@ -10,6 +10,8 @@ import { RouterModule } from '@angular/router';
 import { PostFormComponent } from './Fawareh/post-form/post-form.component';
 import { FormsModule } from '@angular/forms';  // <-- Import FormsModule
 import { LoginComponent } from './hosam/login/login.component';
+import { AllcategoryComponent } from './dima/allcategory/allcategory.component';
+
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { LoginComponent } from './hosam/login/login.component';
     NavbarComponent,
     FooterComponent,
     PostFormComponent,
-    LoginComponent
+    LoginComponent,
+    AllcategoryComponent
+  
   ],
   imports: [
     FormsModule,
@@ -28,6 +32,7 @@ import { LoginComponent } from './hosam/login/login.component';
 
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'postForm', component: PostFormComponent },
+      { path: 'Categories', component: AllcategoryComponent },
       { path: 'login', component: LoginComponent },
 
     ]),

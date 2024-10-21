@@ -18,7 +18,7 @@ namespace AnimalShelters_Project.Server.Controllers
 
         // add post from form api
         [HttpPost("addPost")]
-        public async Task <IActionResult> addPost([FromForm] PostFormDto postForm)
+        public async Task<IActionResult> addPost([FromForm] PostFormDto postForm)
         {
             if (!ModelState.IsValid)
             {
@@ -41,13 +41,15 @@ namespace AnimalShelters_Project.Server.Controllers
                 Content = postForm.Content,
                 Image = postForm.Image.FileName,
                 Title = postForm.Title,
-                
+
             };
             _db.Posts.Add(post);
             _db.SaveChanges();
             return Ok(post);
 
         }
+
+
 
     }
 }
