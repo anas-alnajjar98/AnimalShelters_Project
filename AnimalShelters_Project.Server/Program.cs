@@ -126,8 +126,8 @@ namespace AnimalShelters_Project.Server
 
             app.UseHttpsRedirection();
 
-            app.UseAuthorization();
             app.UseAuthentication();
+            app.UseAuthorization();
             app.UseCors("Development");
 
 

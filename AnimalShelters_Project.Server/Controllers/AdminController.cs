@@ -17,7 +17,8 @@ namespace AnimalShelters_Project.Server.Controllers
 
         }
         [HttpGet("/getAllAnimals")]
-        public IActionResult GetAnimals() {
+        public IActionResult GetAnimals()
+        {
 
             var animals = _context.Animals.ToList();
             if (animals != null)
@@ -53,46 +54,156 @@ namespace AnimalShelters_Project.Server.Controllers
 
         }
 
-        [HttpPost("addAnimals")]
-        public IActionResult addAnimal([FromForm] AnimalDto animal)
+        [HttpGet("AnimalsbyShelterId/{id}")]
+
+        public IActionResult AnimalsShelter(int id)
         {
 
-            var folder = Path.Combine(Directory.GetCurrentDirectory(), "Uploads");
-            if (!Directory.Exists(folder))
+            var animals = _context.Animals.Where(a => a.ShelterId == id).ToList();
+
+            if (id <= 0)
             {
-                Directory.CreateDirectory(folder);
-            }
-            var fileImage = Path.Combine(folder, animal.ImageUrl.FileName);
-            using (var stream = new FileStream(fileImage, FileMode.Create))
-            {
-                animal.ImageUrl.CopyToAsync(stream);
+                return BadRequest();
 
             }
-
-            var newAnimal = new Animal
+            if (animals != null)
             {
-                Name = animal.Name,
-                CategoryId = animal.CategoryId,
-                Breed = animal.Breed,
-                Age = animal.Age,
-                ShelterId = animal.ShelterId,
-                Size = animal.Size,
-                Temperament = animal.Temperament,
-                SpecialNeeds = animal.SpecialNeeds,
-                AdoptionStatus = animal.AdoptionStatus
-            };
+                return Ok(animals);
 
-            _context.Animals.Add(newAnimal);
-            _context.SaveChanges();
-            return Ok(newAnimal);
+            }
+
+            return NotFound();
+
+
         }
 
 
 
+        [HttpPut("updateAnimals/{id}")]
+        public IActionResult updateAnimals(int id, [FromForm] AnimalDto animal)
+        {
+            var newedit = _context.Animals.Where(p => p.AnimalId == id).FirstOrDefault();
+
+            if (newedit == null)
+            {
+                return NotFound("Animal not found.");
+            }
+
+            if (animal.ImageUrl != null && animal.ImageUrl.Length > 0)
+            {
+                var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
+
+                if (!Directory.Exists(uploadsFolder))
+                {
+                    Directory.CreateDirectory(uploadsFolder);
+                }
+
+                var uniqueFileName = Guid.NewGuid().ToString() + "_" + animal.ImageUrl.FileName;
+                var filePathWwwroot = Path.Combine(uploadsFolder, uniqueFileName);
+
+                using (var fileStream = new FileStream(filePathWwwroot, FileMode.Create))
+                {
+                    animal.ImageUrl.CopyTo(fileStream);
+                }
+
+                // Update the newedit object properties
+                newedit.Name = animal.Name;
+                newedit.CategoryId = animal.CategoryId;
+                newedit.Breed = animal.Breed;
+                newedit.Age = animal.Age;
+                newedit.ShelterId = animal.ShelterId;
+                newedit.Size = animal.Size;
+                newedit.Temperament = animal.Temperament;
+                newedit.SpecialNeeds = animal.SpecialNeeds;
+                newedit.ImageUrl = $"/images/{uniqueFileName}";
+                newedit.AdoptionStatus = animal.AdoptionStatus;
+
+                // Save changes to the context
+                _context.Animals.Update(newedit);
+                _context.SaveChanges();
+
+                return Ok(newedit);
+            }
+
+            return BadRequest("there is an error in updated animals");
+        }
+
+        [HttpDelete("deleteAnimal/{id}")]
+        public IActionResult DeleteAnimal(int id)
+        {
+            var animal = _context.Animals.Where(a => a.AnimalId == id).FirstOrDefault();
+
+            
+            if (animal == null)
+            {
+                return NotFound("Animal not found.");
+            }
+
+            _context.Animals.Remove(animal);
+
+            _context.SaveChanges();
+
+            return Ok($"Animal with ID {id} was successfully deleted.");
+        }
 
 
-        [HttpGet("GetAllCategory")]
-        public async Task<IActionResult> GetAllCategory() {
+
+        [HttpPost("addAnimals")]
+        public IActionResult addAnimal([FromForm] AnimalDto animal)
+        {
+
+
+            if (animal.ImageUrl != null && animal.ImageUrl.Length > 0)
+            {
+                var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
+
+
+
+                if (!Directory.Exists(uploadsFolder))
+                {
+                    Directory.CreateDirectory(uploadsFolder);
+                }
+
+                var uniqueFileName = Guid.NewGuid().ToString() + "_" + animal.ImageUrl.FileName;
+                var filePathWwwroot = Path.Combine(uploadsFolder, uniqueFileName);
+
+
+                using (var fileStream = new FileStream(filePathWwwroot, FileMode.Create))
+                {
+                    animal.ImageUrl.CopyToAsync(fileStream);
+                }
+
+
+
+                var newAnimal = new Animal
+                {
+                    Name = animal.Name,
+                    CategoryId = animal.CategoryId,
+                    Breed = animal.Breed,
+                    Age = animal.Age,
+                    ShelterId = animal.ShelterId,
+                    Size = animal.Size,
+                    Temperament = animal.Temperament,
+                    SpecialNeeds = animal.SpecialNeeds,
+                    ImageUrl = $"/images/{uniqueFileName}",
+                    AdoptionStatus = animal.AdoptionStatus
+                };
+
+                _context.Animals.Add(newAnimal);
+                _context.SaveChanges();
+                return Ok(newAnimal);
+            }
+
+
+        
+            
+            return BadRequest("Invalid data or missing image.");
+        }
+
+
+            [HttpGet("GetAllCategory")]
+        public async Task<IActionResult> GetAllCategory()
+        {
 
             var categorys = _context.Categories.ToList();
             if (!categorys.Any()) { return NotFound("no ctaegory in our dataBase"); }
@@ -187,6 +298,15 @@ namespace AnimalShelters_Project.Server.Controllers
             }
          
 
+        }
+        [HttpDelete("DeletCategoryById/{id}")]
+        public async Task<IActionResult> DeletCategoryById(int id) {
+            if (id <= 0) { return BadRequest("id can't be zero or less"); }
+            var category=_context.Categories.FirstOrDefault(c => c.Id == id);
+            if (category == null) { return NotFound("no category found "); }
+            _context.Categories.Remove(category);
+            _context.SaveChanges();
+            return Ok(category);
         }
     }
 }
