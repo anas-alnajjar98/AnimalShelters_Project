@@ -1,4 +1,3 @@
-
 using AnimalShelters_Project.Server.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,7 +16,7 @@ namespace AnimalShelters_Project.Server
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddDbContext<MyDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("YourConnectionString")));
+            options.UseSqlServer(builder.Configuration.GetConnectionString("YourConnectionString")));
 
             var app = builder.Build();
 
