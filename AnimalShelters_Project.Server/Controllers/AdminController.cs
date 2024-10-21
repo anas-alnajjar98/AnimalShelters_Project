@@ -2,7 +2,9 @@
 using AnimalShelters_Project.Server.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Org.BouncyCastle.Crypto;
 using System.Drawing;
+using System.Numerics;
 
 namespace AnimalShelters_Project.Server.Controllers
 {
@@ -106,7 +108,7 @@ namespace AnimalShelters_Project.Server.Controllers
                     animal.ImageUrl.CopyTo(fileStream);
                 }
 
-                // Update the newedit object properties
+                
                 newedit.Name = animal.Name;
                 newedit.CategoryId = animal.CategoryId;
                 newedit.Breed = animal.Breed;
@@ -118,7 +120,7 @@ namespace AnimalShelters_Project.Server.Controllers
                 newedit.ImageUrl = $"/images/{uniqueFileName}";
                 newedit.AdoptionStatus = animal.AdoptionStatus;
 
-                // Save changes to the context
+                
                 _context.Animals.Update(newedit);
                 _context.SaveChanges();
 
@@ -201,7 +203,102 @@ namespace AnimalShelters_Project.Server.Controllers
         }
 
 
-            [HttpGet("GetAllCategory")]
+
+        [HttpGet("/getAllAShelters")]
+        public IActionResult GetShelters()
+        {
+
+            var shelter = _context.Shelters.ToList();
+            if (shelter != null)
+            {
+
+                return Ok(shelter);
+            }
+            return NoContent();
+
+        }
+
+
+        [HttpPost("addShelters")]
+        public IActionResult addShelter([FromForm] ShelterDto shelter)
+        {
+
+
+
+            var newShelter = new Shelter
+            {
+                Name= shelter.Name,
+                Address= shelter.Address,
+                Phone= shelter.Phone,
+                Email= shelter.Email,
+                Verified= shelter.Verified
+
+            };
+
+            _context.Shelters.Add(newShelter);
+            _context.SaveChanges();
+            return Ok(newShelter);
+        }
+
+
+
+
+        [HttpPut("updateShelter/{id}")]
+        public IActionResult updateShelters(int id, [FromForm] ShelterDto shelter)
+        {
+            var newedit = _context.Shelters.Where(p => p.ShelterId == id).FirstOrDefault();
+
+            if (newedit == null)
+            {
+                return NotFound("shelters not found.");
+            }
+
+           
+               
+                newedit.Name = shelter.Name;
+               newedit.Address = shelter.Address;
+               newedit.Phone = shelter.Phone;
+               newedit.Email = shelter.Email;
+               newedit.Verified = shelter.Verified;
+              
+                _context.Shelters.Update(newedit);
+                _context.SaveChanges();
+
+                return Ok(newedit);
+                   
+        }
+
+        [HttpDelete("deleteShelter/{id}")]
+        public IActionResult DeleteShelter(int id) {
+
+
+            var shelter = _context.Shelters.Find(id);
+
+            if (shelter != null)
+            {
+                var animals = _context.Animals.Where(a => a.ShelterId == id).ToList();
+
+                if (animals.Any())
+                {
+                    _context.Animals.RemoveRange(animals);
+                }
+
+                _context.Shelters.Remove(shelter);
+                _context.SaveChanges();
+
+                return NoContent();
+            }
+
+            return NotFound($"there is no shelter with id {id}");
+
+
+
+        }
+
+           
+
+
+        [HttpGet("GetAllCategory")]
         public async Task<IActionResult> GetAllCategory()
         {
 
