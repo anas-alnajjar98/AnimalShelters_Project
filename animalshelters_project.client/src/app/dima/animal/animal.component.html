@@ -1,0 +1,23 @@
+<div class="animal-container">
+  <div *ngFor="let animal of animals" class="animal-card">
+    <div class="card">
+      <img src="https://localhost:7208{{animal.imageUrl}}" alt="{{animal.name}} Image" class="card-img-top">
+      <div class="card-body">
+        <h5 class="card-title">{{ animal.name }}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">{{ animal.breed }} - Age: {{ animal.age }}</h6>
+        <p class="card-text">
+          <strong>Size:</strong> {{ animal.size }}<br>
+          <strong>Temperament:</strong> {{ animal.temperament }}<br>
+          <strong>Special Needs:</strong> {{ animal.specialNeeds }}<br>
+          <strong>Adoption Status:</strong> {{ animal.adoptionStatus }}<br>
+     
+        </p>
+        <div class="card-actions">
+          <button class="btn btn-primary">Adopt Me</button>
+          <button class="btn btn-secondary">More Info</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

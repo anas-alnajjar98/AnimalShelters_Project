@@ -11,6 +11,7 @@ import { PostFormComponent } from './Fawareh/post-form/post-form.component';
 import { FormsModule } from '@angular/forms';  // <-- Import FormsModule
 import { LoginComponent } from './hosam/login/login.component';
 import { AllcategoryComponent } from './dima/allcategory/allcategory.component';
+import { AnimalComponent } from './dima/animal/animal.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { AllcategoryComponent } from './dima/allcategory/allcategory.component';
     FooterComponent,
     PostFormComponent,
     LoginComponent,
-    AllcategoryComponent
+    AllcategoryComponent,
+    AnimalComponent
   
   ],
   imports: [

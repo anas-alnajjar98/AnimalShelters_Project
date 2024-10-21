@@ -24,7 +24,7 @@
       <div class="col-md-4" *ngFor="let item of Array">
         <div class="service-style-01 mb-5">
           <img class="img-fluid" src="https://localhost:7208/{{item.image}}" alt="">
-          <a [routerLink]="['/getanimal', item.id]" class="service-title">{{item.species}}</a>
+          <a [routerLink]="['/animal', item.id]" class="service-title">{{item.species}}</a>
 
         </div>
       </div>
