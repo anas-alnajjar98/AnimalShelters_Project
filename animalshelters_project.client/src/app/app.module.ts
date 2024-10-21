@@ -11,6 +11,11 @@ import { PostFormComponent } from './Fawareh/post-form/post-form.component';
 import { FormsModule } from '@angular/forms';  // <-- Import FormsModule
 import { LoginComponent } from './hosam/login/login.component';
 import { AllcategoryComponent } from './dima/allcategory/allcategory.component';
+import { RegisterComponent } from './hosam/register/register.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ResetPasswordComponent } from './hosam/reset-password/reset-password.component';
+import { VirifyOtpComponent } from './hosam/virify-otp/virify-otp.component';
+import { PasswordResetComponent } from './hosam/password-reset/password-reset.component';
 import { AnimalComponent } from './dima/animal/animal.component';
 
 
@@ -23,12 +28,19 @@ import { AnimalComponent } from './dima/animal/animal.component';
     PostFormComponent,
     LoginComponent,
     AllcategoryComponent,
+    AllcategoryComponent,
     AnimalComponent
   
+    LoginComponent,
+    RegisterComponent,
+    ResetPasswordComponent,
+    VirifyOtpComponent,
+    PasswordResetComponent
   ],
   imports: [
     FormsModule,
     BrowserModule, HttpClientModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     RouterModule.forRoot([
 
@@ -36,6 +48,10 @@ import { AnimalComponent } from './dima/animal/animal.component';
       { path: 'postForm', component: PostFormComponent },
       { path: 'Categories', component: AllcategoryComponent },
       { path: 'login', component: LoginComponent },
+      { path: 'register', component: RegisterComponent },
+      { path: 'reset-password', component: ResetPasswordComponent },
+      { path: 'virifyOtp', component: VirifyOtpComponent },
+      { path: 'password-reset', component: PasswordResetComponent },
 
     ]),
   ],

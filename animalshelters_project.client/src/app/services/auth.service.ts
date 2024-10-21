@@ -69,10 +69,11 @@ export class AuthService {
     return this.isLoggedInSubject.getValue();
   }
 
-  register(email: string, password: string): Observable<any> {
+  register(email: string, password: string, username: string): Observable<any> {
     const formData = new FormData();
     formData.append('Email', email);
     formData.append('Password', password);
+    formData.append('Username', username);
 
     return this.http.post<any>(`${root}/api/Auth/register`, formData);
   }

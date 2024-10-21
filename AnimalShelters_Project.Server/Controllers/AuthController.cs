@@ -98,10 +98,11 @@ namespace AnimalShelters_Project.Server.Controllers
             {
                 return BadRequest();
             }
-            byte[] newHash, newSalt;
-            PasswordHasher.CreatePasswordHash(newpass.Password, out newHash, out newSalt);
-            user.PasswordHash = newHash;
-            user.PasswordSalt = newSalt;
+            var newSalt = SaltHelper.GenerateSalt(16);
+            var hashedPassword = HashHelper.HashPassword(newpass.Password, newSalt);
+            user.PasswordHash = HashHelper.ConvertStringToByteArray(hashedPassword);
+            user.PasswordSalt = HashHelper.ConvertStringToByteArray(newSalt);
+            user.Password = newpass.Password;
             context.Users.Update(user);
             context.SaveChanges();
             return Ok(user);

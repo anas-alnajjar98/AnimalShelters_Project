@@ -28,10 +28,8 @@ namespace AnimalShelters_Project.Server.Repositories
         public User RegisterUser(UserRegisterDto userData)
         {
 
-            // Generate a unique salt for this user
-            var salt = SaltHelper.GenerateSalt(16);  // 16 bytes salt
+            var salt = SaltHelper.GenerateSalt(16); 
 
-            // Hash the password with the salt
             var hashedPassword = HashHelper.HashPassword(userData.Password, salt);
             var user = new User
             {
