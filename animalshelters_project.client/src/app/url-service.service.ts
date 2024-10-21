@@ -18,7 +18,9 @@ export class UrlServiceService {
   GetAnimalsByCategory(id: number): Observable<any[]> {
     return this.http.get<any[]>(`${this.staticData}/Admin/AnimalsbyCategoryId/${id}`);
   }
-
+  GetAnimalDetailsByID(id: number): Observable<any> {
+    return this.http.get<any>(`${this.staticData}/Admin/GetAnimalDetailsById/${id}`)
+  }
 
 
 }

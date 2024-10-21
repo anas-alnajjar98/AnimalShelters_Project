@@ -2,6 +2,7 @@
 using AnimalShelters_Project.Server.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Org.BouncyCastle.Crypto;
 using System.Drawing;
 using System.Numerics;
@@ -410,6 +411,42 @@ namespace AnimalShelters_Project.Server.Controllers
             _context.Categories.Remove(category);
             _context.SaveChanges();
             return Ok(category);
+        }
+        [HttpGet("GetAnimalDetailsById/{id}")]
+        public async Task<IActionResult> GetAnimalDetailsById(int id)
+        {
+            if (id <= 0)
+            {
+                return BadRequest("ID can't be zero or less");
+            }
+            var animal = await _context.Animals
+                .Include(a => a.Shelter) 
+                .FirstOrDefaultAsync(x => x.AnimalId == id);
+
+            if (animal != null)
+            {
+                var animalInfo = new
+                {
+                    animalImage = animal.ImageUrl,
+                    animalName = animal.Name,
+                    animalSize = animal.Size,
+                    animalSpecialNeeds = animal.SpecialNeeds,
+                    animalAge = animal.Age,
+                    animalBreed=animal.Breed,
+                    animaladoptionStatus=animal.AdoptionStatus,
+                    animalTemperament = animal.Temperament,
+                    shelterName = animal.Shelter?.Name,
+                    shelterEmail = animal.Shelter?.Email,
+                    shelterAddress = animal.Shelter?.Address,
+                    shelterVerified = animal.Shelter?.Verified ?? false 
+                };
+
+                return Ok(animalInfo);
+            }
+            else
+            {
+                return NotFound("No animal found under this ID");
+            }
         }
     }
 }
