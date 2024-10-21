@@ -26,7 +26,7 @@ import { PasswordResetComponent } from './hosam/password-reset/password-reset.co
     FooterComponent,
     PostFormComponent,
     LoginComponent,
-    AllcategoryComponent
+    AllcategoryComponent,
   
     LoginComponent,
     RegisterComponent,
