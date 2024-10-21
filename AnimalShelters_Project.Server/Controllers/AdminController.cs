@@ -14,6 +14,18 @@ namespace AnimalShelters_Project.Server.Controllers
             _context = context;
 
         }
+        [HttpGet("/getAllAnimals")]
+        public IActionResult GetAnimals() { 
+        
+        var animals=_context.Animals.ToList();
+            if (animals!= null)
+            {
+
+                return Ok(animals);
+            }
+            return NoContent();
+        
+        }
         [HttpGet("GetAllCategory")]
         public async Task<IActionResult> GetAllCategory() {
         
