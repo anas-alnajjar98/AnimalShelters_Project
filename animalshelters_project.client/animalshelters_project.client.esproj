@@ -9,6 +9,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="src\app\Fawareh\UrlService\" />
+    <Folder Include="src\app\dima\" />
     <Folder Include="src\app\Fawareh\" />
     <Folder Include="src\app\hosam\" />
   </ItemGroup>

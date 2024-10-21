@@ -18,7 +18,7 @@ namespace AnimalShelters_Project.Server.Controllers
             _context = context;
 
         }
-        [HttpGet("/getAllAnimals")]
+        [HttpGet("getAllAnimals")]
         public IActionResult GetAnimals()
         {
 
@@ -204,7 +204,7 @@ namespace AnimalShelters_Project.Server.Controllers
 
 
 
-        [HttpGet("/getAllAShelters")]
+        [HttpGet("getAllAShelters")]
         public IActionResult GetShelters()
         {
 
