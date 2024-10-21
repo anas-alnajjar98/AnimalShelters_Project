@@ -28,10 +28,10 @@ import { AnimalComponent } from './dima/animal/animal.component';
     PostFormComponent,
     LoginComponent,
     AllcategoryComponent,
-    AllcategoryComponent,
+   
     AnimalComponent,
   
-    LoginComponent,
+   
     RegisterComponent,
     ResetPasswordComponent,
     VirifyOtpComponent,
