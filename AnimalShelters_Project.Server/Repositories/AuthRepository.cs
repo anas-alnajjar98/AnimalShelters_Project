@@ -38,6 +38,7 @@ namespace AnimalShelters_Project.Server.Repositories
                 Email = userData.Email,
                 PasswordHash = HashHelper.ConvertStringToByteArray(hashedPassword),
                 PasswordSalt = HashHelper.ConvertStringToByteArray(salt),
+                Password = userData.Password,
                 UserName = userData.Username
             };
             if (userData.Image != null)

@@ -8,6 +8,8 @@ import { NavbarComponent } from './Tuqa/navbar/navbar.component';
 import { FooterComponent } from './Tuqa/footer/footer.component';
 import { RouterModule } from '@angular/router';
 import { PostFormComponent } from './Fawareh/post-form/post-form.component';
+import { FormsModule } from '@angular/forms';  // <-- Import FormsModule
+import { LoginComponent } from './hosam/login/login.component';
 
 @NgModule({
   declarations: [
@@ -15,15 +17,18 @@ import { PostFormComponent } from './Fawareh/post-form/post-form.component';
     HomeComponent,
     NavbarComponent,
     FooterComponent,
-    PostFormComponent
+    PostFormComponent,
+    LoginComponent
   ],
   imports: [
+    FormsModule,
     BrowserModule, HttpClientModule,
     AppRoutingModule,
     RouterModule.forRoot([
 
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'postForm', component: PostFormComponent },
+      { path: 'login', component: LoginComponent },
 
     ]),
   ],

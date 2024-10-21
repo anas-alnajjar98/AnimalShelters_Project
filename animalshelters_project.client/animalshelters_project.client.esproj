@@ -8,6 +8,9 @@
     <BuildOutputFolder>$(MSBuildProjectDirectory)\dist\animalshelters_project.client\browser\</BuildOutputFolder>
   </PropertyGroup>
   <ItemGroup>
+    <Folder Include="src\app\Fawareh\UrlService\" />
+    <Folder Include="src\app\dima\" />
     <Folder Include="src\app\Fawareh\" />
+    <Folder Include="src\app\hosam\" />
   </ItemGroup>
 </Project>
