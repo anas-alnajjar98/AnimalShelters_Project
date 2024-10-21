@@ -54,6 +54,57 @@ namespace AnimalShelters_Project.Server.Controllers
 
         }
 
+        [HttpPut("updateAnimals/{id}")]
+        public IActionResult updateAnimals(int id, [FromForm] AnimalDto animal)
+        {
+            var newedit = _context.Animals.Where(p => p.AnimalId == id).FirstOrDefault();
+
+            if (newedit == null)
+            {
+                return NotFound("Animal not found.");
+            }
+
+            if (animal.ImageUrl != null && animal.ImageUrl.Length > 0)
+            {
+                var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
+
+                if (!Directory.Exists(uploadsFolder))
+                {
+                    Directory.CreateDirectory(uploadsFolder);
+                }
+
+                var uniqueFileName = Guid.NewGuid().ToString() + "_" + animal.ImageUrl.FileName;
+                var filePathWwwroot = Path.Combine(uploadsFolder, uniqueFileName);
+
+                using (var fileStream = new FileStream(filePathWwwroot, FileMode.Create))
+                {
+                    animal.ImageUrl.CopyTo(fileStream);
+                }
+
+                // Update the newedit object properties
+                newedit.Name = animal.Name;
+                newedit.CategoryId = animal.CategoryId;
+                newedit.Breed = animal.Breed;
+                newedit.Age = animal.Age;
+                newedit.ShelterId = animal.ShelterId;
+                newedit.Size = animal.Size;
+                newedit.Temperament = animal.Temperament;
+                newedit.SpecialNeeds = animal.SpecialNeeds;
+                newedit.ImageUrl = $"/images/{uniqueFileName}";
+                newedit.AdoptionStatus = animal.AdoptionStatus;
+
+                // Save changes to the context
+                _context.Animals.Update(newedit);
+                _context.SaveChanges();
+
+                return Ok(newedit);
+            }
+
+            return BadRequest("Invalid data or missing image.");
+        }
+
+
+
         [HttpPost("addAnimals")]
         public IActionResult addAnimal([FromForm] AnimalDto animal)
         {
