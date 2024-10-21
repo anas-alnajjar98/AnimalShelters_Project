@@ -10,6 +10,11 @@ import { RouterModule } from '@angular/router';
 import { PostFormComponent } from './Fawareh/post-form/post-form.component';
 import { FormsModule } from '@angular/forms';  // <-- Import FormsModule
 import { LoginComponent } from './hosam/login/login.component';
+import { RegisterComponent } from './hosam/register/register.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ResetPasswordComponent } from './hosam/reset-password/reset-password.component';
+import { VirifyOtpComponent } from './hosam/virify-otp/virify-otp.component';
+import { PasswordResetComponent } from './hosam/password-reset/password-reset.component';
 
 @NgModule({
   declarations: [
@@ -18,17 +23,26 @@ import { LoginComponent } from './hosam/login/login.component';
     NavbarComponent,
     FooterComponent,
     PostFormComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent,
+    ResetPasswordComponent,
+    VirifyOtpComponent,
+    PasswordResetComponent
   ],
   imports: [
     FormsModule,
     BrowserModule, HttpClientModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     RouterModule.forRoot([
 
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'postForm', component: PostFormComponent },
       { path: 'login', component: LoginComponent },
+      { path: 'register', component: RegisterComponent },
+      { path: 'reset-password', component: ResetPasswordComponent },
+      { path: 'virifyOtp', component: VirifyOtpComponent },
+      { path: 'password-reset', component: PasswordResetComponent },
 
     ]),
   ],

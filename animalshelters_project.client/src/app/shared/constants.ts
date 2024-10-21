@@ -1,1 +1,1 @@
-export const root = "http://localhost:7208/" 
+export const root = "https://localhost:7208" 
