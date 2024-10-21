@@ -33,6 +33,7 @@ import { AllcategoryComponent } from './dima/allcategory/allcategory.component';
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'postForm', component: PostFormComponent },
       { path: 'Categories', component: AllcategoryComponent },
+      { path: 'login', component: LoginComponent },
 
     ]),
   ],

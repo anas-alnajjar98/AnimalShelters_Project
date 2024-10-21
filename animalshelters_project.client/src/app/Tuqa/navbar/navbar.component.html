@@ -9,7 +9,7 @@ header -->
   <nav class="navbar navbar-static-top navbar-expand-lg header-sticky">
     <div class="container-fluid">
       <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"><i class="fas fa-align-left"></i></button>
-      <a class="navbar-brand" href="index.html">
+      <a class="navbar-brand" routerLink="/">
         <img class="img-fluid logo" src="assets/images/logo.svg" alt="Main logo">
         <img class="img-fluid logo-sticky" src="assets/images/logo-dark.svg" alt="Logo responsive and sticky">
       </a>
@@ -73,26 +73,14 @@ header -->
               <li><a class="dropdown-item" href="blog-detail.html">Blog Detail</a></li>
             </ul>
           </li>
-          <li class="dropdown nav-item">
-            <a class="nav-link" href="javascript:void(0)" data-bs-toggle="dropdown">Shop<i class="fas fa-chevron-down fa-xs"></i></a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="shop.html">Shop</a></li>
-              <li><a class="dropdown-item" href="shop-single.html">Shop Single</a></li>
-              <li><a class="dropdown-item" href="shop-cart.html">Shop Cart</a></li>
-              <li><a class="dropdown-item" href="shop-checkout.html">Shop Checkout</a></li>
-            </ul>
-          </li>
-
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" routerLink="/Categories">Categories</a>
-          </li>
+          
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="contact-us.html">Contact Us</a>
           </li>
         </ul>
       </div>
       <div class="add-listing">
-        <a class="btn btn-dark btn-sm" href="book-a-sitter.html">Book Sitter</a>
+        <a class="btn btn-dark btn-sm" routerLink="/login">LOGIN</a>
       </div>
     </div>
   </nav>
