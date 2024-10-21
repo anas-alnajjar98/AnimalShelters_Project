@@ -9,6 +9,7 @@ import { FooterComponent } from './Tuqa/footer/footer.component';
 import { RouterModule } from '@angular/router';
 import { PostFormComponent } from './Fawareh/post-form/post-form.component';
 import { FormsModule } from '@angular/forms';  // <-- Import FormsModule
+import { LoginComponent } from './hosam/login/login.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { FormsModule } from '@angular/forms';  // <-- Import FormsModule
     HomeComponent,
     NavbarComponent,
     FooterComponent,
-    PostFormComponent
+    PostFormComponent,
+    LoginComponent
   ],
   imports: [
     FormsModule,
