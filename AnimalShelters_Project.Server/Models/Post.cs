@@ -15,7 +15,7 @@ public partial class Post
 
     public string? Title { get; set; }
 
-    public string? Tag { get; set; }
+    public bool? Flag { get; set; }
 
     public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
 
