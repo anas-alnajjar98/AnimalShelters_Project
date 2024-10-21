@@ -100,7 +100,25 @@ namespace AnimalShelters_Project.Server.Controllers
                 return Ok(newedit);
             }
 
-            return BadRequest("Invalid data or missing image.");
+            return BadRequest("there is an error in updated animals");
+        }
+
+        [HttpDelete("deleteAnimal/{id}")]
+        public IActionResult DeleteAnimal(int id)
+        {
+            var animal = _context.Animals.Where(a => a.AnimalId == id).FirstOrDefault();
+
+            
+            if (animal == null)
+            {
+                return NotFound("Animal not found.");
+            }
+
+            _context.Animals.Remove(animal);
+
+            _context.SaveChanges();
+
+            return Ok($"Animal with ID {id} was successfully deleted.");
         }
 
 
