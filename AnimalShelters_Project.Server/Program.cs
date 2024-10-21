@@ -17,7 +17,17 @@ namespace AnimalShelters_Project.Server
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddDbContext<MyDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("YourConnectionString")));
+            options.UseSqlServer(builder.Configuration.GetConnectionString("YourConnectionString")));
+
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("Development", builder =>
+                {
+                    builder.AllowAnyHeader()
+                           .AllowAnyMethod()
+                           .AllowAnyOrigin();
+                });
+            });
 
             var app = builder.Build();
 
@@ -34,6 +44,9 @@ namespace AnimalShelters_Project.Server
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
+
+            app.UseCors("Development");
+
 
 
             app.MapControllers();
