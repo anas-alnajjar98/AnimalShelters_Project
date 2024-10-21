@@ -29,7 +29,7 @@ import { AnimalComponent } from './dima/animal/animal.component';
     LoginComponent,
     AllcategoryComponent,
     AllcategoryComponent,
-    AnimalComponent
+    AnimalComponent,
   
     LoginComponent,
     RegisterComponent,
