@@ -361,3 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/AnimalShelters_Project.Server/appsettings.json
+/AnimalShelters_Project.Server/Models/MyDbContext.cs
