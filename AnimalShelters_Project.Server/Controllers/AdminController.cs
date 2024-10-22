@@ -136,18 +136,23 @@ namespace AnimalShelters_Project.Server.Controllers
         {
             var animal = _context.Animals.Where(a => a.AnimalId == id).FirstOrDefault();
 
-            
             if (animal == null)
             {
                 return NotFound("Animal not found.");
             }
 
+            // Manually remove all related adoption applications
+            var adoptionApplications = _context.AdoptionApplications.Where(aa => aa.AnimalId == id).ToList();
+            _context.AdoptionApplications.RemoveRange(adoptionApplications);
+
+            // Now remove the animal
             _context.Animals.Remove(animal);
 
             _context.SaveChanges();
 
-            return Ok($"Animal with ID {id} was successfully deleted.");
+            return NoContent();
         }
+
 
 
 

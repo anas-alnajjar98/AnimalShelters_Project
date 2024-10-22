@@ -46,4 +46,10 @@ export class UrlServiceService {
     return this.http.put(`${this.staticData}/Admin/UpdateCategory/${id}`, data)
 
   }
+  GetAllAnimal(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.staticData}/Admin/getAllAnimals`)
+  }
+  DeleteAnimalByID(id: any): Observable<any> {
+    return this.http.delete<any>(`${this.staticData}/Admin/deleteAnimal/${id}`)
+  }
 }
