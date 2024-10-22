@@ -54,4 +54,29 @@ export class UrlServiceService {
     return this.http.post<any>(`${this.staticData}/Admin/AddNewCategory`, data);
 
   }
+
+ 
+
+  AddShelter(data: any): Observable<any> {
+    return this.http.post<any>(`${this.staticData}/Admin/addShelters`, data);
+
+  }
+  getShelters(): Observable<any> {
+    return this.http.get<any>(`${this.staticData}/Admin/getAllAShelters`);
+
+  }
+
+
+  deleteShelter(id: number): Observable<any> {
+    return this.http.delete(`${this.staticData}/Admin/deleteShelter/${id}`);
+  }
+
+ 
+  updateShelter(id: any, data: any): Observable<any> {
+    return this.http.put(`${this.staticData}/Admin/updateShelter/${id}`, data)
+  }
+
+  getShelterById(id: number): Observable<any> {
+    return this.http.get<any>(`${this.staticData}/Admin/GetShelterByID/${id}`)
+  }
 }

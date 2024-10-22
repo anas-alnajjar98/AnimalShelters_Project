@@ -47,6 +47,19 @@ namespace AnimalShelters_Project.Server.Controllers
             return Ok(category);
         }
 
+        [HttpGet("GetShelterByID/{id}")]
+        public IActionResult getshelterId(int id)
+        {
+            if (id <= 0)
+            {
+                return BadRequest();
+
+            }
+            var shelter = _context.Shelters.FirstOrDefault(c => c.ShelterId == id);
+            if (shelter == null)
+                return NoContent();
+            return Ok(shelter);
+        }
 
         [HttpGet("AnimalsbyCategoryId/{id}")]
 

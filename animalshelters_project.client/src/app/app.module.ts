@@ -27,6 +27,9 @@ import { AllcategoriesComponent } from './admin/allcategories/allcategories.comp
 import { UpdateCategoryComponent } from './admin/update-category/update-category.component';
 import { AddCategoryComponent } from './admin/add-category/add-category.component';
 import { GetAllUsersComponent } from './admin/get-all-users/get-all-users.component';
+import { AllSheltersComponent } from './admin/all-shelters/all-shelters.component';
+import { UpdateShelterComponent } from './admin/update-shelter/update-shelter.component';
+import { AddShelterComponent } from './admin/add-shelter/add-shelter.component';
 
 
 
@@ -55,10 +58,13 @@ import { GetAllUsersComponent } from './admin/get-all-users/get-all-users.compon
     AllcategoriesComponent,
     AdminDashboardComponent,
     UpdateCategoryComponent,
-    AddCategoryComponent
+    AddCategoryComponent,
     
     ProfileComponent,
-    GetAllUsersComponent
+    GetAllUsersComponent,
+    AllSheltersComponent,
+    UpdateShelterComponent,
+    AddShelterComponent
   ],
   imports: [
     FormsModule,
@@ -76,7 +82,7 @@ import { GetAllUsersComponent } from './admin/get-all-users/get-all-users.compon
       { path: 'virifyOtp', component: VirifyOtpComponent },
       { path: 'password-reset', component: PasswordResetComponent },
       { path: 'contactUs', component: ContactUsComponent },
-      {path: 'Home', component: HomeComponent}
+      {path: 'Home', component: HomeComponent},
 
 
 
@@ -89,6 +95,9 @@ import { GetAllUsersComponent } from './admin/get-all-users/get-all-users.compon
           { path: "AllCategories", component: AllcategoriesComponent },
           { path: "UpdateCategory/:id", component: UpdateCategoryComponent },
           { path: "AddCategory", component: AddCategoryComponent },
+          { path: "AllShelters", component: AllSheltersComponent },
+          { path: "UpdateShelter/:id", component: UpdateShelterComponent },
+          { path: "AddShelter", component: AddShelterComponent },
 
         ]
       }
