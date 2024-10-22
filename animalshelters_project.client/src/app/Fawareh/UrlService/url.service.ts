@@ -17,4 +17,9 @@ export class UrlService {
   addPost(data: any): Observable<any> {
     return this.http.post<any>(`${this.staticUrl}/Gharibeh_s/addPost`, data)
   }
+
+  allPosts(): Observable<any> {
+    debugger
+    return this.http.get<any>(`${this.staticUrl}//Gharibeh_s/allPost`)
+  }
 }
