@@ -26,6 +26,12 @@ export class UrlServiceService {
     return this.http.get<any>(`${this.staticData}/Admin/GetAnimalDetailsById/${id}`)
   }
 
+  submitContactForm(contactData: FormData): Observable<any> {
+
+    return this.http.post(`${this.staticData}/Contact/newmassege`, contactData );
+  }
+
+
   GetUserByID(id: number): Observable<any> {
     return this.http.get<any>(`${this.staticData}/Admin/getUserByID/${id}`)
   }
@@ -35,4 +41,9 @@ export class UrlServiceService {
     return this.http.post<any>(url, { headers });
   }
 
+
+  updateCategory(id: any, data: any): Observable<any> {
+    return this.http.put(`${this.staticData}/Admin/UpdateCategory/${id}`, data)
+
+  }
 }

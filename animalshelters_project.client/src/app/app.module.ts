@@ -18,10 +18,15 @@ import { VirifyOtpComponent } from './hosam/virify-otp/virify-otp.component';
 import { PasswordResetComponent } from './hosam/password-reset/password-reset.component';
 import { AnimalComponent } from './dima/animal/animal.component';
 import { AnimalDetailsComponent } from './dima/animal-details/animal-details.component';
+import { ContactUsComponent } from './Tuqa/contact-us/contact-us.component';
+import { ProfileComponent } from './hosam/profile/profile.component';
 import { AdoptionFormComponent } from './dima/adoption-form/adoption-form.component';
 import { OurCommunityComponent } from './Fawareh/our-community/our-community.component';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 import { AllcategoriesComponent } from './admin/allcategories/allcategories.component';
+import { UpdateCategoryComponent } from './admin/update-category/update-category.component';
+import { GetAllUsersComponent } from './admin/get-all-users/get-all-users.component';
+
 
 
 @NgModule({
@@ -35,19 +40,23 @@ import { AllcategoriesComponent } from './admin/allcategories/allcategories.comp
     AllcategoryComponent,
    
     AnimalComponent,
-  
    
     RegisterComponent,
     ResetPasswordComponent,
     VirifyOtpComponent,
     PasswordResetComponent,
     AnimalDetailsComponent,
-    AdoptionFormComponent,
+    ContactUsComponent,
+   
     AnimalDetailsComponent,
+    ProfileComponent
     OurCommunityComponent,
     AllcategoriesComponent,
-    AdminDashboardComponent
+    AdminDashboardComponent,
+    UpdateCategoryComponent
     
+    ProfileComponent,
+    GetAllUsersComponent
   ],
   imports: [
     FormsModule,
@@ -64,11 +73,19 @@ import { AllcategoriesComponent } from './admin/allcategories/allcategories.comp
       { path: 'reset-password', component: ResetPasswordComponent },
       { path: 'virifyOtp', component: VirifyOtpComponent },
       { path: 'password-reset', component: PasswordResetComponent },
+      { path: 'contactUs', component: ContactUsComponent },
+      {path: 'Home', component: HomeComponent}
+
+
+
+      { path: 'profile', component: ProfileComponent },
+
       { path: 'ourCommunity', component: OurCommunityComponent },
       
       {
         path: 'AdminDashBoard', component: AdminDashboardComponent, children: [
           { path: "AllCategories", component: AllcategoriesComponent },
+          { path: "UpdateCategory/:id", component: UpdateCategoryComponent },
         ]
       }
     ]),
