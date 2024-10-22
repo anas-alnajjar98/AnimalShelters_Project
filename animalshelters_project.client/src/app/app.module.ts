@@ -32,6 +32,7 @@ import { UpdateShelterComponent } from './admin/update-shelter/update-shelter.co
 import { AddShelterComponent } from './admin/add-shelter/add-shelter.component';
 import { GetAllAnimalComponent } from './admin/get-all-animal/get-all-animal.component';
 import { UpdateAnimalComponent } from './admin/update-animal/update-animal.component';
+import { AddAnimalComponent } from './admin/add-animal/add-animal.component';
 
 
 
@@ -68,7 +69,8 @@ import { UpdateAnimalComponent } from './admin/update-animal/update-animal.compo
     UpdateShelterComponent,
     AddShelterComponent,
     GetAllAnimalComponent,
-    UpdateAnimalComponent
+    UpdateAnimalComponent,
+    AddAnimalComponent
   ],
   imports: [
     FormsModule,
@@ -104,6 +106,7 @@ import { UpdateAnimalComponent } from './admin/update-animal/update-animal.compo
           { path: "UpdateAnimal/:id", component: UpdateAnimalComponent },
           { path: "UpdateShelter/:id", component: UpdateShelterComponent },
           { path: "AddShelter", component: AddShelterComponent },
+          { path: "AddAnimals", component: AddAnimalComponent },
 
         ]
       }

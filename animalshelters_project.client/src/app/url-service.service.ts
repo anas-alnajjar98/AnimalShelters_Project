@@ -94,4 +94,9 @@ export class UrlServiceService {
     return this.http.get<any>(`${this.staticData}/Admin/getAnimalsbyID/${id}`)
   }
 
+  AddAnimal(data: any): Observable<any> {
+    return this.http.post<any>(`${this.staticData}/Admin/addAnimals`, data);
+
+  }
+
 }
