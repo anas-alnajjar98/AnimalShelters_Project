@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -15,6 +15,10 @@ export class UrlServiceService {
     return this.http.get<any>(`${this.staticData}/Admin/GetAllCategory`);
   
   }
+  deleteCategory(id: number): Observable<any> {
+    return this.http.delete(`${this.staticData}/Admin/DeletCategoryById/${id}`);
+  }
+
   GetAnimalsByCategory(id: number): Observable<any[]> {
     return this.http.get<any[]>(`${this.staticData}/Admin/AnimalsbyCategoryId/${id}`);
   }
@@ -25,4 +29,10 @@ export class UrlServiceService {
   GetUserByID(id: number): Observable<any> {
     return this.http.get<any>(`${this.staticData}/Admin/getUserByID/${id}`)
   }
+  SubmitAdoptionApplication(AnimalID: number, UserID: number): Observable<any> {
+    const url = `${this.staticData}/Admin/ApplicationFormSubmit?AnimalID=${AnimalID}&UserID=${UserID}`;
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': 'Bearer token' });
+    return this.http.post<any>(url, { headers });
+  }
+
 }

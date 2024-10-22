@@ -9,12 +9,17 @@ import { Observable } from 'rxjs';
 })
 export class OurCommunityComponent {
 
+  showCommentBox: boolean = false;
+  userId: any;
 
   ngOnInit() {
+    this.userId = localStorage.getItem('userId');
     this.getAllPosts();
   }
 
   constructor(private _ser: UrlService) { }
+
+  comments: any[] = [];
 
   posts: any[] = [];
   getAllPosts() {
@@ -44,9 +49,14 @@ export class OurCommunityComponent {
 
   }
 
+  toggleCommentBox() {
+    this.showCommentBox = !this.showCommentBox;
+  }
 
+  getCommentsForPost(id: any): Observable<any> {
+    return this._ser.getComments(id);
 
-
+  }
 
 
   

@@ -19,8 +19,18 @@ export class UrlService {
   }
 
   allPosts(): Observable<any> {
-
     return this.http.get<any>(`${this.staticUrl}/Gharibeh_s/allPost`)
+  }
+
+  // Add a comment to a post
+  addComment(postId: number, userId: number, content: string): Observable<any> {
+    const commentData = { postId, userId, content };
+    return this.http.post(`${this.staticUrl}/Gharibeh_s/addComment`, commentData);
+  }
+
+  // Get all comments for a specific post
+  getComments(postId: number): Observable<any> {
+    return this.http.get(`${this.staticUrl}/Gharibeh_s/displayComments/${postId}`);
   }
 
 

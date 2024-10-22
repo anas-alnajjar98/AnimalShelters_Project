@@ -21,9 +21,11 @@ export class AdoptionFormComponent {
       if (AnimalID) {
         this.AnimalID = +AnimalID;
         this.GetAnimalDetails(this.AnimalID);
+         this.UserId = localStorage.getItem('userId')
+        this.GetUserInfo(this.UserId)
       }
     });
-    this.UserId = localStorage.getItem('userId')
+    //this.UserId = localStorage.getItem('userId')
   }
   GetAnimalDetails(AnimalID: number): void {
     this._ser.GetAnimalDetailsByID(AnimalID).subscribe(
@@ -36,8 +38,9 @@ export class AdoptionFormComponent {
       }
     );
   }
-  GetUserInfo(Userid: number): void {
-    this._ser.GetUserByID(Userid).subscribe(
+  GetUserInfo(UserId: number): void {
+    
+    this._ser.GetUserByID(UserId).subscribe(
       (response) => {
         console.log('API Response:', response);
         this.UserData = response;
@@ -46,5 +49,18 @@ export class AdoptionFormComponent {
         console.error('Error fetching user details:', error);
       }
     );
+   
   }
+  FormSubmit(animalID: number, userID: number) {
+    console.log("Submitting application with AnimalID:", animalID, "and UserID:", userID);
+
+    // Now, call your API to submit the adoption form
+    this._ser.SubmitAdoptionApplication(animalID, userID).subscribe(response => {
+      console.log("Application submitted successfully", response);
+    //  // You can add logic here to handle success, like redirecting or showing a confirmation
+    }, error => {
+      console.error("Failed to submit application", error);
+    });
+  }
+
 }
