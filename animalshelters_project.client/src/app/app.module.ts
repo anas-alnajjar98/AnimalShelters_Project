@@ -25,6 +25,7 @@ import { OurCommunityComponent } from './Fawareh/our-community/our-community.com
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 import { AllcategoriesComponent } from './admin/allcategories/allcategories.component';
 import { UpdateCategoryComponent } from './admin/update-category/update-category.component';
+import { AddCategoryComponent } from './admin/add-category/add-category.component';
 
 
 
@@ -48,11 +49,12 @@ import { UpdateCategoryComponent } from './admin/update-category/update-category
     ContactUsComponent,
    
     AnimalDetailsComponent,
-    ProfileComponent
+    ProfileComponent,
     OurCommunityComponent,
     AllcategoriesComponent,
     AdminDashboardComponent,
-    UpdateCategoryComponent
+    UpdateCategoryComponent,
+    AddCategoryComponent
     
   ],
   imports: [
@@ -82,6 +84,8 @@ import { UpdateCategoryComponent } from './admin/update-category/update-category
         path: 'AdminDashBoard', component: AdminDashboardComponent, children: [
           { path: "AllCategories", component: AllcategoriesComponent },
           { path: "UpdateCategory/:id", component: UpdateCategoryComponent },
+          { path: "AddCategory", component: AddCategoryComponent },
+
         ]
       }
     ]),

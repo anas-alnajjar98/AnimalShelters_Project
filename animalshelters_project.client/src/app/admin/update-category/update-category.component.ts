@@ -8,44 +8,55 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrl: './update-category.component.css'
 })
 export class UpdateCategoryComponent {
-  param: any
+  param: any;
   imageFile: File | null = null;
+  categoryData: any = {};
+
+  constructor(private _ser: UrlServiceService, private _active: ActivatedRoute, private _router: Router) { }
+
   ngOnInit() {
-    this.param = this._active.snapshot.paramMap.get('id')
-   
+    this.param = this._active.snapshot.paramMap.get('id');
+    this.fetchCategoryData();
   }
-  constructor(private _ser: UrlServiceService, private _active: ActivatedRoute, private _router: Router) {
 
-
+  fetchCategoryData() {
+    this._ser.getCategoryById(this.param).subscribe(
+      (response: any) => {
+        debugger
+        this.categoryData = response;
+      
+      },
+      error => {
+        console.error("Error fetching category data", error);
+      }
+    );
   }
+
   changeImage(event: any) {
     if (event.target.files && event.target.files.length > 0) {
       this.imageFile = event.target.files[0];
-      console.log('Selected image:', this.imageFile); 
+      console.log('Selected image:', this.imageFile);
     }
   }
-  Array: any
+
   UpdateCategory(data: any) {
-    var form = new FormData();
+    const form = new FormData();
     for (let key in data) {
-      form.append(key, data[key])
-
+      form.append(key, data[key]);
     }
+
     if (this.imageFile) {
-      form.append('Image', this.imageFile); 
-    } else {
-      console.error('No image file selected');
+      form.append('Image', this.imageFile);
     }
 
-    this._ser.updateCategory(this.param, form).subscribe(response => {
-      alert("The category has been updated successfully");
-
-
-      this._router.navigate(['AdminDashBoard/AllCategories']);
-    }, error => {
-
-      console.error("Error updating category", error);
-    });
+    this._ser.updateCategory(this.param, form).subscribe(
+      response => {
+        alert("The category has been updated successfully");
+        this._router.navigate(['AdminDashBoard/AllCategories']);
+      },
+      error => {
+        console.error("Error updating category", error);
+      }
+    );
   }
-
 }

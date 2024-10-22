@@ -41,9 +41,17 @@ export class UrlServiceService {
     return this.http.post<any>(url, { headers });
   }
 
-
+  
+  getCategoryById(id: number): Observable<any> {
+    return this.http.get<any>(`${this.staticData}/Admin/GetCategoryByID/${id}`)
+  }
   updateCategory(id: any, data: any): Observable<any> {
     return this.http.put(`${this.staticData}/Admin/UpdateCategory/${id}`, data)
+  }
+
+  
+  AddCategory(data: any): Observable<any> {
+    return this.http.post<any>(`${this.staticData}/Admin/AddNewCategory`, data);
 
   }
 }
