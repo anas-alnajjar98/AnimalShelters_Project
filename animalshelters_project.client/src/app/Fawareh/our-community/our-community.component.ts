@@ -47,7 +47,6 @@ export class OurCommunityComponent {
   }
 
 
-  }
 
   toggleCommentBox() {
     this.showCommentBox = !this.showCommentBox;
@@ -58,6 +57,7 @@ export class OurCommunityComponent {
 
   }
 
+}
 
   
 
