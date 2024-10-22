@@ -7,7 +7,7 @@ import { AdoptionFormComponent } from './dima/adoption-form/adoption-form.compon
 const routes: Routes = [
   { path: 'animal/:id', component: AnimalComponent },
   { path: 'animalDetails/:id', component: AnimalDetailsComponent },
-  {path:'adoptionForm',component:AdoptionFormComponent}
+  {path:'adoptionForm/:id',component:AdoptionFormComponent}
 ];
 
 @NgModule({

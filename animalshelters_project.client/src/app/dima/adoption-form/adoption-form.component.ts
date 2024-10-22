@@ -11,7 +11,8 @@ export class AdoptionFormComponent {
   constructor(private _ser: UrlServiceService, private route: ActivatedRoute) { }
   AnimalID: any;
   AnimalDetails: any;
-
+  UserId:any
+  UserData: any;
   
 
   ngOnInit(): void {
@@ -22,6 +23,7 @@ export class AdoptionFormComponent {
         this.GetAnimalDetails(this.AnimalID);
       }
     });
+    this.UserId = localStorage.getItem('userId')
   }
   GetAnimalDetails(AnimalID: number): void {
     this._ser.GetAnimalDetailsByID(AnimalID).subscribe(
@@ -31,6 +33,17 @@ export class AdoptionFormComponent {
       },
       (error) => {
         console.error('Error fetching animal details:', error);
+      }
+    );
+  }
+  GetUserInfo(Userid: number): void {
+    this._ser.GetUserByID(Userid).subscribe(
+      (response) => {
+        console.log('API Response:', response);
+        this.UserData = response;
+      },
+      (error) => {
+        console.error('Error fetching user details:', error);
       }
     );
   }
