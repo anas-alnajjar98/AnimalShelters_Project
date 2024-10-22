@@ -5,7 +5,9 @@
   </div>
 </header>
 
-<div class="post-container" *ngFor="let item of posts">
+@for (item of posts; track item.id)
+{
+<div class="post-container">
   <!-- Post -->
   <div class="post">
     <!-- Post Info (Username and Title) -->
@@ -27,29 +29,45 @@
     <!-- Post Info (Likes and Comments) -->
     <div class="post-info">
       <div class="post-stats">
-        <span class="likes">❤️ 245 likes</span>
+        @if(item.likes == null) {
+        <span class="likes">❤️ 0 likes</span>
+        }
+        @else {
+        <span class="likes">❤️ {{item.likes}} likes</span>
+        }
+
         <span class="comments">💬 10 comments</span>
       </div>
 
       <!-- Interaction Buttons -->
       <div class="post-actions">
         <button class="like-button">❤️ Like</button>
-        <button class="comment-button">💬 Comment</button>
+        <!--<button class="comment-button" (click)="toggleCommentBox()">💬 Comment</button>-->
       </div>
     </div>
 
     <!-- Comments Section -->
+
     <div class="comments-section">
-      <div class="comment-list">
-        <div class="comment">
-          <span class="comment-user">Ali Ahmad:</span>
-          <span class="comment-text">Amazing transformation!</span>
-        </div>
-        <div class="comment">
-          <span class="comment-user">Othman Ali:</span>
-          <span class="comment-text">Great story, well done!</span>
+      <div class="comment-box" *ngIf="showCommentBox">
+        <!--<textarea [(ngModel)]="newComment" placeholder="Add a comment..."></textarea>
+        <button (click)="submitComment()">Submit</button>-->
+      </div>
+
+      <div class="comments-section">
+        <div class="comment-list">
+          <div class="comment" *ngFor="let item of comments">
+            <span class="comment-user"> {{ item.userName }} :</span>
+            <span class="comment-text">{{ item.content }}</span>
+          </div>
+          <!--<div class="comment">
+            <span class="comment-user">Othman Ali:</span>
+            <span class="comment-text">Great story, well done!</span>
+          </div>-->
         </div>
       </div>
     </div>
   </div>
-</div>
+  </div>
+
+}

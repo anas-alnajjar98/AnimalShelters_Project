@@ -15,6 +15,10 @@ export class UrlServiceService {
     return this.http.get<any>(`${this.staticData}/Admin/GetAllCategory`);
   
   }
+  deleteCategory(id: number): Observable<any> {
+    return this.http.delete(`${this.staticData}/Admin/DeletCategoryById/${id}`);
+  }
+
   GetAnimalsByCategory(id: number): Observable<any[]> {
     return this.http.get<any[]>(`${this.staticData}/Admin/AnimalsbyCategoryId/${id}`);
   }

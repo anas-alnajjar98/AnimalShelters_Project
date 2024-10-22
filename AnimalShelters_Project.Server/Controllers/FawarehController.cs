@@ -57,7 +57,7 @@ namespace AnimalShelters_Project.Server.Controllers
                 return PhysicalFile(imagePath, "image/jpeg"); // أو "image/png" حسب نوع الصورة
             }
 
-            return NotFound();
+            return NotFound($"Image with named {imageName} not found");
         }
     }
 }
