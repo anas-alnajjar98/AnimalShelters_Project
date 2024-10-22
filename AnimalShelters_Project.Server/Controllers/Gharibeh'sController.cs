@@ -2,6 +2,7 @@
 using AnimalShelters_Project.Server.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace AnimalShelters_Project.Server.Controllers
 {
@@ -63,6 +64,113 @@ namespace AnimalShelters_Project.Server.Controllers
             }).ToList();
             return Ok(post);
         }
+
+        // POST: api/likes
+        [HttpPost("addLike")]
+        public IActionResult LikePost([FromBody] LikeDto likeDto)
+        {
+            // Check if the like already exists
+            var existingLike = _db.Likes
+                .FirstOrDefault(l => l.PostId == likeDto.PostId && l.UserId == likeDto.UserId);
+
+            if (existingLike != null)
+            {
+                // Toggle the like flag (like/unlike)
+                existingLike.Flag = !existingLike.Flag;
+                _db.SaveChanges();
+                return Ok(existingLike);
+            }
+            else
+            {
+                // Add a new like
+                var like = new Like
+                {
+                    PostId = likeDto.PostId,
+                    UserId = likeDto.UserId,
+                    Flag = true
+                };
+                _db.Likes.Add(like);
+                _db.SaveChanges();
+                return Ok(like);
+            }
+        }
+
+        // GET: api/likes/{postId}
+        [HttpGet("countLikes/{postId}")]
+        public IActionResult GetLikesForPost(long postId)
+        {
+            var likeCount = _db.Likes
+                .Where(l => l.PostId == postId && l.Flag == true)
+                .Count();
+
+            return Ok(new { likeCount });
+        }
+
+
+        // POST: api/comments
+        [HttpPost("addComment")]
+        public IActionResult AddComment([FromBody] CommentDto commentDto)
+        {
+            var comment = new Comment
+            {
+                PostId = commentDto.PostId,
+                UserId = commentDto.UserId,
+                Content = commentDto.Content
+            };
+            _db.Comments.Add(comment);
+            _db.SaveChanges();
+            return Ok(comment);
+        }
+
+        // GET: api/comments/{postId}
+        [HttpGet("displayComments/{postId}")]
+        public IActionResult GetCommentsForPost(long postId)
+        {
+            var comments = _db.Comments
+                .Where(c => c.PostId == postId)
+                .Select(c => new
+                {
+                    c.Id,
+                    c.Content,
+                    UserName = _db.Users.FirstOrDefault(u => u.UserId == c.UserId).UserName
+                }).ToList();
+
+            return Ok(comments);
+        }
+
+
+        // POST: api/replies
+        [HttpPost("addReplay")]
+        public IActionResult AddReply([FromBody] ReplyDto replyDto)
+        {
+            var reply = new Reply
+            {
+                CommentId = replyDto.CommentId,
+                UserId = replyDto.UserId,
+                Content = replyDto.Content
+            };
+            _db.Replies.Add(reply);
+            _db.SaveChanges();
+            return Ok(reply);
+        }
+
+        // GET: api/replies/{commentId}
+        [HttpGet("displayReplaies/{commentId}")]
+        public IActionResult GetRepliesForComment(long commentId)
+        {
+            var replies = _db.Replies
+                .Where(r => r.CommentId == commentId)
+                .Select(r => new
+                {
+                    r.Id,
+                    r.Content,
+                    UserName = _db.Users.FirstOrDefault(u => u.UserId == r.UserId).UserName
+                }).ToList();
+
+            return Ok(replies);
+        }
+
+
 
 
 
