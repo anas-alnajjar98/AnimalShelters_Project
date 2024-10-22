@@ -7,7 +7,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-adoption-form',
   templateUrl: './adoption-form.component.html',
-  styleUrls: ['./adoption-form.component.css']  // Make sure the correct path to CSS
+  styleUrls: ['./adoption-form.component.css']  
 })
 export class AdoptionFormComponent implements OnInit {
   myform: FormGroup;
@@ -17,11 +17,10 @@ export class AdoptionFormComponent implements OnInit {
   UserData: any;
 
   constructor(private _ser: UrlServiceService, private route: ActivatedRoute, private router: Router) {
-    // Initialize form group with form controls
     this.myform = new FormGroup({
       animalId: new FormControl(''),
       userId: new FormControl(''),
-      adoptionNotes: new FormControl('', Validators.required)  // Required field validation
+      adoptionNotes: new FormControl('', Validators.required)  
     });
   }
 
@@ -34,7 +33,7 @@ export class AdoptionFormComponent implements OnInit {
         this.UserId = localStorage.getItem('userId');
         this.GetUserInfo(this.UserId);
 
-        // Update form with values once data is loaded
+        
         this.myform.patchValue({
           animalId: this.AnimalID,
           userId: this.UserId
@@ -82,9 +81,8 @@ export class AdoptionFormComponent implements OnInit {
       return;
     }
 
-    // Check if form is valid before submission
     if (this.myform.valid) {
-      const formData = this.myform.value;  // Get all form data
+      const formData = this.myform.value;  
       console.log('Form Data:', formData);
 
       this._ser.SubmitAdoptionApplication(formData).subscribe(
