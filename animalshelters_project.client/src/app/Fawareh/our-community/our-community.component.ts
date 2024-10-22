@@ -11,50 +11,94 @@ export class OurCommunityComponent {
 
   showCommentBox: boolean = false;
   userId: any;
+  newComment: string = "";
+  newReply: string = "";
+  // Stores the visibility of comment boxes for each post
+  commentBoxes: any = {};
+
+  // Store comments and replies for posts
+  replies: any = {};
+  comments: any[] = [];
+
+  posts: any[] = [];
 
   ngOnInit() {
-    this.userId = localStorage.getItem('userId');
+    //this.userId = localStorage.getItem('userId')
     this.getAllPosts();
   }
 
   constructor(private _ser: UrlService) { }
 
-  comments: any[] = [];
-
-  posts: any[] = [];
   getAllPosts() {
     
     this._ser.allPosts().subscribe((data) => {
       this.posts = data;
-
-           })
+    })
      
   };
 
   data = {
     "postId": 0,
-    "userId": localStorage.getItem("userId")
+    "userId": 1
 }
 
   addLike(postId: number) {
     this.data.postId = postId
     this._ser.addLike(this.data).subscribe(() => {
-      
-     
       this.getAllPosts();
-
     })
   }
 
 
 
-  toggleCommentBox() {
-    this.showCommentBox = !this.showCommentBox;
+  // Toggle the comment section visibility and load comments
+  toggleCommentBox(postId: number) {
+    if (!this.commentBoxes[postId]) {
+      this.getCommentsForPost(postId);  // Fetch comments only if the box isn't open
+    }
+    this.commentBoxes[postId] = !this.commentBoxes[postId];
   }
 
-  getCommentsForPost(id: any): Observable<any> {
-    return this._ser.getComments(id);
 
+
+  getCommentsForPost(postId: number) {
+    this._ser.getComments(postId).subscribe((data) => {
+      this.comments[postId] = data;
+    });
+  }
+
+  // Add a new comment to a post
+  submitComment(postId: number) {
+    if (!this.newComment.trim()) return; // Prevent empty comments
+
+    const commentData = {
+      postId: postId,
+      userId: 1,  // Assume userId is available
+      content: this.newComment
+    };
+
+    this._ser.addComment(commentData).subscribe((data) => {
+      this.getCommentsForPost(postId);
+      this.newComment = "";  // Clear the input after submitting
+    });
+  }
+  getRepliesForComment(commentId: number) {
+    this._ser.getReplies(commentId).subscribe((data) => {
+      this.replies[commentId] = data;
+    });
+  }
+
+  submitReply(commentId: number) {
+    const replyData = {
+      commentId: commentId,
+      userId: 1,
+      content: this.newReply
+    };
+
+    this._ser.addReply(replyData).subscribe(() => {
+      this.getRepliesForComment(commentId);
+      this.newReply = "";  // Clear input after submitting
+    });
   }
 
 }
