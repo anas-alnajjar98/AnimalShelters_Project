@@ -83,6 +83,19 @@ namespace AnimalShelters_Project.Server.Controllers
 
 
         }
+        [HttpGet("getAnimalsbyID/{id}")]
+        public IActionResult getanimalsbyID (int id ){ 
+        if (id <= 0)
+            {
+                return BadRequest();
+            }
+        var animals=_context.Animals.FirstOrDefault(a => a.AnimalId == id);
+            if (animals != null)
+                return Ok(animals);
+            return NotFound();
+        
+        
+        }
 
         [HttpGet("AnimalsbyShelterId/{id}")]
 

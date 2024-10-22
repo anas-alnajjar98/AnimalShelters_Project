@@ -8,20 +8,32 @@ import Swal from 'sweetalert2';
   styleUrl: './get-all-animal.component.css'
 })
 export class GetAllAnimalComponent {
-  animal:any
-  constructor(private _ser: UrlServiceService) { }
+
+ 
   ngOnInit() {
-    this.GetAnimal()
+
+    this.GetAnimalAdmin();
   }
-  GetAnimal() {
-    this._ser.GetAllAnimal().subscribe((data:any) => {
-      this.animal=data
+  constructor(private _ser: UrlServiceService) {
+
+
+  }
+
+  Array: any
+  GetAnimalAdmin() {
+    this._ser.GetAllAnimal().subscribe((data) => {
+      this.Array = data
+      console.log(this.Array, "this.AnimalArray")
     })
+
   }
-  editAnimal(animalId: number) {
-    console.log('Edit animal with ID:', animalId);
+
+
+
+  //editAnimal(animalId: number) {
+  //  console.log('Edit animal with ID:', animalId);
     
-  }
+  //}
 
   deleteAnimal(animalId: number) {
     Swal.fire({
