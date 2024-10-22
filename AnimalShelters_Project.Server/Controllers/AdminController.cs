@@ -33,6 +33,33 @@ namespace AnimalShelters_Project.Server.Controllers
 
         }
 
+        [HttpGet("GetCategoryByID/{id}")]
+        public IActionResult getcategoryId(int id)
+        {
+            if (id <=0)
+            {
+                return BadRequest();
+
+            }
+            var category = _context.Categories.FirstOrDefault(c => c.Id == id);
+            if (category == null)
+                return NoContent();
+            return Ok(category);
+        }
+
+        [HttpGet("GetShelterByID/{id}")]
+        public IActionResult getshelterId(int id)
+        {
+            if (id <= 0)
+            {
+                return BadRequest();
+
+            }
+            var shelter = _context.Shelters.FirstOrDefault(c => c.ShelterId == id);
+            if (shelter == null)
+                return NoContent();
+            return Ok(shelter);
+        }
 
         [HttpGet("AnimalsbyCategoryId/{id}")]
 

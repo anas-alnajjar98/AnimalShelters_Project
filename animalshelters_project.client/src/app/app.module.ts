@@ -25,7 +25,11 @@ import { OurCommunityComponent } from './Fawareh/our-community/our-community.com
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 import { AllcategoriesComponent } from './admin/allcategories/allcategories.component';
 import { UpdateCategoryComponent } from './admin/update-category/update-category.component';
+import { AddCategoryComponent } from './admin/add-category/add-category.component';
 import { GetAllUsersComponent } from './admin/get-all-users/get-all-users.component';
+import { AllSheltersComponent } from './admin/all-shelters/all-shelters.component';
+import { UpdateShelterComponent } from './admin/update-shelter/update-shelter.component';
+import { AddShelterComponent } from './admin/add-shelter/add-shelter.component';
 import { GetAllAnimalComponent } from './admin/get-all-animal/get-all-animal.component';
 
 
@@ -54,11 +58,10 @@ import { GetAllAnimalComponent } from './admin/get-all-animal/get-all-animal.com
     OurCommunityComponent,
     AllcategoriesComponent,
     AdminDashboardComponent,
-    UpdateCategoryComponent,
+    UpdateCategoryComponent
     
     ProfileComponent,
-    GetAllUsersComponent,
-    GetAllAnimalComponent
+    GetAllUsersComponent
   ],
   imports: [
     FormsModule,
@@ -88,7 +91,6 @@ import { GetAllAnimalComponent } from './admin/get-all-animal/get-all-animal.com
         path: 'AdminDashBoard', component: AdminDashboardComponent, children: [
           { path: "AllCategories", component: AllcategoriesComponent },
           { path: "UpdateCategory/:id", component: UpdateCategoryComponent },
-          {path:"AllAnimal",component:GetAllAnimalComponent}
         ]
       }
     ]),
