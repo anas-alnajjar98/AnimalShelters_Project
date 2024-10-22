@@ -485,10 +485,10 @@ namespace AnimalShelters_Project.Server.Controllers
         
         }
         [HttpPost("ApplicationFormSubmit")]
-        public async Task<IActionResult> ApplicationFormSubmit(int AnimalID, int UserID)
+        public async Task<IActionResult> ApplicationFormSubmit([FromBody] AdoptionDto adopt)
         {
            
-            if (AnimalID <= 0 || UserID <= 0)
+            if (adopt.AnimalId <= 0 || adopt.UserId <= 0)
             {
                 return BadRequest("ID can't be zero or less.");
             }
@@ -497,11 +497,12 @@ namespace AnimalShelters_Project.Server.Controllers
 
             var application = new AdoptionApplication
             {
-                AnimalId = AnimalID,
-                UserId = UserID,
+                AnimalId = adopt.AnimalId,
+                UserId = adopt.UserId,
                 SubmittedAt = DateTime.Now,
                 UpdatedAt = DateTime.Now,
-                Status = "pending"
+                Status = "pending",
+              AdoptionNotes=adopt.AdoptionNotes
             };
 
             _context.AdoptionApplications.Add(application);

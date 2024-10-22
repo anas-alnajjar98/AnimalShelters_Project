@@ -35,12 +35,11 @@ export class UrlServiceService {
   GetUserByID(id: number): Observable<any> {
     return this.http.get<any>(`${this.staticData}/Admin/getUserByID/${id}`)
   }
-  SubmitAdoptionApplication(AnimalID: number, UserID: number): Observable<any> {
-    const url = `${this.staticData}/Admin/ApplicationFormSubmit?AnimalID=${AnimalID}&UserID=${UserID}`;
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': 'Bearer token' });
-    return this.http.post<any>(url, { headers });
-  }
+  
 
+  SubmitAdoptionApplication(data: any): Observable<any> {
+    return this.http.post<any>(`${this.staticData}/Admin/ApplicationFormSubmit`, data);
+  }
   
   getCategoryById(id: number): Observable<any> {
     return this.http.get<any>(`${this.staticData}/Admin/GetCategoryByID/${id}`)

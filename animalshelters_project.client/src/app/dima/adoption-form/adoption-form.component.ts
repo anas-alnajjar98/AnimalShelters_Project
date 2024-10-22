@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { UrlServiceService } from '../../url-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { FormControl, FormGroup } from '@angular/forms';
+
 
 @Component({
   selector: 'app-adoption-form',
@@ -10,24 +12,36 @@ import Swal from 'sweetalert2';
 })
 export class AdoptionFormComponent {
   constructor(private _ser: UrlServiceService, private route: ActivatedRoute, private router: Router) { }
+  myform = new FormGroup({
+    animalId: new FormControl(),
+    userId: new FormControl(),
+    adoptionNotes: new FormControl()
+  });
   AnimalID: any;
   AnimalDetails: any;
-  UserId:any
+  UserId: any
   UserData: any;
-  
+
+
 
   ngOnInit(): void {
-
     this.route.paramMap.subscribe(params => {
       const AnimalID = params.get('id');
       if (AnimalID) {
         this.AnimalID = +AnimalID;
         this.GetAnimalDetails(this.AnimalID);
-         this.UserId = localStorage.getItem('userId')
-        this.GetUserInfo(this.UserId)
+        this.UserId = localStorage.getItem('userId');
+        this.GetUserInfo(this.UserId);
+
+        // Correcting the FormGroup initialization
+        this.myform = new FormGroup({
+          animalId: new FormControl(this.AnimalID),
+          userId: new FormControl(this.UserId),// Set the initial value for animalId as AnimalID
+          adoptionNotes: new FormControl('')
+
+        });
       }
     });
-    //this.UserId = localStorage.getItem('userId')
   }
   GetAnimalDetails(AnimalID: number): void {
     debugger
@@ -52,12 +66,11 @@ export class AdoptionFormComponent {
         console.error('Error fetching user details:', error);
       }
     );
-   
+
   }
-  FormSubmit(animalID: number, userID: any) {
-    debugger
-   
-    if (userID === null || userID === undefined) {
+  FormSubmit() {
+    debugger;
+    if (!this.UserId) {
       Swal.fire({
         icon: 'info',
         title: 'Login',
@@ -71,7 +84,9 @@ export class AdoptionFormComponent {
       return;
     }
 
-    this._ser.SubmitAdoptionApplication(animalID, userID).subscribe(response => {
+    const formData = this.myform.value; // Get form data
+    console.log('Form Data:', this.myform.value);
+    this._ser.SubmitAdoptionApplication(formData).subscribe(response => {
       console.log("Application submitted successfully", response);
 
       Swal.fire({
@@ -96,8 +111,4 @@ export class AdoptionFormComponent {
       });
     });
   }
-
-
-
-
 }
