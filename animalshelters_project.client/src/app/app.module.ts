@@ -32,7 +32,6 @@ import { AnimalDetailsComponent } from './dima/animal-details/animal-details.com
    
     AnimalComponent,
   
-   
     RegisterComponent,
     ResetPasswordComponent,
     VirifyOtpComponent,
