@@ -1,64 +1,78 @@
+<section class="header-inner bg-dark text-center">
+ 
+</section>
 <div class="container">
   <h1>Animal Adoption Form</h1>
 
   <form action="#" method="post" enctype="multipart/form-data">
-
     <!-- User Section -->
-    <fieldset>
+    <fieldset >
       <legend>User Information</legend>
-      <label for="userName">User Name:</label>
-      <input type="text" id="userName" name="userName" required>
 
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" required>
+      <div class="form-row">
+        <label for="userName">User Name:</label>
+        <input type="text" id="userName" name="userName" required>
+      </div>
 
-      <label for="userImage">Upload Image:</label>
-      <input type="file" id="userImage" name="userImage" accept="image/*">
+      <div class="form-row">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+      </div>
     </fieldset>
 
     <!-- Animal Section -->
-    <fieldset>
+    <fieldset ">
       <legend>Animal Information</legend>
-      <label for="animalName">Animal Name:</label>
-      <input type="text" id="animalName" name="animalName" required>
 
-      <label for="breed">Breed:</label>
-      <input type="text" id="breed" name="breed" required>
+      <div class="form-row">
+        <label for="animalName">Animal Name:</label>
+        <input type="text" id="animalName" name="animalName" required value="{{ AnimalDetails.animalName}}">
+      </div>
 
-      <label for="size">Size:</label>
-      <input type="text" id="size" name="size">
+      <div class="form-row">
+        <label for="breed">Breed:</label>
+        <input type="text" id="breed" name="breed" required>
+      </div>
 
-      <label for="age">Age:</label>
-      <input type="number" id="age" name="age">
+      <div class="form-row">
+        <label for="size">Size:</label>
+        <input type="text" id="size" name="size">
+      </div>
 
-      <label for="temperament">Temperament:</label>
-      <input type="text" id="temperament" name="temperament">
+      <div class="form-row">
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age">
+      </div>
 
-      <label for="specialNeeds">Special Needs:</label>
-      <input type="text" id="specialNeeds" name="specialNeeds">
+      <div class="form-row">
+        <label for="temperament">Temperament:</label>
+        <input type="text" id="temperament" name="temperament">
+      </div>
 
-      <label for="adoptionStatus">Adoption Status:</label>
-      <select id="adoptionStatus" name="adoptionStatus">
-        <option value="Available">Available</option>
-        <option value="Adopted">Adopted</option>
-        <option value="Pending">Pending</option>
-      </select>
+      <div class="form-row">
+        <label for="specialNeeds">Special Needs:</label>
+        <input type="text" id="specialNeeds" name="specialNeeds">
+      </div>
     </fieldset>
 
     <!-- Shelter Section -->
     <fieldset>
       <legend>Shelter Information</legend>
-      <label for="shelterName">Shelter Name:</label>
-      <input type="text" id="shelterName" name="shelterName" required>
 
-      <label for="shelterEmail">Shelter Email:</label>
-      <input type="email" id="shelterEmail" name="shelterEmail" required>
+      <div class="form-row">
+        <label for="shelterName">Shelter Name:</label>
+        <input type="text" id="shelterName" name="shelterName" required>
+      </div>
 
-      <label for="address">Address:</label>
-      <input type="text" id="address" name="address" required>
+      <div class="form-row">
+        <label for="shelterEmail">Shelter Email:</label>
+        <input type="email" id="shelterEmail" name="shelterEmail" required>
+      </div>
 
-      <label for="verified">Verified:</label>
-      <input type="checkbox" id="verified" name="verified"> Yes
+      <div class="form-row">
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" required>
+      </div>
     </fieldset>
 
     <button type="submit">Submit Adoption Form</button>

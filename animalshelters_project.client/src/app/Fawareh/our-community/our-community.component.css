@@ -61,3 +61,11 @@
 .comment-user {
   font-weight: bold;
 }
+
+.post-content{
+    padding: 20px;
+}
+
+.post-header {
+  padding: 10px;
+}

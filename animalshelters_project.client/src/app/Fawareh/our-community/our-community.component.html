@@ -10,18 +10,18 @@
   <div class="post">
     <!-- Post Info (Username and Title) -->
     <div class="post-header">
-      <h3 class="post-username">John Doe</h3>
-      <p class="post-title">A Wonderful Journey with Max the Dog</p>
+      <h3 class="post-username">{{item.userName}}</h3>
+      <p class="post-title">{{item.title}}</p>
     </div>
 
     <!-- Post Image -->
     <div class="post-image">
-      <img src="https://media.4-paws.org/9/c/9/7/9c97c38666efa11b79d94619cc1db56e8c43d430/Molly_006-2829x1886-2726x1886-1920x1328.jpg" alt="Post Image">
+      <img src="https://localhost:7208/api/Fawareh/getImage/{{item.image}}" alt="Post Image">
     </div>
 
     <!-- Post Content -->
     <div class="post-content">
-      <p>Max was rescued from the streets and found his forever home with us. His transformation is a true success story, and we are so happy to have him as part of our family.</p>
+      <p>{{item.content}}.</p>
     </div>
 
     <!-- Post Info (Likes and Comments) -->
