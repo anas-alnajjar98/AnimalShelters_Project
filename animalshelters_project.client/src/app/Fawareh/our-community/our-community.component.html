@@ -29,11 +29,11 @@
     <!-- Post Info (Likes and Comments) -->
     <div class="post-info">
       <div class="post-stats">
-        @if(item.likes == null) {
+        @if(item.likesCount == null) {
         <span class="likes">❤️ 0 likes</span>
         }
         @else {
-        <span class="likes">❤️ {{item.likes}} likes</span>
+        <span class="likes">❤️ {{item.likesCount}} likes</span>
         }
 
         <span class="comments">💬 10 comments</span>
@@ -41,8 +41,9 @@
 
       <!-- Interaction Buttons -->
       <div class="post-actions">
-        <button class="like-button">❤️ Like</button>
-        <!--<button class="comment-button" (click)="toggleCommentBox()">💬 Comment</button>-->
+        
+        <button  (click)="addLike(item.id)"  class="like-button">❤️ Like</button>
+        <button class="comment-button">💬 Comment</button>
       </div>
     </div>
 

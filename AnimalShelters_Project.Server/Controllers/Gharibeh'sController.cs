@@ -1,8 +1,6 @@
 ﻿using AnimalShelters_Project.Server.DTOs.GharibehDtos;
 using AnimalShelters_Project.Server.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace AnimalShelters_Project.Server.Controllers
 {
@@ -56,10 +54,12 @@ namespace AnimalShelters_Project.Server.Controllers
         {
             var post = _db.Posts.Where(p => p.Flag == true).Select(t => new
             {
+                id = t.Id,
                 Content = t.Content,
                 Title = t.Title,
                 Image = t.Image,
                 UserName = t.User.UserName,
+                likesCount = t.Likes.Where(l => l.Flag == true).Count(),
 
             }).ToList();
             return Ok(post);
@@ -97,13 +97,13 @@ namespace AnimalShelters_Project.Server.Controllers
 
         // GET: api/likes/{postId}
         [HttpGet("countLikes/{postId}")]
-        public IActionResult GetLikesForPost(long postId)
+        public IActionResult GetLikesForPost(int postId)
         {
             var likeCount = _db.Likes
                 .Where(l => l.PostId == postId && l.Flag == true)
                 .Count();
 
-            return Ok(new { likeCount });
+            return Ok(likeCount);
         }
 
 
