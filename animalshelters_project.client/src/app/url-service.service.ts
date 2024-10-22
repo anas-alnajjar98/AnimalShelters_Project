@@ -22,5 +22,7 @@ export class UrlServiceService {
     return this.http.get<any>(`${this.staticData}/Admin/GetAnimalDetailsById/${id}`)
   }
 
-
+  GetUserByID(id: number): Observable<any> {
+    return this.http.get<any>(`${this.staticData}/Admin/getUserByID/${id}`)
+  }
 }

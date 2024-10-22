@@ -427,6 +427,7 @@ namespace AnimalShelters_Project.Server.Controllers
             {
                 var animalInfo = new
                 {
+                    animalId=animal.AnimalId,
                     animalImage = animal.ImageUrl,
                     animalName = animal.Name,
                     animalSize = animal.Size,
@@ -447,6 +448,14 @@ namespace AnimalShelters_Project.Server.Controllers
             {
                 return NotFound("No animal found under this ID");
             }
+        }
+        [HttpGet("getUserByID/{id}")]
+        public async Task<IActionResult> getUserByID(int id) {
+            if (id <= 0) { return BadRequest("id can't be zero or less"); }
+            var user=await _context.Users.FindAsync(id);
+            if (user == null) { return NotFound("no user found under this id"); }
+            return Ok(user);
+        
         }
     }
 }
