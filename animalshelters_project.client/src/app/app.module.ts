@@ -20,6 +20,7 @@ import { AnimalComponent } from './dima/animal/animal.component';
 import { AnimalDetailsComponent } from './dima/animal-details/animal-details.component';
 import { AdoptionFormComponent } from './dima/adoption-form/adoption-form.component';
 import { OurCommunityComponent } from './Fawareh/our-community/our-community.component';
+import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { OurCommunityComponent } from './Fawareh/our-community/our-community.com
     AnimalDetailsComponent,
     AdoptionFormComponent,
     AnimalDetailsComponent,
-    OurCommunityComponent
+    OurCommunityComponent,
+    
   ],
   imports: [
     FormsModule,
@@ -60,7 +62,12 @@ import { OurCommunityComponent } from './Fawareh/our-community/our-community.com
       { path: 'virifyOtp', component: VirifyOtpComponent },
       { path: 'password-reset', component: PasswordResetComponent },
       { path: 'ourCommunity', component: OurCommunityComponent },
-
+      
+      {
+        path: 'AdminDashBoard', component: AdminDashboardComponent, children: [
+         
+        ]
+      }
     ]),
   ],
   providers: [],
