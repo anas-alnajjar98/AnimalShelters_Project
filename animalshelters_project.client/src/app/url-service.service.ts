@@ -41,4 +41,9 @@ export class UrlServiceService {
     return this.http.post<any>(url, { headers });
   }
 
+
+  updateCategory(id: any, data: any): Observable<any> {
+    return this.http.put(`${this.staticData}/Admin/UpdateCategory/${id}`, data)
+
+  }
 }
