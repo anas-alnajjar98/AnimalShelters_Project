@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { UrlServiceService } from '../../url-service.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-adoption-form',
@@ -8,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './adoption-form.component.css'
 })
 export class AdoptionFormComponent {
-  constructor(private _ser: UrlServiceService, private route: ActivatedRoute) { }
+  constructor(private _ser: UrlServiceService, private route: ActivatedRoute, private router: Router) { }
   AnimalID: any;
   AnimalDetails: any;
   UserId:any
@@ -16,6 +17,7 @@ export class AdoptionFormComponent {
   
 
   ngOnInit(): void {
+
     this.route.paramMap.subscribe(params => {
       const AnimalID = params.get('id');
       if (AnimalID) {
@@ -28,6 +30,7 @@ export class AdoptionFormComponent {
     //this.UserId = localStorage.getItem('userId')
   }
   GetAnimalDetails(AnimalID: number): void {
+    debugger
     this._ser.GetAnimalDetailsByID(AnimalID).subscribe(
       (response) => {
         console.log('API Response:', response);
@@ -39,7 +42,7 @@ export class AdoptionFormComponent {
     );
   }
   GetUserInfo(UserId: number): void {
-    
+    debugger
     this._ser.GetUserByID(UserId).subscribe(
       (response) => {
         console.log('API Response:', response);
@@ -51,16 +54,50 @@ export class AdoptionFormComponent {
     );
    
   }
-  FormSubmit(animalID: number, userID: number) {
-    console.log("Submitting application with AnimalID:", animalID, "and UserID:", userID);
+  FormSubmit(animalID: number, userID: any) {
+    debugger
+   
+    if (userID === null || userID === undefined) {
+      Swal.fire({
+        icon: 'info',
+        title: 'Login',
+        text: `You need to login first`,
+        confirmButtonText: 'OK'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.router.navigate(['/login']);
+        }
+      });
+      return;
+    }
 
-    // Now, call your API to submit the adoption form
     this._ser.SubmitAdoptionApplication(animalID, userID).subscribe(response => {
       console.log("Application submitted successfully", response);
-    //  // You can add logic here to handle success, like redirecting or showing a confirmation
+
+      Swal.fire({
+        icon: 'success',
+        title: 'Application Submitted!',
+        text: `Your adoption application has been submitted successfully.`,
+        confirmButtonText: 'OK'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.router.navigate(['/']);
+        }
+      });
+
     }, error => {
       console.error("Failed to submit application", error);
+
+      Swal.fire({
+        icon: 'error',
+        title: 'Submission Failed',
+        text: 'There was an error submitting your application. Please try again later.',
+        confirmButtonText: 'OK'
+      });
     });
   }
+
+
+
 
 }

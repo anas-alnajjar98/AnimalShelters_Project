@@ -75,6 +75,6 @@
       </div>
     </fieldset>
 
-    <button type="button" (click)="FormSubmit(AnimalDetails.animalId, UserData.userId)">Submit Adoption Form</button>
+    <button type="button" (click)="FormSubmit(AnimalDetails.animalId, UserData ? UserData.userId : undefined)">Submit Adoption Form</button>
   </form>
 </div>
