@@ -10,8 +10,8 @@
   <div class="post">
     <!-- Post Info (Username and Title) -->
     <div class="post-header">
-      <h3 class="post-username">John Doe</h3>
-      <p class="post-title">A Wonderful Journey with Max the Dog</p>
+      <h3 class="post-username">{{item.userName}}</h3>
+      <p class="post-title">{{item.title}}</p>
     </div>
 
     <!-- Post Image -->
@@ -21,7 +21,7 @@
 
     <!-- Post Content -->
     <div class="post-content">
-      <p>Max was rescued from the streets and found his forever home with us. His transformation is a true success story, and we are so happy to have him as part of our family.</p>
+      <p>{{item.content}}.</p>
     </div>
 
     <!-- Post Info (Likes and Comments) -->
