@@ -1,28 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UrlServiceService } from '../../url-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { FormControl, FormGroup } from '@angular/forms';
-
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-adoption-form',
   templateUrl: './adoption-form.component.html',
-  styleUrl: './adoption-form.component.css'
+  styleUrls: ['./adoption-form.component.css']  // Make sure the correct path to CSS
 })
-export class AdoptionFormComponent {
-  constructor(private _ser: UrlServiceService, private route: ActivatedRoute, private router: Router) { }
-  myform = new FormGroup({
-    animalId: new FormControl(),
-    userId: new FormControl(),
-    adoptionNotes: new FormControl()
-  });
+export class AdoptionFormComponent implements OnInit {
+  myform: FormGroup;
   AnimalID: any;
   AnimalDetails: any;
-  UserId: any
+  UserId: any;
   UserData: any;
 
-
+  constructor(private _ser: UrlServiceService, private route: ActivatedRoute, private router: Router) {
+    // Initialize form group with form controls
+    this.myform = new FormGroup({
+      animalId: new FormControl(''),
+      userId: new FormControl(''),
+      adoptionNotes: new FormControl('', Validators.required)  // Required field validation
+    });
+  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -33,18 +34,16 @@ export class AdoptionFormComponent {
         this.UserId = localStorage.getItem('userId');
         this.GetUserInfo(this.UserId);
 
-        // Correcting the FormGroup initialization
-        this.myform = new FormGroup({
-          animalId: new FormControl(this.AnimalID),
-          userId: new FormControl(this.UserId),// Set the initial value for animalId as AnimalID
-          adoptionNotes: new FormControl('')
-
+        // Update form with values once data is loaded
+        this.myform.patchValue({
+          animalId: this.AnimalID,
+          userId: this.UserId
         });
       }
     });
   }
+
   GetAnimalDetails(AnimalID: number): void {
-    debugger
     this._ser.GetAnimalDetailsByID(AnimalID).subscribe(
       (response) => {
         console.log('API Response:', response);
@@ -55,8 +54,8 @@ export class AdoptionFormComponent {
       }
     );
   }
+
   GetUserInfo(UserId: number): void {
-    debugger
     this._ser.GetUserByID(UserId).subscribe(
       (response) => {
         console.log('API Response:', response);
@@ -66,10 +65,9 @@ export class AdoptionFormComponent {
         console.error('Error fetching user details:', error);
       }
     );
-
   }
+
   FormSubmit() {
-    debugger;
     if (!this.UserId) {
       Swal.fire({
         icon: 'info',
@@ -84,31 +82,37 @@ export class AdoptionFormComponent {
       return;
     }
 
-    const formData = this.myform.value; // Get form data
-    console.log('Form Data:', this.myform.value);
-    this._ser.SubmitAdoptionApplication(formData).subscribe(response => {
-      console.log("Application submitted successfully", response);
+    // Check if form is valid before submission
+    if (this.myform.valid) {
+      const formData = this.myform.value;  // Get all form data
+      console.log('Form Data:', formData);
 
-      Swal.fire({
-        icon: 'success',
-        title: 'Application Submitted!',
-        text: `Your adoption application has been submitted successfully.`,
-        confirmButtonText: 'OK'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          this.router.navigate(['/']);
+      this._ser.SubmitAdoptionApplication(formData).subscribe(
+        (response) => {
+          console.log('Application submitted successfully', response);
+          Swal.fire({
+            icon: 'success',
+            title: 'Application Submitted!',
+            text: `Your adoption application has been submitted successfully.`,
+            confirmButtonText: 'OK'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.router.navigate(['/']);
+            }
+          });
+        },
+        (error) => {
+          console.error('Failed to submit application', error);
+          Swal.fire({
+            icon: 'error',
+            title: 'Submission Failed',
+            text: 'There was an error submitting your application. Please try again later.',
+            confirmButtonText: 'OK'
+          });
         }
-      });
-
-    }, error => {
-      console.error("Failed to submit application", error);
-
-      Swal.fire({
-        icon: 'error',
-        title: 'Submission Failed',
-        text: 'There was an error submitting your application. Please try again later.',
-        confirmButtonText: 'OK'
-      });
-    });
+      );
+    } else {
+      console.log('Form is invalid');
+    }
   }
 }

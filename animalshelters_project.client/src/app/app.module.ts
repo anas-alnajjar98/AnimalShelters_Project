@@ -60,7 +60,7 @@ import { GetAllAnimalComponent } from './admin/get-all-animal/get-all-animal.com
     AdminDashboardComponent,
     UpdateCategoryComponent,
     AddCategoryComponent,
-
+    AdoptionFormComponent,
     ProfileComponent,
     GetAllUsersComponent,
     AllSheltersComponent,
