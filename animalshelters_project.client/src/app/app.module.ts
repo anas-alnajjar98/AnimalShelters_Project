@@ -40,7 +40,7 @@ import { OurCommunityComponent } from './Fawareh/our-community/our-community.com
     VirifyOtpComponent,
     PasswordResetComponent,
     AnimalDetailsComponent,
-    AdoptionFormComponent
+    AdoptionFormComponent,
     AnimalDetailsComponent,
     OurCommunityComponent
   ],
