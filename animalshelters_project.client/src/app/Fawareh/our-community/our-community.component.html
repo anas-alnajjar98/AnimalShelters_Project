@@ -1,0 +1,74 @@
+<!-- Header Section with Pet Background -->
+<header style="background-image: url('your-pet-background.jpg'); background-size: cover; background-position: center; height: 300px; position: relative;">
+  <div style="background-color: steelblue; height: 100%; display: flex; justify-content: center; align-items: center;">
+    <h1 style="color: white; font-size: 3rem; text-align: center;">Our Success Stories</h1>
+  </div>
+</header>
+
+@for (item of posts; track item.id)
+{
+<div class="post-container">
+  <!-- Post -->
+  <div class="post">
+    <!-- Post Info (Username and Title) -->
+    <div class="post-header">
+      <h3 class="post-username">{{item.userName}}</h3>
+      <p class="post-title">{{item.title}}</p>
+    </div>
+
+    <!-- Post Image -->
+    <div class="post-image">
+      <img src="https://localhost:7208/api/Fawareh/getImage/{{item.image}}" alt="Post Image">
+    </div>
+
+    <!-- Post Content -->
+    <div class="post-content">
+      <p>{{item.content}}.</p>
+    </div>
+
+    <!-- Post Info (Likes and Comments) -->
+    <div class="post-info">
+      <div class="post-stats">
+        @if(item.likesCount == null) {
+        <span class="likes">❤️ 0 likes</span>
+        }
+        @else {
+        <span class="likes">❤️ {{item.likesCount}} likes</span>
+        }
+
+        <span class="comments">💬 10 comments</span>
+      </div>
+
+      <!-- Interaction Buttons -->
+      <div class="post-actions">
+        
+        <button  (click)="addLike(item.id)"  class="like-button">❤️ Like</button>
+        <button class="comment-button">💬 Comment</button>
+      </div>
+    </div>
+
+    <!-- Comments Section -->
+
+    <div class="comments-section">
+      <div class="comment-box" *ngIf="showCommentBox">
+        <!--<textarea [(ngModel)]="newComment" placeholder="Add a comment..."></textarea>
+        <button (click)="submitComment()">Submit</button>-->
+      </div>
+
+      <div class="comments-section">
+        <div class="comment-list">
+          <div class="comment" *ngFor="let item of comments">
+            <span class="comment-user"> {{ item.userName }} :</span>
+            <span class="comment-text">{{ item.content }}</span>
+          </div>
+          <!--<div class="comment">
+            <span class="comment-user">Othman Ali:</span>
+            <span class="comment-text">Great story, well done!</span>
+          </div>-->
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+}

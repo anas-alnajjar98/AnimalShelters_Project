@@ -427,6 +427,7 @@ namespace AnimalShelters_Project.Server.Controllers
             {
                 var animalInfo = new
                 {
+                    animalId=animal.AnimalId,
                     animalImage = animal.ImageUrl,
                     animalName = animal.Name,
                     animalSize = animal.Size,
@@ -448,5 +449,38 @@ namespace AnimalShelters_Project.Server.Controllers
                 return NotFound("No animal found under this ID");
             }
         }
+        [HttpGet("getUserByID/{id}")]
+        public async Task<IActionResult> getUserByID(int id) {
+            if (id <= 0) { return BadRequest("id can't be zero or less"); }
+            var user=await _context.Users.FindAsync(id);
+            if (user == null) { return NotFound("no user found under this id"); }
+            return Ok(user);
+        
+        }
+        [HttpPost("ApplicationFormSubmit")]
+        public async Task<IActionResult> ApplicationFormSubmit(int AnimalID, int UserID)
+        {
+           
+            if (AnimalID <= 0 || UserID <= 0)
+            {
+                return BadRequest("ID can't be zero or less.");
+            }
+
+           
+
+            var application = new AdoptionApplication
+            {
+                AnimalId = AnimalID,
+                UserId = UserID,
+                SubmittedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now,
+                Status = "pending"
+            };
+
+            _context.AdoptionApplications.Add(application);
+            _context.SaveChanges();
+            return CreatedAtAction(nameof(ApplicationFormSubmit), new { id = application.AnimalId }, application);
+        }
+
     }
 }
