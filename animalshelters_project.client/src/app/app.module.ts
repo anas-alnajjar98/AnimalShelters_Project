@@ -58,6 +58,7 @@ import { ContactUsComponent } from './Tuqa/contact-us/contact-us.component';
       { path: 'virifyOtp', component: VirifyOtpComponent },
       { path: 'password-reset', component: PasswordResetComponent },
       { path: 'contactUs', component: ContactUsComponent },
+      {path: 'Home', component: HomeComponent}
 
 
 
