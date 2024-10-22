@@ -61,7 +61,7 @@ import { UpdateAnimalComponent } from './admin/update-animal/update-animal.compo
     AdminDashboardComponent,
     UpdateCategoryComponent,
     AddCategoryComponent,
-
+    AdoptionFormComponent,
     ProfileComponent,
     GetAllUsersComponent,
     AllSheltersComponent,
