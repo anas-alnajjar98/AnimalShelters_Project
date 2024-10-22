@@ -29,4 +29,9 @@ export class UrlServiceService {
   GetUserByID(id: number): Observable<any> {
     return this.http.get<any>(`${this.staticData}/Admin/getUserByID/${id}`)
   }
+
+  updateCategory(id: any, data: any): Observable<any> {
+    return this.http.put(`${this.staticData}/Admin/UpdateCategory/${id}`, data)
+
+  }
 }

@@ -22,6 +22,7 @@ import { AdoptionFormComponent } from './dima/adoption-form/adoption-form.compon
 import { OurCommunityComponent } from './Fawareh/our-community/our-community.component';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 import { AllcategoriesComponent } from './admin/allcategories/allcategories.component';
+import { UpdateCategoryComponent } from './admin/update-category/update-category.component';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { AllcategoriesComponent } from './admin/allcategories/allcategories.comp
     AnimalDetailsComponent,
     OurCommunityComponent,
     AllcategoriesComponent,
-    AdminDashboardComponent
+    AdminDashboardComponent,
+    UpdateCategoryComponent
     
   ],
   imports: [
@@ -69,6 +71,7 @@ import { AllcategoriesComponent } from './admin/allcategories/allcategories.comp
       {
         path: 'AdminDashBoard', component: AdminDashboardComponent, children: [
           { path: "AllCategories", component: AllcategoriesComponent },
+          { path: "UpdateCategory/:id", component: UpdateCategoryComponent },
         ]
       }
     ]),
