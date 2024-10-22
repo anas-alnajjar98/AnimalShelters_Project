@@ -30,9 +30,16 @@ export class OurCommunityComponent {
           post.likes = likesData;
         })
       })
+
+      this.posts.forEach(post => {
+        this.getComments(post.id).subscribe(commentsData => {
+          post.comments = commentsData
+        })
+      })
       this.getLikesPerPost(data.id)
       console.log(this.posts);
     });
+
   }
 
   toggleCommentBox() {
