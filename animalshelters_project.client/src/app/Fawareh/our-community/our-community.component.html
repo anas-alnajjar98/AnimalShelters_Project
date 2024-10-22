@@ -5,7 +5,9 @@
   </div>
 </header>
 
-<div class="post-container" *ngFor="let item of posts">
+@for (item of posts, track item.id)
+{
+<div class="post-container">
   <!-- Post -->
   <div class="post">
     <!-- Post Info (Username and Title) -->
@@ -53,3 +55,5 @@
     </div>
   </div>
 </div>
+
+}
