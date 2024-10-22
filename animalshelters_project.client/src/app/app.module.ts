@@ -18,6 +18,7 @@ import { VirifyOtpComponent } from './hosam/virify-otp/virify-otp.component';
 import { PasswordResetComponent } from './hosam/password-reset/password-reset.component';
 import { AnimalComponent } from './dima/animal/animal.component';
 import { AnimalDetailsComponent } from './dima/animal-details/animal-details.component';
+import { ProfileComponent } from './hosam/profile/profile.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { AnimalDetailsComponent } from './dima/animal-details/animal-details.com
     ResetPasswordComponent,
     VirifyOtpComponent,
     PasswordResetComponent,
-    AnimalDetailsComponent
+    AnimalDetailsComponent,
+    ProfileComponent
   ],
   imports: [
     FormsModule,
@@ -54,6 +56,7 @@ import { AnimalDetailsComponent } from './dima/animal-details/animal-details.com
       { path: 'reset-password', component: ResetPasswordComponent },
       { path: 'virifyOtp', component: VirifyOtpComponent },
       { path: 'password-reset', component: PasswordResetComponent },
+      { path: 'profile', component: ProfileComponent },
 
     ]),
   ],
