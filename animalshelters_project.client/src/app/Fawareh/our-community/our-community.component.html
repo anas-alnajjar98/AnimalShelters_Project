@@ -1,0 +1,55 @@
+<!-- Header Section with Pet Background -->
+<header style="background-image: url('your-pet-background.jpg'); background-size: cover; background-position: center; height: 300px; position: relative;">
+  <div style="background-color: steelblue; height: 100%; display: flex; justify-content: center; align-items: center;">
+    <h1 style="color: white; font-size: 3rem; text-align: center;">Our Success Stories</h1>
+  </div>
+</header>
+
+<div class="post-container" *ngFor="let item of posts">
+  <!-- Post -->
+  <div class="post">
+    <!-- Post Info (Username and Title) -->
+    <div class="post-header">
+      <h3 class="post-username">John Doe</h3>
+      <p class="post-title">A Wonderful Journey with Max the Dog</p>
+    </div>
+
+    <!-- Post Image -->
+    <div class="post-image">
+      <img src="https://media.4-paws.org/9/c/9/7/9c97c38666efa11b79d94619cc1db56e8c43d430/Molly_006-2829x1886-2726x1886-1920x1328.jpg" alt="Post Image">
+    </div>
+
+    <!-- Post Content -->
+    <div class="post-content">
+      <p>Max was rescued from the streets and found his forever home with us. His transformation is a true success story, and we are so happy to have him as part of our family.</p>
+    </div>
+
+    <!-- Post Info (Likes and Comments) -->
+    <div class="post-info">
+      <div class="post-stats">
+        <span class="likes">❤️ 245 likes</span>
+        <span class="comments">💬 10 comments</span>
+      </div>
+
+      <!-- Interaction Buttons -->
+      <div class="post-actions">
+        <button class="like-button">❤️ Like</button>
+        <button class="comment-button">💬 Comment</button>
+      </div>
+    </div>
+
+    <!-- Comments Section -->
+    <div class="comments-section">
+      <div class="comment-list">
+        <div class="comment">
+          <span class="comment-user">Ali Ahmad:</span>
+          <span class="comment-text">Amazing transformation!</span>
+        </div>
+        <div class="comment">
+          <span class="comment-user">Othman Ali:</span>
+          <span class="comment-text">Great story, well done!</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
