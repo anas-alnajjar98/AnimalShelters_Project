@@ -23,7 +23,9 @@ export class UrlService {
     return this.http.get<any>(`${this.staticUrl}/Gharibeh_s/allPost`)
   }
 
-  getLikesPerPost(id: number): Observable<any> {
-    return this.http.get<any>(`${this.staticUrl}/Gharibeh_s/countLikes/${id}`)
+
+  addLike(data : any): Observable<any> {
+    return this.http.post<any>(`${this.staticUrl}/Gharibeh_s/addLike`, data)
   }
+
 }

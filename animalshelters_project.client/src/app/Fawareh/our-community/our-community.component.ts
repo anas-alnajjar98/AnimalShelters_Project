@@ -22,24 +22,32 @@ export class OurCommunityComponent {
     this._ser.allPosts().subscribe((data) => {
       this.posts = data;
 
-      this.posts.forEach(post => {
-        this.getLikesPerPost(post.id).subscribe(likesData => {
-          post.likes = likesData;
-        })
-      })
-      this.getLikesPerPost(data.id)
-      console.log(this.posts);
-    });
+           })
+     
+  };
+
+  data = {
+    "postId": 0,
+    "userId": localStorage.getItem("userId")
+}
+
+  addLike(postId: number) {
+    this.data.postId = postId
+    this._ser.addLike(this.data).subscribe(() => {
+      
+     
+      this.getAllPosts();
+
+    })
   }
 
 
-  likes: any
-
-
-  getLikesPerPost(id: any): Observable<any> {
-    return this._ser.getLikesPerPost(id);
   }
+
+
+
+
 
 
   
-}
+
