@@ -49,6 +49,21 @@ namespace AnimalShelters_Project.Server.Controllers
 
         }
 
+        // get all posts when Flag is true 
+        [HttpGet("allPost")]
+        public IActionResult GetAllPost()
+        {
+            var post = _db.Posts.Where(p => p.Flag == true).Select(t => new
+            {
+                Content = t.Content,
+                Title = t.Title,
+                Image = t.Image,
+                UserName = t.User.UserName,
+
+            }).ToList();
+            return Ok(post);
+        }
+
 
 
     }

@@ -19,6 +19,7 @@ import { PasswordResetComponent } from './hosam/password-reset/password-reset.co
 import { AnimalComponent } from './dima/animal/animal.component';
 import { AnimalDetailsComponent } from './dima/animal-details/animal-details.component';
 import { AdoptionFormComponent } from './dima/adoption-form/adoption-form.component';
+import { OurCommunityComponent } from './Fawareh/our-community/our-community.component';
 
 
 @NgModule({
@@ -39,7 +40,9 @@ import { AdoptionFormComponent } from './dima/adoption-form/adoption-form.compon
     VirifyOtpComponent,
     PasswordResetComponent,
     AnimalDetailsComponent,
-    AdoptionFormComponent
+    AdoptionFormComponent,
+    AnimalDetailsComponent,
+    OurCommunityComponent
   ],
   imports: [
     FormsModule,
@@ -56,6 +59,7 @@ import { AdoptionFormComponent } from './dima/adoption-form/adoption-form.compon
       { path: 'reset-password', component: ResetPasswordComponent },
       { path: 'virifyOtp', component: VirifyOtpComponent },
       { path: 'password-reset', component: PasswordResetComponent },
+      { path: 'ourCommunity', component: OurCommunityComponent },
 
     ]),
   ],
