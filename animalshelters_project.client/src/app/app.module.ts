@@ -20,6 +20,7 @@ import { AnimalComponent } from './dima/animal/animal.component';
 import { AnimalDetailsComponent } from './dima/animal-details/animal-details.component';
 import { ContactUsComponent } from './Tuqa/contact-us/contact-us.component';
 import { ProfileComponent } from './hosam/profile/profile.component';
+import { GetAllUsersComponent } from './admin/get-all-users/get-all-users.component';
 
 
 
@@ -43,7 +44,8 @@ import { ProfileComponent } from './hosam/profile/profile.component';
     ContactUsComponent,
    
     AnimalDetailsComponent,
-    ProfileComponent
+    ProfileComponent,
+    GetAllUsersComponent
   ],
   imports: [
     FormsModule,
