@@ -34,8 +34,8 @@
   </div>
 
   <div class="adoption-section">
-    <button  class="adopt-button">
+    <a class="adopt-button"  [routerLink]="['/adoptionForm', AnimalDetails. animalId]">
       Adopt {{ AnimalDetails.animalName }}
-    </button>
+    </a>
   </div>
 </div>

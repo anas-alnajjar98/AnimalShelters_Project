@@ -36,6 +36,7 @@ header -->
                     <ul class="list-unstyled mt-lg-3">
                       <li><a class="dropdown-item" href="about-us.html">About</a></li>
                       <li><a class="dropdown-item" routerLink="/postForm">Post Form</a></li>
+                      <li><a class="dropdown-item" routerLink="/ourCommunity">Our Community</a></li>
 
                       <li><a class="dropdown-item" href="service.html">Service</a></li>
                       <li><a class="dropdown-item" href="service-detail.html">Service Detail</a></li>
@@ -76,10 +77,13 @@ header -->
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" routerLink="/Categories">Categories</a>
           </li>
-
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="contact-us.html">Contact Us</a>
+            <a class="nav-link dropdown-toggle" routerLink="/AdminDashBoard">Admin</a>
           </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" routerLink="contactUs">Contact Us</a>
+          </li>
+
         </ul>
       </div>
       <div *ngIf="!isLoggedIn" class="add-listing">
