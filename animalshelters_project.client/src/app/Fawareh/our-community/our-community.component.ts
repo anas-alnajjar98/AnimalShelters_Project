@@ -8,8 +8,11 @@ import { UrlService } from '../UrlService/url.service';
 })
 export class OurCommunityComponent {
 
+  showCommentBox: boolean = false;
+  userId: any;
 
   ngOnInit() {
+    this.userId = localStorage.getItem('userId');
     this.getAllPosts();
   }
 
@@ -23,6 +26,12 @@ export class OurCommunityComponent {
       console.log(this.posts);
     });
   }
+
+  toggleCommentBox() {
+    this.showCommentBox = !this.showCommentBox;
+  }
+
+
 
 
 

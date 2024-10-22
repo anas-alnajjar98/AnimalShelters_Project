@@ -36,24 +36,31 @@
       <!-- Interaction Buttons -->
       <div class="post-actions">
         <button class="like-button">❤️ Like</button>
-        <button class="comment-button">💬 Comment</button>
+        <button class="comment-button" (click)="toggleCommentBox()">💬 Comment</button>
       </div>
     </div>
 
     <!-- Comments Section -->
+
     <div class="comments-section">
-      <div class="comment-list">
-        <div class="comment">
-          <span class="comment-user">Ali Ahmad:</span>
-          <span class="comment-text">Amazing transformation!</span>
-        </div>
-        <div class="comment">
-          <span class="comment-user">Othman Ali:</span>
-          <span class="comment-text">Great story, well done!</span>
+      <div class="comment-box" *ngIf="showCommentBox">
+        <textarea [(ngModel)]="newComment" placeholder="Add a comment..."></textarea>
+        <button (click)="submitComment()">Submit</button>
+      </div>
+
+      <div class="comments-section">
+        <div class="comment-list">
+          <div class="comment">
+            <span class="comment-user">Ali Ahmad:</span>
+            <span class="comment-text">Amazing transformation!</span>
+          </div>
+          <div class="comment">
+            <span class="comment-user">Othman Ali:</span>
+            <span class="comment-text">Great story, well done!</span>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
 }
