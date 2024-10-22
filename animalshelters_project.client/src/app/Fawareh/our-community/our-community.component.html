@@ -29,7 +29,13 @@
     <!-- Post Info (Likes and Comments) -->
     <div class="post-info">
       <div class="post-stats">
-        <span class="likes">❤️ 245 likes</span>
+        @if(item.likes == null) {
+        <span class="likes">❤️ 0 likes</span>
+        }
+        @else {
+        <span class="likes">❤️ {{item.likes}} likes</span>
+        }
+
         <span class="comments">💬 10 comments</span>
       </div>
 

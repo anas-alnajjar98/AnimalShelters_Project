@@ -32,4 +32,8 @@ export class UrlService {
   getComments(postId: number): Observable<any> {
     return this.http.get(`${this.staticUrl}/Gharibeh_s/displayComments/${postId}`);
   }
+
+  getLikesPerPost(id: number): Observable<any> {
+    return this.http.get<any>(`${this.staticUrl}/Gharibeh_s/countLikes/${id}`)
+  }
 }

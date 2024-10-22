@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { UrlService } from '../UrlService/url.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-our-community',
@@ -18,11 +19,18 @@ export class OurCommunityComponent {
 
   constructor(private _ser: UrlService) { }
 
-  posts: any;
+  posts: any[] = [];
   getAllPosts() {
     
     this._ser.allPosts().subscribe((data) => {
       this.posts = data;
+
+      this.posts.forEach(post => {
+        this.getLikesPerPost(post.id).subscribe(likesData => {
+          post.likes = likesData;
+        })
+      })
+      this.getLikesPerPost(data.id)
       console.log(this.posts);
     });
   }
@@ -33,6 +41,13 @@ export class OurCommunityComponent {
 
 
 
+
+  likes: any
+
+
+  getLikesPerPost(id: any): Observable<any> {
+    return this._ser.getLikesPerPost(id);
+  }
 
 
   
