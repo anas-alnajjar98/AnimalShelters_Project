@@ -23,6 +23,7 @@ export class UrlServiceService {
   }
 
   submitContactForm(contactData: FormData): Observable<any> {
+
     return this.http.post(`${this.staticData}/Contact/newmassege`, contactData );
   }
 
