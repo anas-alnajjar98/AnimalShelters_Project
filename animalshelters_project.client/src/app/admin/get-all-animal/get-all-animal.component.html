@@ -1,0 +1,32 @@
+<h2 class="text-center mb-4">All Animal</h2>
+<a class="btn btn-success btn-sm" >Add new Animal</a>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+
+      <th>Name</th>
+      <th>Breed</th>
+      <th>Age</th>
+      <th>Size</th>
+      <th>Temperament</th>
+      <th>Special Needs</th>
+      <th>Adoption Status</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let animal of animal">
+    <tr>
+      <td>{{ animal.name }}</td>
+      <td>{{ animal.breed }}</td>
+      <td>{{ animal.age }}</td>
+      <td>{{ animal.size }}</td>
+      <td>{{ animal.temperament }}</td>
+      <td>{{ animal.specialNeeds }}</td>
+      <td>{{ animal.adoptionStatus }}</td>
+      <td>
+        <button (click)="editAnimal(animal.animalId)" class="btn btn-primary">Edit</button>
+        <button (click)="deleteAnimal(animal.animalId)" class="btn btn-danger">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

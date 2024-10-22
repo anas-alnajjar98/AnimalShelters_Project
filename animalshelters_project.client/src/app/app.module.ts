@@ -30,6 +30,7 @@ import { GetAllUsersComponent } from './admin/get-all-users/get-all-users.compon
 import { AllSheltersComponent } from './admin/all-shelters/all-shelters.component';
 import { UpdateShelterComponent } from './admin/update-shelter/update-shelter.component';
 import { AddShelterComponent } from './admin/add-shelter/add-shelter.component';
+import { GetAllAnimalComponent } from './admin/get-all-animal/get-all-animal.component';
 
 
 
@@ -42,16 +43,16 @@ import { AddShelterComponent } from './admin/add-shelter/add-shelter.component';
     PostFormComponent,
     LoginComponent,
     AllcategoryComponent,
-   
+
     AnimalComponent,
-   
+
     RegisterComponent,
     ResetPasswordComponent,
     VirifyOtpComponent,
     PasswordResetComponent,
     AnimalDetailsComponent,
     ContactUsComponent,
-   
+
     AnimalDetailsComponent,
     ProfileComponent,
     OurCommunityComponent,
@@ -59,7 +60,7 @@ import { AddShelterComponent } from './admin/add-shelter/add-shelter.component';
     AdminDashboardComponent,
     UpdateCategoryComponent,
     AddCategoryComponent,
-    
+
     ProfileComponent,
     GetAllUsersComponent,
     AllSheltersComponent,
@@ -82,20 +83,22 @@ import { AddShelterComponent } from './admin/add-shelter/add-shelter.component';
       { path: 'virifyOtp', component: VirifyOtpComponent },
       { path: 'password-reset', component: PasswordResetComponent },
       { path: 'contactUs', component: ContactUsComponent },
-      {path: 'Home', component: HomeComponent},
+      { path: 'Home', component: HomeComponent },
 
 
 
       { path: 'profile', component: ProfileComponent },
 
       { path: 'ourCommunity', component: OurCommunityComponent },
-      
+
       {
         path: 'AdminDashBoard', component: AdminDashboardComponent, children: [
           { path: "AllCategories", component: AllcategoriesComponent },
           { path: "UpdateCategory/:id", component: UpdateCategoryComponent },
           { path: "AddCategory", component: AddCategoryComponent },
           { path: "AllShelters", component: AllSheltersComponent },
+          { path: "AllAnimal", component: GetAllAnimalComponent },
+
           { path: "UpdateShelter/:id", component: UpdateShelterComponent },
           { path: "AddShelter", component: AddShelterComponent },
 

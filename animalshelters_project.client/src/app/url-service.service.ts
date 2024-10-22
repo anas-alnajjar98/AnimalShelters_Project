@@ -78,4 +78,10 @@ export class UrlServiceService {
   getShelterById(id: number): Observable<any> {
     return this.http.get<any>(`${this.staticData}/Admin/GetShelterByID/${id}`)
   }
+  GetAllAnimal(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.staticData}/Admin/getAllAnimals`)
+  }
+  DeleteAnimalByID(id: any): Observable<any> {
+    return this.http.delete<any>(`${this.staticData}/Admin/deleteAnimal/${id}`)
+  }
 }
