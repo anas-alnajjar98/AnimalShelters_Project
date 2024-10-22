@@ -43,25 +43,29 @@ import { GetAllAnimalComponent } from './admin/get-all-animal/get-all-animal.com
     PostFormComponent,
     LoginComponent,
     AllcategoryComponent,
-   
+
     AnimalComponent,
-   
+
     RegisterComponent,
     ResetPasswordComponent,
     VirifyOtpComponent,
     PasswordResetComponent,
     AnimalDetailsComponent,
     ContactUsComponent,
-   
+
     AnimalDetailsComponent,
     ProfileComponent,
     OurCommunityComponent,
     AllcategoriesComponent,
     AdminDashboardComponent,
-    UpdateCategoryComponent
-    
+    UpdateCategoryComponent,
+    AddCategoryComponent,
+
     ProfileComponent,
-    GetAllUsersComponent
+    GetAllUsersComponent,
+    AllSheltersComponent,
+    UpdateShelterComponent,
+    AddShelterComponent
   ],
   imports: [
     FormsModule,
@@ -79,18 +83,25 @@ import { GetAllAnimalComponent } from './admin/get-all-animal/get-all-animal.com
       { path: 'virifyOtp', component: VirifyOtpComponent },
       { path: 'password-reset', component: PasswordResetComponent },
       { path: 'contactUs', component: ContactUsComponent },
-      {path: 'Home', component: HomeComponent},
+      { path: 'Home', component: HomeComponent },
 
 
 
       { path: 'profile', component: ProfileComponent },
 
       { path: 'ourCommunity', component: OurCommunityComponent },
-      
+
       {
         path: 'AdminDashBoard', component: AdminDashboardComponent, children: [
           { path: "AllCategories", component: AllcategoriesComponent },
           { path: "UpdateCategory/:id", component: UpdateCategoryComponent },
+          { path: "AddCategory", component: AddCategoryComponent },
+          { path: "AllShelters", component: AllSheltersComponent },
+          { path: "AllAnimal", component: GetAllAnimalComponent },
+
+          { path: "UpdateShelter/:id", component: UpdateShelterComponent },
+          { path: "AddShelter", component: AddShelterComponent },
+
         ]
       }
     ]),
