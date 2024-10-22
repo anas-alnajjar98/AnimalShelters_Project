@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -26,9 +26,21 @@ export class UrlServiceService {
     return this.http.get<any>(`${this.staticData}/Admin/GetAnimalDetailsById/${id}`)
   }
 
+  submitContactForm(contactData: FormData): Observable<any> {
+
+    return this.http.post(`${this.staticData}/Contact/newmassege`, contactData );
+  }
+
+
   GetUserByID(id: number): Observable<any> {
     return this.http.get<any>(`${this.staticData}/Admin/getUserByID/${id}`)
   }
+  SubmitAdoptionApplication(AnimalID: number, UserID: number): Observable<any> {
+    const url = `${this.staticData}/Admin/ApplicationFormSubmit?AnimalID=${AnimalID}&UserID=${UserID}`;
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': 'Bearer token' });
+    return this.http.post<any>(url, { headers });
+  }
+
 
   updateCategory(id: any, data: any): Observable<any> {
     return this.http.put(`${this.staticData}/Admin/UpdateCategory/${id}`, data)

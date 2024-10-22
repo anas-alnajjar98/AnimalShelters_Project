@@ -18,11 +18,14 @@ import { VirifyOtpComponent } from './hosam/virify-otp/virify-otp.component';
 import { PasswordResetComponent } from './hosam/password-reset/password-reset.component';
 import { AnimalComponent } from './dima/animal/animal.component';
 import { AnimalDetailsComponent } from './dima/animal-details/animal-details.component';
+import { ContactUsComponent } from './Tuqa/contact-us/contact-us.component';
+import { ProfileComponent } from './hosam/profile/profile.component';
 import { AdoptionFormComponent } from './dima/adoption-form/adoption-form.component';
 import { OurCommunityComponent } from './Fawareh/our-community/our-community.component';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 import { AllcategoriesComponent } from './admin/allcategories/allcategories.component';
 import { UpdateCategoryComponent } from './admin/update-category/update-category.component';
+
 
 
 @NgModule({
@@ -36,15 +39,16 @@ import { UpdateCategoryComponent } from './admin/update-category/update-category
     AllcategoryComponent,
    
     AnimalComponent,
-  
    
     RegisterComponent,
     ResetPasswordComponent,
     VirifyOtpComponent,
     PasswordResetComponent,
     AnimalDetailsComponent,
-    AdoptionFormComponent,
+    ContactUsComponent,
+   
     AnimalDetailsComponent,
+    ProfileComponent
     OurCommunityComponent,
     AllcategoriesComponent,
     AdminDashboardComponent,
@@ -66,6 +70,12 @@ import { UpdateCategoryComponent } from './admin/update-category/update-category
       { path: 'reset-password', component: ResetPasswordComponent },
       { path: 'virifyOtp', component: VirifyOtpComponent },
       { path: 'password-reset', component: PasswordResetComponent },
+      { path: 'contactUs', component: ContactUsComponent },
+
+
+
+      { path: 'profile', component: ProfileComponent },
+
       { path: 'ourCommunity', component: OurCommunityComponent },
       
       {
