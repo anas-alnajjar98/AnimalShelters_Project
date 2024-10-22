@@ -22,5 +22,10 @@ export class UrlServiceService {
     return this.http.get<any>(`${this.staticData}/Admin/GetAnimalDetailsById/${id}`)
   }
 
+  submitContactForm(contactData: FormData): Observable<any> {
+    return this.http.post(`${this.staticData}/Contact/newmassege`, contactData );
+  }
+
+
 
 }
