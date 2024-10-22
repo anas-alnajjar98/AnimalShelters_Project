@@ -26,6 +26,7 @@ import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard
 import { AllcategoriesComponent } from './admin/allcategories/allcategories.component';
 import { UpdateCategoryComponent } from './admin/update-category/update-category.component';
 import { AddCategoryComponent } from './admin/add-category/add-category.component';
+import { GetAllUsersComponent } from './admin/get-all-users/get-all-users.component';
 
 
 
@@ -56,6 +57,8 @@ import { AddCategoryComponent } from './admin/add-category/add-category.componen
     UpdateCategoryComponent,
     AddCategoryComponent
     
+    ProfileComponent,
+    GetAllUsersComponent
   ],
   imports: [
     FormsModule,
@@ -73,6 +76,7 @@ import { AddCategoryComponent } from './admin/add-category/add-category.componen
       { path: 'virifyOtp', component: VirifyOtpComponent },
       { path: 'password-reset', component: PasswordResetComponent },
       { path: 'contactUs', component: ContactUsComponent },
+      {path: 'Home', component: HomeComponent}
 
 
 
