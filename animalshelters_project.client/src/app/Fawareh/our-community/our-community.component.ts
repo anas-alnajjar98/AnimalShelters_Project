@@ -19,6 +19,8 @@ export class OurCommunityComponent {
 
   constructor(private _ser: UrlService) { }
 
+  comments: any[] = [];
+
   posts: any[] = [];
   getAllPosts() {
     
@@ -30,21 +32,28 @@ export class OurCommunityComponent {
           post.likes = likesData;
         })
       })
+
+      this.posts.forEach(post => {
+        this.getCommentsForPost(post.id).subscribe(commentsData => {
+          post.comments = commentsData
+        })
+      })
       this.getLikesPerPost(data.id)
       console.log(this.posts);
     });
+
   }
 
   toggleCommentBox() {
     this.showCommentBox = !this.showCommentBox;
   }
 
+  getCommentsForPost(id: any): Observable<any> {
+    return this._ser.getComments(id);
 
-
+  }
 
   likes: any
-
-
   getLikesPerPost(id: any): Observable<any> {
     return this._ser.getLikesPerPost(id);
   }

@@ -42,7 +42,7 @@
       <!-- Interaction Buttons -->
       <div class="post-actions">
         <button class="like-button">❤️ Like</button>
-        <button class="comment-button" (click)="toggleCommentBox()">💬 Comment</button>
+        <!--<button class="comment-button" (click)="toggleCommentBox()">💬 Comment</button>-->
       </div>
     </div>
 
@@ -50,23 +50,24 @@
 
     <div class="comments-section">
       <div class="comment-box" *ngIf="showCommentBox">
-        <textarea [(ngModel)]="newComment" placeholder="Add a comment..."></textarea>
-        <button (click)="submitComment()">Submit</button>
+        <!--<textarea [(ngModel)]="newComment" placeholder="Add a comment..."></textarea>
+        <button (click)="submitComment()">Submit</button>-->
       </div>
 
       <div class="comments-section">
         <div class="comment-list">
-          <div class="comment">
-            <span class="comment-user">Ali Ahmad:</span>
-            <span class="comment-text">Amazing transformation!</span>
+          <div class="comment" *ngFor="let item of comments">
+            <span class="comment-user"> {{ item.userName }} :</span>
+            <span class="comment-text">{{ item.content }}</span>
           </div>
-          <div class="comment">
+          <!--<div class="comment">
             <span class="comment-user">Othman Ali:</span>
             <span class="comment-text">Great story, well done!</span>
-          </div>
+          </div>-->
         </div>
       </div>
     </div>
+  </div>
   </div>
 
 }
