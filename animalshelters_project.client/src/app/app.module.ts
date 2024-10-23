@@ -76,7 +76,7 @@ import { PostManagementComponent } from './admin/post-management/post-management
     GetAllAnimalComponent,
     UpdateAnimalComponent,
     AddAnimalComponent,
-    AdoptionApplicationComponent
+    AdoptionApplicationComponent,
     AddAnimalComponent,
     GetAllUsersComponent,
     AdminLoginComponent,
@@ -118,8 +118,7 @@ import { PostManagementComponent } from './admin/post-management/post-management
           { path: "UpdateShelter/:id", component: UpdateShelterComponent },
           { path: "AddShelter", component: AddShelterComponent },
           { path: "AddAnimals", component: AddAnimalComponent },
-          { path: "AdoptionApplication", component: AdoptionApplicationComponent }
-
+          { path: "AdoptionApplication", component: AdoptionApplicationComponent },
           { path: "allUsers", component: GetAllUsersComponent },
           { path: "post-management", component: PostManagementComponent },
         ]
