@@ -527,6 +527,72 @@ namespace AnimalShelters_Project.Server.Controllers
             _context.SaveChanges();
             return CreatedAtAction(nameof(ApplicationFormSubmit), new { id = application.AnimalId }, application);
         }
+        [HttpGet("GetAllAdoptionApplication")]
+        public async Task<IActionResult> GetAllAdoptionApplication()
+        {
+            var applications = await _context.AdoptionApplications
+                .Where(x => x.Status == "pending")
+                .Select(x => new
+                {
+                    ApplicationId = x.ApplicationId,
+                    ApplicantName = x.User.UserName,      
+                    AnimalName = x.Animal.Name,      
+                    AdoptionNotes = x.AdoptionNotes,  
+                    Status = x.Status
+                })
+                .ToListAsync();
+
+            if (applications == null || !applications.Any())
+            {
+                return NotFound();
+            }
+
+            return Ok(applications);
+        }
+
+        [HttpPut("{applicationId}/accept")]
+        public async Task<IActionResult> AcceptApplication(int applicationId)
+        {
+           
+            var application = await _context.AdoptionApplications.FindAsync(applicationId);
+            if (application == null)
+            {
+               
+                Console.WriteLine($"Application with ID {applicationId} not found.");
+                return NotFound(new { message = $"Application with ID {applicationId} not found." });
+            }
+
+           
+            if (application.Status != "pending")
+            {
+               
+                Console.WriteLine($"Application with ID {applicationId} is not pending.");
+                return BadRequest(new { message = "Application is not pending" });
+            }
+
+          
+            application.Status = "accepted";
+            application.UpdatedAt = DateTime.Now;
+
+            
+            var otherApplications = await _context.AdoptionApplications
+                .Where(a => a.AnimalId == application.AnimalId && a.ApplicationId != applicationId && a.Status == "pending")
+                .ToListAsync();
+
+            foreach (var otherApp in otherApplications)
+            {
+                otherApp.Status = "rejected";
+                otherApp.UpdatedAt = DateTime.Now;
+            }
+
+           
+            await _context.SaveChangesAsync();
+
+           
+            Console.WriteLine($"Application with ID {applicationId} accepted. Other applications rejected.");
+            return Ok();
+        }
+
 
     }
 }
