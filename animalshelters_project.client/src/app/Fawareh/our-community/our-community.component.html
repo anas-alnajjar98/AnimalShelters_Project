@@ -50,10 +50,17 @@
       <div class="post-actions">
 
         <button (click)="addLike(item.id)" class="like-button">❤️ Like</button>
-        <button (click)="toggleCommentBox(item.id)" class="comment-button">💬 .. comments</button>
-        <div>
-          <button class="share-btn" (click)="shareOnFacebook(item.id)">Share on Facebook</button>
+
+        
+          
+    
+        <div >
+          <button (click)="toggleCommentBox(item.id)" class="comment-button ">💬 .. comments</button>
+          <button class="share-btn mewo" (click)="shareOnFacebook(item.id)">
+            <i class="fab fa-facebook"></i>
+          </button>
         </div>
+        
       </div>
     </div>
 
@@ -93,9 +100,11 @@
   </div>
 </div>
 
+
+
+}
+
 <!-- Floating Action Button for Add Page -->
 <button (click)="navigateToAddPage()" class="fab-button">
   <i class="fa fa-plus"></i>
 </button>
-
-}
