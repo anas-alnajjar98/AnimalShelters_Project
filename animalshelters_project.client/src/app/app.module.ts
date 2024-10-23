@@ -73,7 +73,7 @@ import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
     AddShelterComponent,
     GetAllAnimalComponent,
     UpdateAnimalComponent,
-    AddAnimalComponent
+    AddAnimalComponent,
     GetAllUsersComponent,
     AdminLoginComponent,
   ],
