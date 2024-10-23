@@ -28,7 +28,7 @@ export class AddShelterComponent {
           text: 'The shelter has been added successfully!',
           confirmButtonText: 'OK'
         }).then(() => {
-          this._router.navigate(['AdminDashBoard/AllShelters']);
+          this._router.navigate(['adminDashBoard/AllShelters']);
         });
       },
       error => {
