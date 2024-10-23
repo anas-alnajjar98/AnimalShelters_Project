@@ -69,7 +69,7 @@ export class UpdateAnimalComponent {
           text: 'The animal has been updated successfully!',
           confirmButtonText: 'OK'
         }).then(() => {
-          this._router.navigate(['AdminDashBoard/AllAnimal']);
+          this._router.navigate(['adminDashBoard/AllAnimal']);
         });
       },
       error => {

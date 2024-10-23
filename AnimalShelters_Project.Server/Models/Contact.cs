@@ -12,4 +12,6 @@ public partial class Contact
     public string Email { get; set; } = null!;
 
     public string Message { get; set; } = null!;
+
+    public string? Reply { get; set; }
 }

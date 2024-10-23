@@ -58,7 +58,7 @@ export class UpdateCategoryComponent {
           text: 'The category has been updated successfully!',
           confirmButtonText: 'OK'
         }).then(() => {
-          this._router.navigate(['AdminDashBoard/AllCategories']);
+          this._router.navigate(['adminDashBoard/AllCategories']);
         });
       },
       error => {
