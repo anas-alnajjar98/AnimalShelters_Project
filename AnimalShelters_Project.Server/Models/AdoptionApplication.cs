@@ -17,6 +17,8 @@ public partial class AdoptionApplication
 
     public DateTime? UpdatedAt { get; set; }
 
+    public string? AdoptionNotes { get; set; }
+
     public virtual Animal? Animal { get; set; }
 
     public virtual User? User { get; set; }

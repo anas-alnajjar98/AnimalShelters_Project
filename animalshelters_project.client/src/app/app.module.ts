@@ -26,6 +26,7 @@ import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard
 import { AllcategoriesComponent } from './admin/allcategories/allcategories.component';
 import { UpdateCategoryComponent } from './admin/update-category/update-category.component';
 import { GetAllUsersComponent } from './admin/get-all-users/get-all-users.component';
+import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
 
 
 
@@ -49,14 +50,15 @@ import { GetAllUsersComponent } from './admin/get-all-users/get-all-users.compon
     ContactUsComponent,
    
     AnimalDetailsComponent,
-    ProfileComponent
+    ProfileComponent,
     OurCommunityComponent,
     AllcategoriesComponent,
     AdminDashboardComponent,
-    UpdateCategoryComponent
+    UpdateCategoryComponent,
     
     ProfileComponent,
-    GetAllUsersComponent
+    GetAllUsersComponent,
+    AdminLoginComponent,
   ],
   imports: [
     FormsModule,
@@ -74,6 +76,7 @@ import { GetAllUsersComponent } from './admin/get-all-users/get-all-users.compon
       { path: 'virifyOtp', component: VirifyOtpComponent },
       { path: 'password-reset', component: PasswordResetComponent },
       { path: 'contactUs', component: ContactUsComponent },
+      { path: 'admin', component: AdminLoginComponent },
 
 
 
@@ -82,9 +85,10 @@ import { GetAllUsersComponent } from './admin/get-all-users/get-all-users.compon
       { path: 'ourCommunity', component: OurCommunityComponent },
       
       {
-        path: 'AdminDashBoard', component: AdminDashboardComponent, children: [
+        path: 'adminDashBoard', component: AdminDashboardComponent, children: [
           { path: "AllCategories", component: AllcategoriesComponent },
           { path: "UpdateCategory/:id", component: UpdateCategoryComponent },
+          { path: "allUsers", component: GetAllUsersComponent },
         ]
       }
     ]),
