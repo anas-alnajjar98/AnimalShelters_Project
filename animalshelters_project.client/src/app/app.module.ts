@@ -49,11 +49,11 @@ import { GetAllUsersComponent } from './admin/get-all-users/get-all-users.compon
     ContactUsComponent,
    
     AnimalDetailsComponent,
-    ProfileComponent
+    ProfileComponent,
     OurCommunityComponent,
     AllcategoriesComponent,
     AdminDashboardComponent,
-    UpdateCategoryComponent
+    UpdateCategoryComponent,
     
     ProfileComponent,
     GetAllUsersComponent
@@ -74,7 +74,7 @@ import { GetAllUsersComponent } from './admin/get-all-users/get-all-users.compon
       { path: 'virifyOtp', component: VirifyOtpComponent },
       { path: 'password-reset', component: PasswordResetComponent },
       { path: 'contactUs', component: ContactUsComponent },
-      {path: 'Home', component: HomeComponent}
+      {path: 'Home', component: HomeComponent},
 
 
 
