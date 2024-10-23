@@ -5,7 +5,7 @@
 preloader -->
 <!--=================================
 header -->
-<header class="header default">
+<header class="header default" *ngIf="!isAdminLogin()">
   <nav class="navbar navbar-static-top navbar-expand-lg header-sticky">
     <div class="container-fluid">
       <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"><i class="fas fa-align-left"></i></button>
@@ -78,7 +78,7 @@ header -->
             <a class="nav-link dropdown-toggle" routerLink="/Categories">Categories</a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" routerLink="/AdminDashBoard">Admin</a>
+            <a class="nav-link dropdown-toggle" routerLink="/adminDashBoard">Admin</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" routerLink="contactUs">Contact Us</a>

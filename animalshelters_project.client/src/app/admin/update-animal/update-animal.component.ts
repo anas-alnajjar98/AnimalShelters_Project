@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { UrlServiceService } from '../../url-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-update-animal',
@@ -51,29 +52,35 @@ export class UpdateAnimalComponent {
   }
   Array: any
   Updateanimal(data: any) {
-    var form = new FormData();
+    const form = new FormData();
     for (let key in data) {
-      form.append(key, data[key])
-
+      form.append(key, data[key]);
     }
 
     if (this.imageFile) {
       form.append('ImageUrl', this.imageFile);
     }
-    
-    form.forEach((value, key) => {
-      console.log(key, value);
-    });
 
-    this._ser.UpdateAnimal(this.param, form).subscribe(response => {
-      alert("The Animal has been updated successfully");
-
-
-      this._router.navigate(['AdminDashBoard/AllAnimal']);
-    }, error => {
-
-      console.error("Error updating Animals", error);
-    });
+    this._ser.UpdateAnimal(this.param, form).subscribe(
+      response => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Success',
+          text: 'The animal has been updated successfully!',
+          confirmButtonText: 'OK'
+        }).then(() => {
+          this._router.navigate(['adminDashBoard/AllAnimal']);
+        });
+      },
+      error => {
+        console.error("Error updating Animals", error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'There was an error updating the animal. Please try again.',
+          confirmButtonText: 'OK'
+        });
+      }
+    );
   }
-
 }

@@ -34,6 +34,7 @@ import { GetAllAnimalComponent } from './admin/get-all-animal/get-all-animal.com
 import { UpdateAnimalComponent } from './admin/update-animal/update-animal.component';
 import { AddAnimalComponent } from './admin/add-animal/add-animal.component';
 import { AdoptionApplicationComponent } from './admin/adoption-application/adoption-application.component';
+import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
 
 
 
@@ -64,6 +65,8 @@ import { AdoptionApplicationComponent } from './admin/adoption-application/adopt
     UpdateCategoryComponent,
     AddCategoryComponent,
     AdoptionFormComponent,
+    UpdateCategoryComponent,
+    
     ProfileComponent,
     GetAllUsersComponent,
     AllSheltersComponent,
@@ -73,6 +76,9 @@ import { AdoptionApplicationComponent } from './admin/adoption-application/adopt
     UpdateAnimalComponent,
     AddAnimalComponent,
     AdoptionApplicationComponent
+    AddAnimalComponent,
+    GetAllUsersComponent,
+    AdminLoginComponent,
   ],
   imports: [
     FormsModule,
@@ -91,6 +97,7 @@ import { AdoptionApplicationComponent } from './admin/adoption-application/adopt
       { path: 'password-reset', component: PasswordResetComponent },
       { path: 'contactUs', component: ContactUsComponent },
       { path: 'Home', component: HomeComponent },
+      { path: 'admin', component: AdminLoginComponent },
 
 
 
@@ -99,7 +106,7 @@ import { AdoptionApplicationComponent } from './admin/adoption-application/adopt
       { path: 'ourCommunity', component: OurCommunityComponent },
 
       {
-        path: 'AdminDashBoard', component: AdminDashboardComponent, children: [
+        path: 'adminDashBoard', component: AdminDashboardComponent, children: [
           { path: "AllCategories", component: AllcategoriesComponent },
           { path: "UpdateCategory/:id", component: UpdateCategoryComponent },
           { path: "AddCategory", component: AddCategoryComponent },
@@ -111,6 +118,7 @@ import { AdoptionApplicationComponent } from './admin/adoption-application/adopt
           { path: "AddAnimals", component: AddAnimalComponent },
           { path: "AdoptionApplication", component: AdoptionApplicationComponent }
 
+          { path: "allUsers", component: GetAllUsersComponent },
         ]
       }
     ]),

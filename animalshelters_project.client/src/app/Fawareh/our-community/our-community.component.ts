@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { UrlService } from '../UrlService/url.service';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-our-community',
@@ -27,7 +28,7 @@ export class OurCommunityComponent {
     this.getAllPosts();
   }
 
-  constructor(private _ser: UrlService) { }
+  constructor(private _ser: UrlService, private router: Router) { }
 
   getAllPosts() {
     
@@ -99,6 +100,11 @@ export class OurCommunityComponent {
       this.getRepliesForComment(commentId);
       this.newReply = "";  // Clear input after submitting
     });
+  }
+
+
+  navigateToAddPage() {
+    this.router.navigate(['/postForm']);
   }
 
 }
