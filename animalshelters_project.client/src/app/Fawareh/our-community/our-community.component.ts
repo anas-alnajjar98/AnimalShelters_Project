@@ -30,13 +30,21 @@ export class OurCommunityComponent {
 
   constructor(private _ser: UrlService, private router: Router) { }
 
+  comments: any[] = [];
+
+
+
+  posts: any[] = [];
   getAllPosts() {
-    
     this._ser.allPosts().subscribe((data) => {
       this.posts = data;
     })
      
-  };
+      this.posts.forEach(post => {
+        this.checkIfLikedOrNot(post); 
+      });
+    });
+  }
 
   data = {
     "postId": 0,
@@ -45,6 +53,11 @@ export class OurCommunityComponent {
 
   addLike(postId: number) {
     this.data.postId = postId
+
+    //this.checkIfLikedOrNot(Number(this.data.userId), this.data.postId)
+
+   
+
     this._ser.addLike(this.data).subscribe(() => {
       this.getAllPosts();
     })

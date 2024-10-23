@@ -59,5 +59,21 @@ namespace AnimalShelters_Project.Server.Controllers
 
             return NotFound($"Image with named {imageName} not found");
         }
+
+
+        [HttpGet("CheckIfPostIsLiked/{userId}/{postId}")]
+        public IActionResult CheckIfPostIsLiked(int userId, int postId)
+        {
+            var postLiked = _db.Likes.Where(p => p.UserId == userId && p.PostId == postId).FirstOrDefault();
+
+            if (postLiked == null)
+            {
+                return Ok("NotLiked");
+            }
+
+            return Ok("Liked");
+
+
+        }
     }
 }
