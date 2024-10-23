@@ -41,8 +41,16 @@
 
       <!-- Interaction Buttons -->
       <div class="post-actions">
+        debugger
+        @if(item.checkIfLiked === "Liked")
+        {
+        <button (click)="addLike(item.id)" class="like-button">❤️ Dislike</button>
+        }
+        @else {
+        <button (click)="addLike(item.id)" class="like-button">❤️ Like</button>
+        }
+
         
-        <button  (click)="addLike(item.id)"  class="like-button">❤️ Like</button>
         <button class="comment-button">💬 Comment</button>
       </div>
     </div>

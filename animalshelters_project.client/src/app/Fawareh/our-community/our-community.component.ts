@@ -21,15 +21,19 @@ export class OurCommunityComponent {
 
   comments: any[] = [];
 
+
+
   posts: any[] = [];
   getAllPosts() {
-    
     this._ser.allPosts().subscribe((data) => {
-      this.posts = data;
+      this.posts = data; // Store all posts
 
-           })
      
-  };
+      this.posts.forEach(post => {
+        this.checkIfLikedOrNot(post); 
+      });
+    });
+  }
 
   data = {
     "postId": 0,
@@ -38,6 +42,11 @@ export class OurCommunityComponent {
 
   addLike(postId: number) {
     this.data.postId = postId
+
+    //this.checkIfLikedOrNot(Number(this.data.userId), this.data.postId)
+
+   
+
     this._ser.addLike(this.data).subscribe(() => {
       
      
@@ -55,6 +64,14 @@ export class OurCommunityComponent {
   getCommentsForPost(id: any): Observable<any> {
     return this._ser.getComments(id);
 
+  }
+
+  checkIfLikedOrNot(post: any) {
+          debugger
+
+    this._ser.checkIfLikedOrNot(Number(this.data.userId), post.id).subscribe((data) => {
+      post.checkIfLiked = data;
+    })
   }
 
 }

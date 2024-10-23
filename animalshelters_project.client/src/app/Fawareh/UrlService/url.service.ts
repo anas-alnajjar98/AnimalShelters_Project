@@ -38,4 +38,9 @@ export class UrlService {
     return this.http.post<any>(`${this.staticUrl}/Gharibeh_s/addLike`, data)
   }
 
+  checkIfLikedOrNot(postId: number, userId: number) {
+    return this.http.get(`${this.staticUrl}/Fawareh/CheckIfPostIsLiked/${userId}/${postId}`)
+   
+  }
+
 }
