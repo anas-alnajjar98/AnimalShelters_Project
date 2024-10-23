@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { UrlServiceService } from '../../url-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-update-category',
@@ -51,11 +52,23 @@ export class UpdateCategoryComponent {
 
     this._ser.updateCategory(this.param, form).subscribe(
       response => {
-        alert("The category has been updated successfully");
-        this._router.navigate(['AdminDashBoard/AllCategories']);
+        Swal.fire({
+          icon: 'success',
+          title: 'Success',
+          text: 'The category has been updated successfully!',
+          confirmButtonText: 'OK'
+        }).then(() => {
+          this._router.navigate(['AdminDashBoard/AllCategories']);
+        });
       },
       error => {
         console.error("Error updating category", error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'There was an error updating the category. Please try again.',
+          confirmButtonText: 'OK'
+        });
       }
     );
   }
