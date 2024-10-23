@@ -75,7 +75,7 @@ import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
     GetAllAnimalComponent,
     UpdateAnimalComponent,
     AddAnimalComponent,
-    AdoptionApplicationComponent
+    AdoptionApplicationComponent,
     AddAnimalComponent,
     GetAllUsersComponent,
     AdminLoginComponent,
@@ -116,7 +116,7 @@ import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
           { path: "UpdateShelter/:id", component: UpdateShelterComponent },
           { path: "AddShelter", component: AddShelterComponent },
           { path: "AddAnimals", component: AddAnimalComponent },
-          { path: "AdoptionApplication", component: AdoptionApplicationComponent }
+          { path: "AdoptionApplication", component: AdoptionApplicationComponent },
 
           { path: "allUsers", component: GetAllUsersComponent },
         ]
