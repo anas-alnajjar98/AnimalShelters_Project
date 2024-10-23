@@ -44,7 +44,7 @@ export class UpdateShelterComponent {
           text: 'The shelter has been updated successfully!',
           confirmButtonText: 'OK'
         }).then(() => {
-          this._router.navigate(['AdminDashBoard/AllShelters']);
+          this._router.navigate(['adminDashBoard/AllShelters']);
         });
       },
       error => {
