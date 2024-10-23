@@ -13,7 +13,7 @@ export class HosamService {
   isLoggedIn$ = this.isLoggedInSubject.asObservable();
 
   constructor(private http: HttpClient) {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('Token');
     if (token) {
       this.isLoggedInSubject.next(true);
     }
@@ -28,7 +28,7 @@ export class HosamService {
         .post<{ token: string, id: string }>(`${root}/api/Admins/login`, formData)
         .subscribe(
           (response) => {
-            localStorage.setItem('token', response.token);
+            localStorage.setItem('Token', response.token);
             localStorage.setItem('AdminId', response.id)
             iziToast.success({
               title: 'Login Successful',
@@ -55,7 +55,7 @@ export class HosamService {
 
   logout(): void {
     this.isLoggedInSubject.next(false);
-    localStorage.removeItem('token');
+    localStorage.removeItem('Token');
     localStorage.removeItem('AdminId');
 
 
@@ -69,11 +69,5 @@ export class HosamService {
     return this.isLoggedInSubject.getValue();
   }
 
-  register(email: string, password: string): Observable<any> {
-    const formData = new FormData();
-    formData.append('Email', email);
-    formData.append('Password', password);
-    return this.http.post<any>(`${root}/api/Admins/Register`, formData);
-  }
 
 }
