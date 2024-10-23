@@ -221,3 +221,26 @@
   .fab-button:hover {
     background-color: darkblue;
   }
+
+
+
+
+.share-btn {
+  background-color: #4267B2;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+}
+
+  .share-btn i {
+    margin-right: 8px;
+  }
+
+  .share-btn:hover {
+    background-color: #365899;
+  }

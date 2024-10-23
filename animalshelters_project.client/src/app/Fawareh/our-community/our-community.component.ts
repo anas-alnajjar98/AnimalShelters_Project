@@ -106,9 +106,16 @@ export class OurCommunityComponent {
     });
   }
 
-  navigateToAddPage() {
+
+  navigateToAddPage() { 
     this.router.navigate(['/postForm']);
   }
 
+
+  shareOnFacebook(postId: number) {
+    const postUrl = `https://127.0.0.1:4200/ourCommunity${postId}`;  // Example of the post's URL
+    const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(postUrl)}`;
+    window.open(facebookShareUrl, '_blank');
+  }
 }
 
