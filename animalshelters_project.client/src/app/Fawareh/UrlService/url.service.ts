@@ -43,4 +43,12 @@ export class UrlService {
     return this.http.post(`${this.staticUrl}/Gharibeh_s/addReplay`, replyData);
   }
 
+  getAllPosts(): Observable<any> {
+    return this.http.get<any>(`${this.staticUrl}/Gharibeh_s/getAllPosts`)
+  }
+
+  // Toggle the post flag (Accept/Reject)
+  togglePostFlag(postId: number) {
+    return this.http.put(`${this.staticUrl}/Fawareh/AcceptPost/${postId}`, {});
+  }
 }

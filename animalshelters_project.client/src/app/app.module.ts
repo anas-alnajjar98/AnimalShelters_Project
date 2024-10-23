@@ -26,7 +26,6 @@ import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard
 import { AllcategoriesComponent } from './admin/allcategories/allcategories.component';
 import { UpdateCategoryComponent } from './admin/update-category/update-category.component';
 import { AddCategoryComponent } from './admin/add-category/add-category.component';
-import { GetAllUsersComponent } from './admin/get-all-users/get-all-users.component';
 import { AllSheltersComponent } from './admin/all-shelters/all-shelters.component';
 import { UpdateShelterComponent } from './admin/update-shelter/update-shelter.component';
 import { AddShelterComponent } from './admin/add-shelter/add-shelter.component';
@@ -35,6 +34,8 @@ import { UpdateAnimalComponent } from './admin/update-animal/update-animal.compo
 import { AddAnimalComponent } from './admin/add-animal/add-animal.component';
 import { AdoptionApplicationComponent } from './admin/adoption-application/adoption-application.component';
 import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
+import { PostManagementComponent } from './admin/post-management/post-management.component';
+import { GetAllUserComponent } from './admin/get-all-users/get-all-users.component';
 
 
 
@@ -68,7 +69,6 @@ import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
     UpdateCategoryComponent,
     
     ProfileComponent,
-    GetAllUsersComponent,
     AllSheltersComponent,
     UpdateShelterComponent,
     AddShelterComponent,
@@ -77,8 +77,10 @@ import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
     AddAnimalComponent,
     AdoptionApplicationComponent,
     AddAnimalComponent,
-    GetAllUsersComponent,
+    GetAllUserComponent,
+    AddAnimalComponent,
     AdminLoginComponent,
+    PostManagementComponent,
   ],
   imports: [
     FormsModule,
@@ -117,8 +119,8 @@ import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
           { path: "AddShelter", component: AddShelterComponent },
           { path: "AddAnimals", component: AddAnimalComponent },
           { path: "AdoptionApplication", component: AdoptionApplicationComponent },
-
-          { path: "allUsers", component: GetAllUsersComponent },
+          { path: "allUsers", component: GetAllUserComponent },
+          { path: "post-management", component: PostManagementComponent },
         ]
       }
     ]),

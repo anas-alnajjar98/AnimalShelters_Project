@@ -14,7 +14,7 @@
           </li>
           <li>
             <a routerLink="/adminDashBoard/AllCategories" class="nav-link px-0 align-middle">
-              
+
               <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Category</span>
             </a>
           </li>
@@ -30,13 +30,27 @@
           </li>
           <li>
             <a routerLink="/adminDashBoard/AllShelters" class="nav-link px-0 align-middle">
-              
+
               <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Shelters</span>
             </a>
           </li>
 
           <li>
-            <a routerLink="/Login" class="nav-link px-0 align-middle">
+            <a routerLink="/adminDashBoard/post-management" class="nav-link px-0 align-middle">
+
+              <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Posts Management</span>
+            </a>
+          </li>
+
+          <li>
+            <a routerLink="/adminDashBoard/allUsers" class="nav-link px-0 align-middle">
+
+              <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Users</span>
+            </a>
+          </li>
+
+          <li>
+            <a routerLink="/admin" (click)="Logout()" class="nav-link px-0 align-middle">
               <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Logout</span>
             </a>
           </li>
