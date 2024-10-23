@@ -35,15 +35,68 @@ export class UrlServiceService {
   GetUserByID(id: number): Observable<any> {
     return this.http.get<any>(`${this.staticData}/Admin/getUserByID/${id}`)
   }
-  SubmitAdoptionApplication(AnimalID: number, UserID: number): Observable<any> {
-    const url = `${this.staticData}/Admin/ApplicationFormSubmit?AnimalID=${AnimalID}&UserID=${UserID}`;
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': 'Bearer token' });
-    return this.http.post<any>(url, { headers });
+  
+
+  SubmitAdoptionApplication(data: any): Observable<any> {
+    return this.http.post<any>(`${this.staticData}/Admin/ApplicationFormSubmit`, data);
   }
-
-
+  
+  getCategoryById(id: number): Observable<any> {
+    return this.http.get<any>(`${this.staticData}/Admin/GetCategoryByID/${id}`)
+  }
   updateCategory(id: any, data: any): Observable<any> {
     return this.http.put(`${this.staticData}/Admin/UpdateCategory/${id}`, data)
+  }
+
+  
+  AddCategory(data: any): Observable<any> {
+    return this.http.post<any>(`${this.staticData}/Admin/AddNewCategory`, data);
 
   }
+
+ 
+
+  AddShelter(data: any): Observable<any> {
+    return this.http.post<any>(`${this.staticData}/Admin/addShelters`, data);
+
+  }
+  getShelters(): Observable<any> {
+    return this.http.get<any>(`${this.staticData}/Admin/getAllAShelters`);
+
+  }
+
+
+  deleteShelter(id: number): Observable<any> {
+    return this.http.delete(`${this.staticData}/Admin/deleteShelter/${id}`);
+  }
+
+ 
+  updateShelter(id: any, data: any): Observable<any> {
+    return this.http.put(`${this.staticData}/Admin/updateShelter/${id}`, data)
+  }
+
+  getShelterById(id: number): Observable<any> {
+    return this.http.get<any>(`${this.staticData}/Admin/GetShelterByID/${id}`)
+  }
+ 
+  GetAllAnimal(): Observable<any> {
+    return this.http.get<any>(`${this.staticData}/Admin/getAllAnimals`);
+
+  }
+  DeleteAnimalByID(id: any): Observable<any> {
+    return this.http.delete<any>(`${this.staticData}/Admin/deleteAnimal/${id}`)
+  }
+  UpdateAnimal(id: any, data: any): Observable<any> {
+    return this.http.put(`${this.staticData}/Admin/updateAnimals/${id}`, data)
+  }
+
+  getAnimalById(id: number): Observable<any> {
+    return this.http.get<any>(`${this.staticData}/Admin/getAnimalsbyID/${id}`)
+  }
+
+  AddAnimal(data: any): Observable<any> {
+    return this.http.post<any>(`${this.staticData}/Admin/addAnimals`, data);
+
+  }
+
 }

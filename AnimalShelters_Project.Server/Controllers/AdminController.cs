@@ -33,6 +33,33 @@ namespace AnimalShelters_Project.Server.Controllers
 
         }
 
+        [HttpGet("GetCategoryByID/{id}")]
+        public IActionResult getcategoryId(int id)
+        {
+            if (id <=0)
+            {
+                return BadRequest();
+
+            }
+            var category = _context.Categories.FirstOrDefault(c => c.Id == id);
+            if (category == null)
+                return NoContent();
+            return Ok(category);
+        }
+
+        [HttpGet("GetShelterByID/{id}")]
+        public IActionResult getshelterId(int id)
+        {
+            if (id <= 0)
+            {
+                return BadRequest();
+
+            }
+            var shelter = _context.Shelters.FirstOrDefault(c => c.ShelterId == id);
+            if (shelter == null)
+                return NoContent();
+            return Ok(shelter);
+        }
 
         [HttpGet("AnimalsbyCategoryId/{id}")]
 
@@ -55,6 +82,19 @@ namespace AnimalShelters_Project.Server.Controllers
             return NotFound();
 
 
+        }
+        [HttpGet("getAnimalsbyID/{id}")]
+        public IActionResult getanimalsbyID (int id ){ 
+        if (id <= 0)
+            {
+                return BadRequest();
+            }
+        var animals=_context.Animals.FirstOrDefault(a => a.AnimalId == id);
+            if (animals != null)
+                return Ok(animals);
+            return NotFound();
+        
+        
         }
 
         [HttpGet("AnimalsbyShelterId/{id}")]
@@ -136,18 +176,23 @@ namespace AnimalShelters_Project.Server.Controllers
         {
             var animal = _context.Animals.Where(a => a.AnimalId == id).FirstOrDefault();
 
-            
             if (animal == null)
             {
                 return NotFound("Animal not found.");
             }
 
+            // Manually remove all related adoption applications
+            var adoptionApplications = _context.AdoptionApplications.Where(aa => aa.AnimalId == id).ToList();
+            _context.AdoptionApplications.RemoveRange(adoptionApplications);
+
+            // Now remove the animal
             _context.Animals.Remove(animal);
 
             _context.SaveChanges();
 
-            return Ok($"Animal with ID {id} was successfully deleted.");
+            return NoContent();
         }
+
 
 
 
@@ -458,10 +503,10 @@ namespace AnimalShelters_Project.Server.Controllers
         
         }
         [HttpPost("ApplicationFormSubmit")]
-        public async Task<IActionResult> ApplicationFormSubmit(int AnimalID, int UserID)
+        public async Task<IActionResult> ApplicationFormSubmit([FromBody] AdoptionDto adopt)
         {
            
-            if (AnimalID <= 0 || UserID <= 0)
+            if (adopt.AnimalId <= 0 || adopt.UserId <= 0)
             {
                 return BadRequest("ID can't be zero or less.");
             }
@@ -470,11 +515,12 @@ namespace AnimalShelters_Project.Server.Controllers
 
             var application = new AdoptionApplication
             {
-                AnimalId = AnimalID,
-                UserId = UserID,
+                AnimalId = adopt.AnimalId,
+                UserId = adopt.UserId,
                 SubmittedAt = DateTime.Now,
                 UpdatedAt = DateTime.Now,
-                Status = "pending"
+                Status = "pending",
+              AdoptionNotes=adopt.AdoptionNotes
             };
 
             _context.AdoptionApplications.Add(application);

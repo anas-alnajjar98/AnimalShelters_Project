@@ -22,20 +22,25 @@ export class UrlService {
     return this.http.get<any>(`${this.staticUrl}/Gharibeh_s/allPost`)
   }
 
-  // Add a comment to a post
-  addComment(postId: number, userId: number, content: string): Observable<any> {
-    const commentData = { postId, userId, content };
-    return this.http.post(`${this.staticUrl}/Gharibeh_s/addComment`, commentData);
+  addLike(data: any): Observable<any> {
+    return this.http.post<any>(`${this.staticUrl}/Gharibeh_s/addLike`, data)
   }
 
-  // Get all comments for a specific post
-  getComments(postId: number): Observable<any> {
+  // Add a comment to a post
+  getComments(postId: number) {
     return this.http.get(`${this.staticUrl}/Gharibeh_s/displayComments/${postId}`);
   }
 
+  addComment(commentData: any) {
+    return this.http.post(`${this.staticUrl}/Gharibeh_s/addComment`, commentData);
+  }
 
-  addLike(data : any): Observable<any> {
-    return this.http.post<any>(`${this.staticUrl}/Gharibeh_s/addLike`, data)
+  getReplies(commentId: number): Observable<any> {
+    return this.http.get(`${this.staticUrl}/Gharibeh_s/displayReplaies/${commentId}`);
+  }
+
+  addReply(replyData: any): Observable<any> {
+    return this.http.post(`${this.staticUrl}/Gharibeh_s/addReplay`, replyData);
   }
 
 }
