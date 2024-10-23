@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { UrlService } from '../UrlService/url.service';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-our-community',
@@ -11,13 +12,23 @@ export class OurCommunityComponent {
 
   showCommentBox: boolean = false;
   userId: any;
+  newComment: string = "";
+  newReply: string = "";
+  // Stores the visibility of comment boxes for each post
+  commentBoxes: any = {};
+
+  // Store comments and replies for posts
+  replies: any = {};
+  comments: any[] = [];
+
+  posts: any[] = [];
 
   ngOnInit() {
-    this.userId = localStorage.getItem('userId');
+    //this.userId = localStorage.getItem('userId')
     this.getAllPosts();
   }
 
-  constructor(private _ser: UrlService) { }
+  constructor(private _ser: UrlService, private router: Router) { }
 
   comments: any[] = [];
 
@@ -26,8 +37,8 @@ export class OurCommunityComponent {
   posts: any[] = [];
   getAllPosts() {
     this._ser.allPosts().subscribe((data) => {
-      this.posts = data; // Store all posts
-
+      this.posts = data;
+    })
      
       this.posts.forEach(post => {
         this.checkIfLikedOrNot(post); 
@@ -37,7 +48,7 @@ export class OurCommunityComponent {
 
   data = {
     "postId": 0,
-    "userId": localStorage.getItem("userId")
+    "userId": 1
 }
 
   addLike(postId: number) {
@@ -48,30 +59,70 @@ export class OurCommunityComponent {
    
 
     this._ser.addLike(this.data).subscribe(() => {
-      
-     
       this.getAllPosts();
-
     })
   }
 
 
 
-  toggleCommentBox() {
-    this.showCommentBox = !this.showCommentBox;
+  // Toggle the comment section visibility and load comments
+  toggleCommentBox(postId: number) {
+    if (!this.commentBoxes[postId]) {
+      this.getCommentsForPost(postId);  // Fetch comments only if the box isn't open
+    }
+    this.commentBoxes[postId] = !this.commentBoxes[postId];
   }
 
-  getCommentsForPost(id: any): Observable<any> {
-    return this._ser.getComments(id);
+  toggleReplayBox(commentId: any) {
+    this.getRepliesForComment(commentId);
 
   }
 
-  checkIfLikedOrNot(post: any) {
-          debugger
 
-    this._ser.checkIfLikedOrNot(Number(this.data.userId), post.id).subscribe((data) => {
-      post.checkIfLiked = data;
-    })
+
+  getCommentsForPost(postId: number) {
+    this._ser.getComments(postId).subscribe((data) => {
+      this.comments[postId] = data;
+    });
+  }
+
+  // Add a new comment to a post
+  submitComment(postId: number) {
+    if (!this.newComment.trim()) return; // Prevent empty comments
+
+    const commentData = {
+      postId: postId,
+      userId: 1,  // Assume userId is available
+      content: this.newComment
+    };
+
+    this._ser.addComment(commentData).subscribe((data) => {
+      this.getCommentsForPost(postId);
+      this.newComment = "";  // Clear the input after submitting
+    });
+  }
+  getRepliesForComment(commentId: number) {
+    this._ser.getReplies(commentId).subscribe((data) => {
+      this.replies[commentId] = data;
+    });
+  }
+
+  submitReply(commentId: number) {
+    const replyData = {
+      commentId: commentId,
+      userId: 1,
+      content: this.newReply
+    };
+
+    this._ser.addReply(replyData).subscribe(() => {
+      this.getRepliesForComment(commentId);
+      this.newReply = "";  // Clear input after submitting
+    });
+  }
+
+
+  navigateToAddPage() {
+    this.router.navigate(['/postForm']);
   }
 
 }

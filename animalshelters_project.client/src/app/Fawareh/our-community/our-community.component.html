@@ -36,47 +36,56 @@
         <span class="likes">❤️ {{item.likesCount}} likes</span>
         }
 
-        <span class="comments">💬 10 comments</span>
+        <!--<span class="comments" (click)="toggleCommentBox(item.id)">💬 .. comments </span>-->
       </div>
 
       <!-- Interaction Buttons -->
       <div class="post-actions">
-        debugger
-        @if(item.checkIfLiked === "Liked")
-        {
-        <button (click)="addLike(item.id)" class="like-button">❤️ Dislike</button>
-        }
-        @else {
-        <button (click)="addLike(item.id)" class="like-button">❤️ Like</button>
-        }
 
-        
-        <button class="comment-button">💬 Comment</button>
+        <button (click)="addLike(item.id)" class="like-button">❤️ Like</button>
+        <button (click)="toggleCommentBox(item.id)" class="comment-button">💬 .. comments</button>
       </div>
     </div>
 
     <!-- Comments Section -->
-
-    <div class="comments-section">
-      <div class="comment-box" *ngIf="showCommentBox">
-        <!--<textarea [(ngModel)]="newComment" placeholder="Add a comment..."></textarea>
-        <button (click)="submitComment()">Submit</button>-->
+    <div *ngIf="commentBoxes[item.id]" class="comments-section">
+      <!-- Comment Box for Adding New Comment -->
+      <div class="comment-box">
+        <textarea [(ngModel)]="newComment" placeholder="Add a comment..." rows="2"></textarea>
+        <button (click)="submitComment(item.id)" [disabled]="!newComment.trim()">Comment</button>
       </div>
 
-      <div class="comments-section">
-        <div class="comment-list">
-          <div class="comment" *ngFor="let item of comments">
-            <span class="comment-user"> {{ item.userName }} :</span>
-            <span class="comment-text">{{ item.content }}</span>
+      <!-- Existing Comments -->
+      <div class="comment-list">
+        <div class="comment" *ngFor="let comment of comments[item.id]">
+          <div class="comment-user">{{comment.userName}}</div>
+          <div class="comment-text">{{comment.content}}</div>
+          <button (click)="toggleReplayBox(comment.id)" class="btn">💬 .. replays</button>
+
+
+          <!-- Replies Section -->
+          <div class="reply-list" *ngIf="replies[comment.id]">
+            <div class="reply" *ngFor="let reply of replies[comment.id]">
+              <div class="reply-user">{{reply.userName}}</div>
+              <div class="reply-text">{{reply.content}}</div>
+            </div>
           </div>
-          <!--<div class="comment">
-            <span class="comment-user">Othman Ali:</span>
-            <span class="comment-text">Great story, well done!</span>
-          </div>-->
+
+          <!-- Reply Box -->
+          <div class="reply-box">
+            <textarea [(ngModel)]="newReply" placeholder="Add a reply..." rows="1"></textarea>
+            <button (click)="submitReply(comment.id)" [disabled]="!newReply.trim()">Reply</button>
+          </div>
+
         </div>
       </div>
     </div>
   </div>
-  </div>
+</div>
+
+<!-- Floating Action Button for Add Page -->
+<button (click)="navigateToAddPage()" class="fab-button">
+  <i class="fa fa-plus"></i>
+</button>
 
 }

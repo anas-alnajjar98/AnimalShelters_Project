@@ -33,6 +33,33 @@ namespace AnimalShelters_Project.Server.Controllers
 
         }
 
+        [HttpGet("GetCategoryByID/{id}")]
+        public IActionResult getcategoryId(int id)
+        {
+            if (id <=0)
+            {
+                return BadRequest();
+
+            }
+            var category = _context.Categories.FirstOrDefault(c => c.Id == id);
+            if (category == null)
+                return NoContent();
+            return Ok(category);
+        }
+
+        [HttpGet("GetShelterByID/{id}")]
+        public IActionResult getshelterId(int id)
+        {
+            if (id <= 0)
+            {
+                return BadRequest();
+
+            }
+            var shelter = _context.Shelters.FirstOrDefault(c => c.ShelterId == id);
+            if (shelter == null)
+                return NoContent();
+            return Ok(shelter);
+        }
 
         [HttpGet("AnimalsbyCategoryId/{id}")]
 
@@ -55,6 +82,19 @@ namespace AnimalShelters_Project.Server.Controllers
             return NotFound();
 
 
+        }
+        [HttpGet("getAnimalsbyID/{id}")]
+        public IActionResult getanimalsbyID (int id ){ 
+        if (id <= 0)
+            {
+                return BadRequest();
+            }
+        var animals=_context.Animals.FirstOrDefault(a => a.AnimalId == id);
+            if (animals != null)
+                return Ok(animals);
+            return NotFound();
+        
+        
         }
 
         [HttpGet("AnimalsbyShelterId/{id}")]
@@ -136,18 +176,23 @@ namespace AnimalShelters_Project.Server.Controllers
         {
             var animal = _context.Animals.Where(a => a.AnimalId == id).FirstOrDefault();
 
-            
             if (animal == null)
             {
                 return NotFound("Animal not found.");
             }
 
+            // Manually remove all related adoption applications
+            var adoptionApplications = _context.AdoptionApplications.Where(aa => aa.AnimalId == id).ToList();
+            _context.AdoptionApplications.RemoveRange(adoptionApplications);
+
+            // Now remove the animal
             _context.Animals.Remove(animal);
 
             _context.SaveChanges();
 
-            return Ok($"Animal with ID {id} was successfully deleted.");
+            return NoContent();
         }
+
 
 
 
@@ -458,10 +503,10 @@ namespace AnimalShelters_Project.Server.Controllers
         
         }
         [HttpPost("ApplicationFormSubmit")]
-        public async Task<IActionResult> ApplicationFormSubmit(int AnimalID, int UserID)
+        public async Task<IActionResult> ApplicationFormSubmit([FromBody] AdoptionDto adopt)
         {
            
-            if (AnimalID <= 0 || UserID <= 0)
+            if (adopt.AnimalId <= 0 || adopt.UserId <= 0)
             {
                 return BadRequest("ID can't be zero or less.");
             }
@@ -470,17 +515,84 @@ namespace AnimalShelters_Project.Server.Controllers
 
             var application = new AdoptionApplication
             {
-                AnimalId = AnimalID,
-                UserId = UserID,
+                AnimalId = adopt.AnimalId,
+                UserId = adopt.UserId,
                 SubmittedAt = DateTime.Now,
                 UpdatedAt = DateTime.Now,
-                Status = "pending"
+                Status = "pending",
+              AdoptionNotes=adopt.AdoptionNotes
             };
 
             _context.AdoptionApplications.Add(application);
             _context.SaveChanges();
             return CreatedAtAction(nameof(ApplicationFormSubmit), new { id = application.AnimalId }, application);
         }
+        [HttpGet("GetAllAdoptionApplication")]
+        public async Task<IActionResult> GetAllAdoptionApplication()
+        {
+            var applications = await _context.AdoptionApplications
+                .Where(x => x.Status == "pending")
+                .Select(x => new
+                {
+                    ApplicationId = x.ApplicationId,
+                    ApplicantName = x.User.UserName,      
+                    AnimalName = x.Animal.Name,      
+                    AdoptionNotes = x.AdoptionNotes,  
+                    Status = x.Status
+                })
+                .ToListAsync();
+
+            if (applications == null || !applications.Any())
+            {
+                return NotFound();
+            }
+
+            return Ok(applications);
+        }
+
+        [HttpPut("{applicationId}/accept")]
+        public async Task<IActionResult> AcceptApplication(int applicationId)
+        {
+           
+            var application = await _context.AdoptionApplications.FindAsync(applicationId);
+            if (application == null)
+            {
+               
+                Console.WriteLine($"Application with ID {applicationId} not found.");
+                return NotFound(new { message = $"Application with ID {applicationId} not found." });
+            }
+
+           
+            if (application.Status != "pending")
+            {
+               
+                Console.WriteLine($"Application with ID {applicationId} is not pending.");
+                return BadRequest(new { message = "Application is not pending" });
+            }
+
+          
+            application.Status = "accepted";
+            application.UpdatedAt = DateTime.Now;
+
+            
+            var otherApplications = await _context.AdoptionApplications
+                .Where(a => a.AnimalId == application.AnimalId && a.ApplicationId != applicationId && a.Status == "pending")
+                .ToListAsync();
+
+            foreach (var otherApp in otherApplications)
+            {
+                otherApp.Status = "rejected";
+                otherApp.UpdatedAt = DateTime.Now;
+            }
+
+           
+            await _context.SaveChangesAsync();
+
+           
+            Console.WriteLine($"Application with ID {applicationId} accepted. Other applications rejected.");
+            return Ok();
+        }
+
 
     }
 }

@@ -22,25 +22,33 @@ export class UrlService {
     return this.http.get<any>(`${this.staticUrl}/Gharibeh_s/allPost`)
   }
 
-  // Add a comment to a post
-  addComment(postId: number, userId: number, content: string): Observable<any> {
-    const commentData = { postId, userId, content };
-    return this.http.post(`${this.staticUrl}/Gharibeh_s/addComment`, commentData);
-  }
-
-  // Get all comments for a specific post
-  getComments(postId: number): Observable<any> {
-    return this.http.get(`${this.staticUrl}/Gharibeh_s/displayComments/${postId}`);
-  }
-
-
-  addLike(data : any): Observable<any> {
+  addLike(data: any): Observable<any> {
     return this.http.post<any>(`${this.staticUrl}/Gharibeh_s/addLike`, data)
   }
 
-  checkIfLikedOrNot(postId: number, userId: number) {
-    return this.http.get(`${this.staticUrl}/Fawareh/CheckIfPostIsLiked/${userId}/${postId}`)
-   
+  // Add a comment to a post
+  getComments(postId: number) {
+    return this.http.get(`${this.staticUrl}/Gharibeh_s/displayComments/${postId}`);
   }
 
+  addComment(commentData: any) {
+    return this.http.post(`${this.staticUrl}/Gharibeh_s/addComment`, commentData);
+  }
+
+  getReplies(commentId: number): Observable<any> {
+    return this.http.get(`${this.staticUrl}/Gharibeh_s/displayReplaies/${commentId}`);
+  }
+
+  addReply(replyData: any): Observable<any> {
+    return this.http.post(`${this.staticUrl}/Gharibeh_s/addReplay`, replyData);
+  }
+
+  getAllPosts(): Observable<any> {
+    return this.http.get<any>(`${this.staticUrl}/Gharibeh_s/getAllPosts`)
+  }
+
+  // Toggle the post flag (Accept/Reject)
+  togglePostFlag(postId: number) {
+    return this.http.put(`${this.staticUrl}/Fawareh/AcceptPost/${postId}`, {});
+  }
 }
