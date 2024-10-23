@@ -77,7 +77,7 @@ import { GetAllUserComponent } from './admin/get-all-users/get-all-users.compone
     AddAnimalComponent,
     AdoptionApplicationComponent,
     AddAnimalComponent,
-    GetAllUsersComponent,
+    GetAllUserComponent,
     AddAnimalComponent,
     AdminLoginComponent,
     PostManagementComponent,
@@ -119,7 +119,7 @@ import { GetAllUserComponent } from './admin/get-all-users/get-all-users.compone
           { path: "AddShelter", component: AddShelterComponent },
           { path: "AddAnimals", component: AddAnimalComponent },
           { path: "AdoptionApplication", component: AdoptionApplicationComponent },
-          { path: "allUsers", component: GetAllUsersComponent },
+          { path: "allUsers", component: GetAllUserComponent },
           { path: "post-management", component: PostManagementComponent },
         ]
       }

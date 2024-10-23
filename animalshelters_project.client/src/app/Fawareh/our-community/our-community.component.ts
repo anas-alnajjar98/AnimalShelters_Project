@@ -23,47 +23,35 @@ export class OurCommunityComponent {
 
   posts: any[] = [];
 
+  constructor(private _ser: UrlService, private router: Router) { }
+
   ngOnInit() {
     //this.userId = localStorage.getItem('userId')
     this.getAllPosts();
   }
 
-  constructor(private _ser: UrlService, private router: Router) { }
-
-  comments: any[] = [];
-
-
-
-  posts: any[] = [];
   getAllPosts() {
     this._ser.allPosts().subscribe((data) => {
       this.posts = data;
-    })
-     
-      this.posts.forEach(post => {
-        this.checkIfLikedOrNot(post); 
-      });
+
+  
     });
   }
 
   data = {
     "postId": 0,
     "userId": 1
-}
+  }
 
   addLike(postId: number) {
-    this.data.postId = postId
+    this.data.postId = postId;
 
     //this.checkIfLikedOrNot(Number(this.data.userId), this.data.postId)
 
-   
-
     this._ser.addLike(this.data).subscribe(() => {
       this.getAllPosts();
-    })
+    });
   }
-
-
 
   // Toggle the comment section visibility and load comments
   toggleCommentBox(postId: number) {
@@ -75,10 +63,7 @@ export class OurCommunityComponent {
 
   toggleReplayBox(commentId: any) {
     this.getRepliesForComment(commentId);
-
   }
-
-
 
   getCommentsForPost(postId: number) {
     this._ser.getComments(postId).subscribe((data) => {
@@ -96,11 +81,12 @@ export class OurCommunityComponent {
       content: this.newComment
     };
 
-    this._ser.addComment(commentData).subscribe((data) => {
+    this._ser.addComment(commentData).subscribe(() => {
       this.getCommentsForPost(postId);
       this.newComment = "";  // Clear the input after submitting
     });
   }
+
   getRepliesForComment(commentId: number) {
     this._ser.getReplies(commentId).subscribe((data) => {
       this.replies[commentId] = data;
@@ -120,12 +106,9 @@ export class OurCommunityComponent {
     });
   }
 
-
   navigateToAddPage() {
     this.router.navigate(['/postForm']);
   }
 
 }
-
-  
 
