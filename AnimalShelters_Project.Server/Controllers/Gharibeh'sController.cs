@@ -14,6 +14,12 @@ namespace AnimalShelters_Project.Server.Controllers
             _db = db;
         }
 
+        [HttpGet("getAllPosts")]
+        public IActionResult getAllPosts() {
+            var posts = _db.Posts.ToList();
+            return Ok(posts);
+        }
+
 
         // add post from form api
         [HttpPost("addPost")]

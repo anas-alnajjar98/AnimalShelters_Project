@@ -34,6 +34,7 @@ import { GetAllAnimalComponent } from './admin/get-all-animal/get-all-animal.com
 import { UpdateAnimalComponent } from './admin/update-animal/update-animal.component';
 import { AddAnimalComponent } from './admin/add-animal/add-animal.component';
 import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
+import { PostManagementComponent } from './admin/post-management/post-management.component';
 
 
 
@@ -76,6 +77,7 @@ import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
     AddAnimalComponent,
     GetAllUsersComponent,
     AdminLoginComponent,
+    PostManagementComponent,
   ],
   imports: [
     FormsModule,
@@ -115,6 +117,7 @@ import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
           { path: "AddAnimals", component: AddAnimalComponent },
 
           { path: "allUsers", component: GetAllUsersComponent },
+          { path: "post-management", component: PostManagementComponent },
         ]
       }
     ]),
