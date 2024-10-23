@@ -60,6 +60,11 @@ export class OurCommunityComponent {
     this.commentBoxes[postId] = !this.commentBoxes[postId];
   }
 
+  toggleReplayBox(commentId: any) {
+    this.getRepliesForComment(commentId);
+
+  }
+
 
 
   getCommentsForPost(postId: number) {

@@ -60,6 +60,7 @@
         <div class="comment" *ngFor="let comment of comments[item.id]">
           <div class="comment-user">{{comment.userName}}</div>
           <div class="comment-text">{{comment.content}}</div>
+          <button (click)="toggleReplayBox(comment.id)" class="btn">💬 .. replays</button>
 
 
           <!-- Replies Section -->
