@@ -51,74 +51,44 @@ namespace AnimalShelters_Project.Server.Controllers
 
 
 
-        //[HttpPut("UpdateUserProfile/{id}")]
-        //public async Task<IActionResult> UpdateUserProfile(long id, [FromForm] UserProfileDTO updatedUserDto)
-        //{
-        //    var user = await _context.Users.FindAsync(id);
-        //    if (user == null)
-        //    {
-        //        return NotFound();
-        //    }
+        [HttpPut("UpdateUserProfile/{id}")]
+        public async Task<IActionResult> UpdateUserProfile(int id, [FromForm] UserProfileDTO updatedUserDto)
+        {
+            var user = await _context.Users.FindAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
 
-        //    // تحديث بيانات المستخدم
-        //    user.Name = updatedUserDto.Name;
-        //    user.Username = updatedUserDto.Username;
-        //    user.Email = updatedUserDto.Email;
+            user.UserName = updatedUserDto.UserName;
+            user.Email = updatedUserDto.Email;
 
-        //    // حفظ الصورة إذا تم رفعها
-        //    if (updatedUserDto.Image != null)
-        //    {
-        //        var folder = Path.Combine(Directory.GetCurrentDirectory(), "images");
-        //        if (!Directory.Exists(folder)) Directory.CreateDirectory(folder);
+          
+            if (updatedUserDto.Image != null)
+            {
+                var folder = Path.Combine(Directory.GetCurrentDirectory(), "images");
+                if (!Directory.Exists(folder)) Directory.CreateDirectory(folder);
 
-        //        var imageFilePath = Path.Combine(folder, updatedUserDto.Image.FileName);
-        //        using (var stream = new FileStream(imageFilePath, FileMode.Create))
-        //        {
-        //            await updatedUserDto.Image.CopyToAsync(stream);
-        //        }
-        //        user.Image = updatedUserDto.Image.FileName;
-        //    }
+                var imageFilePath = Path.Combine(folder, updatedUserDto.Image.FileName);
+                using (var stream = new FileStream(imageFilePath, FileMode.Create))
+                {
+                    await updatedUserDto.Image.CopyToAsync(stream);
+                }
+                user.Image = updatedUserDto.Image.FileName;
+            }
 
-        //    // تحديث العنوان في حالة وجوده
-        //    var address = await _context.Addresses.FirstOrDefaultAsync(a => a.UserId == user.Id);
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!UserExists(id)) return NotFound();
+                else throw;
+            }
 
-        //    if (address != null)
-        //    {
-        //        // تحديث البيانات الموجودة
-        //        address.City = updatedUserDto.City;
-        //        address.Street = updatedUserDto.Street;
-        //        address.PhoneNumber = updatedUserDto.PhoneNumber;
-        //        address.PostalCode = updatedUserDto.PostalCode;
-        //        address.AddressLine = updatedUserDto.AddressLine;
-        //    }
-        //    else
-        //    {
-        //        // إنشاء سجل جديد في جدول العنوان إذا لم يكن موجودًا
-        //        address = new Address
-        //        {
-        //            UserId = user.Id,
-        //            City = updatedUserDto.City,
-        //            Street = updatedUserDto.Street,
-        //            PhoneNumber = updatedUserDto.PhoneNumber,
-        //            PostalCode = updatedUserDto.PostalCode,
-        //            AddressLine = updatedUserDto.AddressLine
-        //        };
-
-        //        _context.Addresses.Add(address); // إضافة العنوان الجديد إلى السياق
-        //    }
-
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!UserExists(id)) return NotFound();
-        //        else throw;
-        //    }
-
-        //    return NoContent();
-        //}
+            return NoContent();
+        }
 
 
 
@@ -142,6 +112,7 @@ namespace AnimalShelters_Project.Server.Controllers
             {
                 Name = o.Animal.Name,
                 ImageUrl = o.Animal.ImageUrl,
+                Status = o.Status
             }).ToList();
 
             return Ok(appsDTOs);
