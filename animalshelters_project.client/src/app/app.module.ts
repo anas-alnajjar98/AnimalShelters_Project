@@ -36,6 +36,9 @@ import { AdoptionApplicationComponent } from './admin/adoption-application/adopt
 import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
 import { PostManagementComponent } from './admin/post-management/post-management.component';
 import { GetAllUserComponent } from './admin/get-all-users/get-all-users.component';
+import { AboutComponent } from './Tuqa/about/about.component';
+import { TeamComponent } from './Tuqa/Tuqa/team/team.component';
+import { ServicesComponent } from './Tuqa/Tuqa/services/services.component';
 
 
 
@@ -48,7 +51,8 @@ import { GetAllUserComponent } from './admin/get-all-users/get-all-users.compone
     PostFormComponent,
     LoginComponent,
     AllcategoryComponent,
-
+    TeamComponent,
+    ServicesComponent,
     AnimalComponent,
 
     RegisterComponent,
@@ -81,6 +85,8 @@ import { GetAllUserComponent } from './admin/get-all-users/get-all-users.compone
     AddAnimalComponent,
     AdminLoginComponent,
     PostManagementComponent,
+    AboutComponent,
+    TeamComponent,
   ],
   imports: [
     FormsModule,
@@ -100,9 +106,10 @@ import { GetAllUserComponent } from './admin/get-all-users/get-all-users.compone
       { path: 'contactUs', component: ContactUsComponent },
       { path: 'Home', component: HomeComponent },
       { path: 'admin', component: AdminLoginComponent },
+      { path: "about", component: AboutComponent },
 
-
-
+      { path: 'team', component: TeamComponent }, 
+      { path: 'services', component: ServicesComponent },
       { path: 'profile', component: ProfileComponent },
 
       { path: 'ourCommunity', component: OurCommunityComponent },
@@ -121,6 +128,7 @@ import { GetAllUserComponent } from './admin/get-all-users/get-all-users.compone
           { path: "AdoptionApplication", component: AdoptionApplicationComponent },
           { path: "allUsers", component: GetAllUserComponent },
           { path: "post-management", component: PostManagementComponent },
+          { path: "about", component: AboutComponent},
         ]
       }
     ]),
