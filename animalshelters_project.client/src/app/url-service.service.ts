@@ -98,5 +98,11 @@ export class UrlServiceService {
     return this.http.post<any>(`${this.staticData}/Admin/addAnimals`, data);
 
   }
+  GetAllAdoptionapplication(): Observable<any> {
+    return this.http.get<any>(`${this.staticData}/Admin/GetAllAdoptionApplication`)
+  }
+  AcceptApplication(id: number): Observable<any> {
+    return this.http.put<any>(`${this.staticData}/Admin/${id}/accept`, null);
+  }
 
 }
