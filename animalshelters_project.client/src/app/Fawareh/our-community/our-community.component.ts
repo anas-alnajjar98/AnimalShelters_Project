@@ -43,12 +43,15 @@ export class OurCommunityComponent {
     "userId": 1
   }
 
+  status: any = false;
   addLike(postId: number) {
     this.data.postId = postId;
 
     //this.checkIfLikedOrNot(Number(this.data.userId), this.data.postId)
-
-    this._ser.addLike(this.data).subscribe(() => {
+    
+    this._ser.addLike(this.data).subscribe((status) => {
+      this.status = status;
+      console.log(status);
       this.getAllPosts();
     });
   }

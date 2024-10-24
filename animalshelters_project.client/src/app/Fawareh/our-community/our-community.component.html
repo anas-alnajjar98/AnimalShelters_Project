@@ -49,7 +49,7 @@
       <!-- Interaction Buttons -->
       <div class="post-actions">
 
-        <button (click)="addLike(item.id)" class="like-button">❤️ Like</button>
+        <button (click)="addLike(item.id)" class="like-button">❤️ {{ status.flag ? 'Unlike' : 'Like' }}</button>
 
         
           
