@@ -22,6 +22,7 @@ export class ProfileService {
   }
 
   updateUserProfile(userId: number, updatedData: any): Observable<void> {
+    debugger
     return this.http.put<void>(`${this.baseUrl}/UserProfile/UpdateUserProfile/${userId}`, updatedData, { headers: this.headers });
   }
 

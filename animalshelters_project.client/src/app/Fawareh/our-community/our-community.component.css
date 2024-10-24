@@ -227,6 +227,7 @@
 
 .share-btn {
   background-color: #4267B2;
+  text-align:center;
   color: white;
   border: none;
   padding: 8px 12px;
@@ -237,10 +238,14 @@
   align-items: center;
 }
 
-  .share-btn i {
-    margin-right: 8px;
-  }
+.mewo{
+    margin-left: 5px;
+}
 
-  .share-btn:hover {
-    background-color: #365899;
-  }
+
+
+.share-btn:hover {
+  background-color: #365899;
+}
+
+
