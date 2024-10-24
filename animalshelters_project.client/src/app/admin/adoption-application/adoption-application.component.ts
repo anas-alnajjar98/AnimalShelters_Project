@@ -47,7 +47,7 @@ export class AdoptionApplicationComponent {
         }).then(() => {
           
           this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-            this.router.navigate(['/AdminDashBoard/AdoptionApplication']);
+            this.router.navigate(['/adminDashBoard/AdoptionApplication']);
           });
         });
       },
