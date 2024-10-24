@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ProfileService } from '../../services/profile.service'; // استيراد خدمة API
-import { Router } from '@angular/router'; // لإعادة التوجيه بين الصفحات
+import { ProfileService } from '../../services/profile.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-profile',
@@ -10,9 +11,10 @@ import { Router } from '@angular/router'; // لإعادة التوجيه بين 
 export class ProfileComponent implements OnInit {
   userId!: number;
   userProfile: any;
-  userOrders: any[] = [];
+  userApps: any[] = [];
+  imageFile: File | null = null;
 
-  constructor(private apiService: ProfileService, private router: Router) { }
+  constructor(private apiService: ProfileService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     const storedUserId = localStorage.getItem('userId');
@@ -40,7 +42,8 @@ export class ProfileComponent implements OnInit {
   loadUserApps(): void {
     this.apiService.getUserApps(this.userId).subscribe(
       (data: any) => {
-        this.userOrders = Array.isArray(data) ? data : [];
+        this.userApps = Array.isArray(data) ? data : [];
+        console.log('Apps', this.userApps);
       },
       (error) => {
         console.error('Error fetching user Applications:', error);
@@ -53,4 +56,66 @@ export class ProfileComponent implements OnInit {
     return new Date(endDate) >= today;
   }
 
+
+  onImageSelected(event: any): void {
+    debugger
+    const file: File = event.target.files[0];
+    if (file) {
+      this.imageFile = file;
+      console.log('Selected image file:', this.imageFile);
+    } else {
+      console.log('No file selected.');
+    }
+  }
+
+
+  updateProfile(data: any): void {
+    debugger
+    const formData = new FormData();
+
+    for (const key in data) {
+      if (data[key]) {
+        formData.append(key, data[key]);
+      }
+    }
+
+    if (this.imageFile) {
+      formData.append('image', this.imageFile);
+    }
+
+    this.apiService.updateUserProfile(this.userId, formData).subscribe(
+      () => {
+        alert('User profile updated successfully');
+        this.router.navigate(['/profile']);
+      },
+      (error: HttpErrorResponse) => {
+        console.error('Error updating user profile:', error);
+
+        // Check if it's a validation error (status 400)
+        if (error.status === 400) {
+          const validationErrors = error.error.errors;
+
+          if (validationErrors) {
+            // Iterate through the validation errors and show them
+            let errorMessage = 'Validation errors occurred: \n';
+            for (const field in validationErrors) {
+              if (validationErrors.hasOwnProperty(field)) {
+                errorMessage += `${field}: ${validationErrors[field].join(', ')}\n`;
+              }
+            }
+            alert(errorMessage);
+          } else {
+            alert('An error occurred while updating the profile. Please try again.');
+          }
+        } else {
+          alert(error.message);  // Fallback for other error types
+        }
+      }
+    );
+
+  }
+
 }
+
+
+
