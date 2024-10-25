@@ -66,7 +66,7 @@ namespace AnimalShelters_Project.Server.Controllers
         public IActionResult AnimalsCat(int id)
         {
 
-            var animals = _context.Animals.Where(a => a.CategoryId == id).ToList();
+            var animals = _context.Animals.Where(a => a.CategoryId == id&&a.AdoptionStatus== "Available").ToList();
 
             if (id <= 0)
             {
@@ -630,7 +630,8 @@ namespace AnimalShelters_Project.Server.Controllers
                 otherApp.Status = "rejected";
                 otherApp.UpdatedAt = DateTime.Now;
             }
-
+            var animal = await _context.Animals.Where(x => x.AnimalId == application.AnimalId).FirstAsync();
+            animal.AdoptionStatus = "Taken";
            
             await _context.SaveChangesAsync();
 
