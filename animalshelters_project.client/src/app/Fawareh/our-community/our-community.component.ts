@@ -40,12 +40,17 @@ export class OurCommunityComponent {
 
   data = {
     "postId": 0,
-    "userId": 1
+    "userId": localStorage.getItem('userId'),
   }
 
   status: any = false;
   addLike(postId: number) {
     this.data.postId = postId;
+    debugger
+    if (localStorage.getItem('userId') == null) {
+      alert("You should login first");
+      this.router.navigate(['/login']);
+    }
 
     //this.checkIfLikedOrNot(Number(this.data.userId), this.data.postId)
     
@@ -78,9 +83,13 @@ export class OurCommunityComponent {
   submitComment(postId: number) {
     if (!this.newComment.trim()) return; // Prevent empty comments
 
+    if (localStorage.getItem('userId') == null) {
+      alert("You should login first");
+      this.router.navigate(['/login']);
+    }
     const commentData = {
       postId: postId,
-      userId: 1,  // Assume userId is available
+      userId: localStorage.getItem('userId'),  // Assume userId is available
       content: this.newComment
     };
 
@@ -97,9 +106,14 @@ export class OurCommunityComponent {
   }
 
   submitReply(commentId: number) {
+    if (localStorage.getItem('userId') == null) {
+      alert("You should login first");
+      this.router.navigate(['/login']);
+    }
+
     const replyData = {
       commentId: commentId,
-      userId: 1,
+      userId: localStorage.getItem('userId'),
       content: this.newReply
     };
 
