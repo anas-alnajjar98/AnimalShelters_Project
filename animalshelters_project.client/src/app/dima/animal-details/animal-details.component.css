@@ -1,5 +1,5 @@
 .animal-details {
-  max-width: 900px;
+  max-width: 956px;
   margin: 50px auto;
   padding: 20px;
   background-color: #f9f9f9;
@@ -26,10 +26,9 @@
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-
-  .animal-info h2 {
+  .animal-info[_ngcontent-ng-c909723059] h2[_ngcontent-ng-c909723059] {
     font-size: 28px;
-    color: #333;
+    color: #214d63;
     margin-bottom: 20px;
   }
 
@@ -37,8 +36,9 @@
   .shelter-info p {
     font-size: 16px;
     line-height: 1.6;
-    color: #555;
+    color: #212529;
     margin: 10px 0;
+    text-align: left;
   }
 
     .animal-info p strong,
@@ -49,13 +49,14 @@
 
   .shelter-info h3 {
     font-size: 24px;
-    color: #333;
+    color: #214d63;
     margin-bottom: 15px;
   }
 
 .shelter-info {
   background-color: #f5f5f5;
 }
+
 .adopt-button {
   padding: 10px 20px;
   background-color: #28a745;
@@ -64,7 +65,6 @@
   border-radius: 5px;
   font-size: 16px;
   cursor: pointer;
-  margin-top: 20px;
   transition: background-color 0.3s ease;
 }
 
@@ -74,7 +74,9 @@
 
 .adoption-section {
   display: flex;
-  justify-content: center;
+  justify-content: center; /* Center the button horizontally */
+  align-items: center; /* Center the button vertically if needed */
+  width: 100%; /* Ensure the section takes the full width of the container */
   margin-top: 20px;
 }
 

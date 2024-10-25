@@ -1,0 +1,34 @@
+.table td {
+  vertical-align: middle;
+  height: 200px;
+}
+.table th {
+  vertical-align: middle;
+  height: 50px;
+  background-color: #214d63
+}
+.img-fluid {
+  max-width: 100%;
+  height: 180px;
+  width: 307px;
+}
+button.btn.btn-success.btn-sm {
+  margin: 4px;
+}
+.btn-primary {
+  background: #214d63;
+  border-color: #214d63;
+  color: #ffffff;
+}
+
+
+
+
+.btn[_ngcontent-ng-c2426831644] + .btn[_ngcontent-ng-c2426831644] {
+  /* margin-left: 3px; */
+  width: 84px;
+  margin: 2px;
+  text-align: center;
+  padding: 4px;
+  height: 39px;
+}

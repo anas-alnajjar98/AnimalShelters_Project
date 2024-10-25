@@ -15,6 +15,7 @@
           <tr>
             <th>Id</th>
             <th>Name</th>
+            <th>animal image</th>
             <th>Breed</th>
             <th>Age</th>
             <th>Size</th>
@@ -28,17 +29,18 @@
         <tbody>
          
           <tr *ngFor="let item of Array; let i = index">
-          
+
             <th scope="row">{{ item.animalId }}</th>
             <td>{{ item.name }}</td>
-            <td>{{item.breed}}</td>
+            <td><img class="img-fluid" src="https://localhost:7208/{{item.imageUrl}}" alt=""></td>
+              <td>{{item.breed}}</td>
             <td>{{item.age}}</td>
             <td>{{item.size}}</td>
             <td>{{item.temperament}}</td>
             <td>{{item.specialNeeds}}</td>
             <td>{{item.adoptionStatus}}</td>
             <td>
-            
+
               <button class="btn btn-primary btn-sm" [routerLink]="['/adminDashBoard/UpdateAnimal', item.animalId]">
                 Edit
               </button>

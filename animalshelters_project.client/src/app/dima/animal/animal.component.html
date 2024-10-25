@@ -38,7 +38,7 @@
           <img src="https://localhost:7208{{animal.imageUrl}}" alt="{{animal.name}} Image" class="card-img-top">
           <div class="card-body">
             <h5 class="card-title">{{ animal.name }}</h5>
-            <h6 class="card-subtitle mb-2 text-muted">{{ animal.breed }} - Age: {{ animal.age }}</h6>
+            <h6 class="card-subtitle mb-2 ">Breed:{{ animal.breed }} - Age: {{ animal.age }}</h6>
             <p class="card-text">
               <strong>Size:</strong> {{ animal.size }}<br>
               <strong>Temperament:</strong> {{ animal.temperament }}<br>
@@ -47,7 +47,8 @@
 
             </p>
             <div class="card-actions">
-              <button class="btn btn-primary">Adopt Me</button>
+              <button class="btn btn-primary" [routerLink]="['/adoptionForm', animal. animalId]">Adopt {{ animal.name }}</button>
+          
               <a class="btn btn-secondary" [routerLink]="['/animalDetails', animal.animalId]">More Info</a>
             </div>
           </div>
