@@ -1,47 +1,54 @@
-//import { Component } from '@angular/core';
-//import { UrlServiceService } from '../../url-service.service';
-//import { Router } from '@angular/router';
+// contact-admin.component.ts
+import { Component, OnInit } from '@angular/core';
+import { UrlServiceService } from '../../url-service.service';
+import { Router } from '@angular/router';
 
-//@Component({
-//  selector: 'app-contact-admin',
-//  templateUrl: './contact-admin.component.html',
-//  styleUrl: './contact-admin.component.css'
-//})
-//export class ContactAdminComponent {
-//  contacts: any[] = [];
+@Component({
+  selector: 'app-contact-admin',
+  templateUrl: './contact-admin.component.html',
+  styleUrls: ['./contact-admin.component.css'] // Corrected property name
+})
+export class ContactAdminComponent implements OnInit {
+  contacts: any[] = []; // Define the contacts array
 
-//  constructor(private _ser: UrlServiceService, private _router: Router) { }
+  constructor(private _ser: UrlServiceService, private _router: Router) { }
 
-//  ngOnInit() {
-//    this.getContacts();
-//  }
+  ngOnInit() {
+    this.loadContacts(); // Use a descriptive method name
+  }
 
-//  getContacts() {
-//    this._ser.ContactAdmin().subscribe(
-//      (data: any[]) => {
-//        this.contacts = data; 
-//      },
-//      (error) => {
-//        console.error('Error fetching contacts:', error);
-//      }
-//    );
-//  }
+  loadContacts() {
+    this._ser.ContactAdmin().subscribe(
+      (data: any[]) => {
+        this.contacts = data;
+      },
+      (error) => {
+        console.error('Error fetching contacts:', error);
+      }
+    );
+  }
 
-//  //updateStatus(id: number) {
-//  //  this._ser.updateContactStatus(id).subscribe(
+  replyToContact(contactId: number): void {
+    console.log('Replying to contact with ID:', contactId);
+    // Implement actual reply logic here if necessary
+  }
+}
 
-//  //    () => {
-//  //      debugger
+  //updateStatus(id: number) {
+  //  this._ser.updateContactStatus(id).subscribe(
 
-//  //      alert('Contact status updated successfully!');
-//  //      this.getContacts();
-//  //    },
-//  //    (error) => {
-//  //      debugger
+  //    () => {
+  //      debugger
 
-//  //      alert('Error updating contact status');
-//  //      console.error('Error updating contact status:', error);
-//  //    }
-//  //  )
-//}
+  //      alert('Contact status updated successfully!');
+  //      this.getContacts();
+  //    },
+  //    (error) => {
+  //      debugger
+
+  //      alert('Error updating contact status');
+  //      console.error('Error updating contact status:', error);
+  //    }
+  //  )
+
 

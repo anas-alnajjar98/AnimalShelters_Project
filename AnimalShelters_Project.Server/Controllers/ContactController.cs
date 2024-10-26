@@ -3,6 +3,7 @@ using AnimalShelters_Project.Server.Models;
 using AnimalShelters_Project.Server.Helpers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 
 namespace AnimalShelters_Project.Server.Controllers
 {
@@ -11,69 +12,81 @@ namespace AnimalShelters_Project.Server.Controllers
     public class ContactController : ControllerBase
     {
 
+        private readonly MyDbContext _db;
+        private readonly EmailService _emailService;
 
-        private readonly MyDbContext _Db;
-        //private readonly EmailHelper _emailHelper;
-        public ContactController(MyDbContext db/*, EmailHelper emailHelper*/)
+        public ContactController(MyDbContext db, EmailService emailService)
+
         {
-            _Db = db;
-            //_emailHelper = emailHelper;
+            _db = db;
+            _emailService = emailService;
 
         }
 
-        [HttpPost("newmassege")]
-        public IActionResult addcontact([FromForm] ContactDTO DTO)
+        [HttpPost("sendContactMessage")]
+        public async Task<IActionResult> SendContactMessage([FromForm] ContactDTO contactForm)
         {
-            var messege = new Contact
-            {
-                Name = DTO.Name,
-                Email = DTO.Email,
+            if (contactForm == null) return BadRequest("Empty form");
 
-                Message = DTO.Message,
+            var newMessage = new Contact
+            {
+                Name = contactForm.Name,
+                Email = contactForm.Email,
+                Message = contactForm.Message,
+                Reply = "no reply"
             };
 
-            _Db.Contacts.Add(messege);
-            _Db.SaveChanges();
-            return Ok();
+            _db.Contacts.Add(newMessage);
+            await _db.SaveChangesAsync(); // Make the database save operation asynchronous
+
+            await _emailService.SendEmailAsync(contactForm.Email, "Contact Received", "Thank you for reaching out to us.");
+
+            return Ok(new { message = "Email sent successfully" });
         }
 
 
-        [HttpGet("getallcontact")]
-        public IActionResult getallcontact()
+        [HttpPost("replyToContacts/{contactId}")]
+        public async Task<IActionResult> ReplyToContacts(int contactId, [FromForm] ReplyFormDto replyForm)
         {
-            var messege = _Db.Contacts.ToList();
-            return Ok(messege);
+            if (replyForm == null) return BadRequest("Empty form");
+            if (contactId <= 0) return BadRequest("Invalid contact ID");
+
+            var contact = _db.Contacts.FirstOrDefault(a => a.Id == contactId);
+            if (contact == null) return NotFound("Contact not found");
+
+            contact.Reply = replyForm.Message;
+
+            _db.Contacts.Update(contact);
+            _db.SaveChanges();
+
+            await _emailService.SendEmailAsync(contact.Email, replyForm.Subject, replyForm.Message);
+
+            return Ok(new { message = "Reply sent successfully" });
         }
-        //[HttpPost("adminRespone")]
-        //public async Task<IActionResult> adminRespone([FromForm] AdminresDto adminres)
-        //{
-        //    try
-        //    {
-        //        _emailHelper.SendMessage("to user", adminres.Email, "admin respone", adminres.Message);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Console.WriteLine("error");
-        //    }
 
-        //    return Ok();
-        //}
-
-        [HttpDelete("deleteMessage/{id}")]
-        public IActionResult DeleteMessage(int id)
+        [HttpGet("getAllContactMessages")]
+        public IActionResult GetAllContactMessages()
         {
-            var message = _Db.Contacts.Find(id);
-            if (message == null)
-            {
-                return NotFound();
-            }
+            var messages = _db.Contacts.ToArray();
+            if (messages.Length == 0) return NotFound("No contact messages found");
 
-            _Db.Contacts.Remove(message);
-            _Db.SaveChanges();
-
-            return Ok();
+            return Ok(messages);
         }
 
+        [HttpGet("getContactMessageById/{contactId}")]
+        public IActionResult GetContactMessageById(int contactId)
+        {
+            if (contactId <= 0) return BadRequest("Invalid ID");
+
+            var contact = _db.Contacts.FirstOrDefault(x => x.Id == contactId);
+            if (contact == null) return NotFound("Message not found");
+
+            return Ok(contact);
+        }
+
+        private void SendEmail(string recipientEmail, string subject, string body)
+        {
+            Console.WriteLine($"Email sent to {recipientEmail} with subject '{subject}' and body '{body}'");
+        }
     }
 }
-

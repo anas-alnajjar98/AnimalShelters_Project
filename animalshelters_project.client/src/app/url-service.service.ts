@@ -105,4 +105,8 @@ export class UrlServiceService {
     return this.http.put<any>(`${this.staticData}/Admin/${id}/accept`, null);
   }
 
+  ContactAdmin(): Observable<any> {
+    return this.http.get<any>(`${this.staticData}/Contact/getAllContactMessages`)
+  }
+   
 }

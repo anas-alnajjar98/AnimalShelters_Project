@@ -39,6 +39,7 @@ import { GetAllUserComponent } from './admin/get-all-users/get-all-users.compone
 import { AboutComponent } from './Tuqa/about/about.component';
 import { TeamComponent } from './Tuqa/Tuqa/team/team.component';
 import { ServicesComponent } from './Tuqa/Tuqa/services/services.component';
+import { ContactAdminComponent } from './admin/contact-admin/contact-admin.component';
 
 
 
@@ -128,7 +129,8 @@ import { ServicesComponent } from './Tuqa/Tuqa/services/services.component';
           { path: "AdoptionApplication", component: AdoptionApplicationComponent },
           { path: "allUsers", component: GetAllUserComponent },
           { path: "post-management", component: PostManagementComponent },
-          { path: "about", component: AboutComponent},
+          { path: "about", component: AboutComponent },
+          { path: "ContactAdmin", component: ContactAdminComponent }
         ]
       }
     ]),
