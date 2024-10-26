@@ -26,12 +26,10 @@ export class AllSheltersComponent {
 
   }
 
-
   deleteShelter(id: number): void {
-
     Swal.fire({
       title: 'Are you sure?',
-      text: 'Do you really want to delete this Shelter? If you Deleted all animal inside it will be deleted also',
+      text: 'Do you really want to delete this shelter? All animals inside it will also be deleted.',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -42,20 +40,18 @@ export class AllSheltersComponent {
         this._ser.deleteShelter(id).subscribe(
           () => {
             console.log('Shelter deleted');
-
-            this.Array = this.Array.filter((item: any) => item.id !== id);
             Swal.fire(
               'Deleted!',
-              'The shelter has been deleted.',
+              'The shelter has been deleted successfully.',
               'success'
             );
+            this.GetShelterAdmin(); // Re-fetch the list to get updated data
           },
           error => {
-            console.error('Error deleting Shelter:', error);
-
+            console.error('Error deleting shelter:', error);
             Swal.fire(
               'Error!',
-              'There was a problem deleting the Shelter.',
+              'There was a problem deleting the shelter. Please try again later.',
               'error'
             );
           }

@@ -86,7 +86,7 @@ export class ProfileComponent implements OnInit {
     this.apiService.updateUserProfile(this.userId, formData).subscribe(
       () => {
         alert('User profile updated successfully');
-        this.router.navigate(['/profile']);
+        this.loadUserProfile();
       },
       (error: HttpErrorResponse) => {
         console.error('Error updating user profile:', error);

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { UrlServiceService } from '../../url-service.service';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-allcategories',
@@ -12,7 +13,7 @@ export class AllcategoriesComponent {
 
     this.GetCategoryAdmin();
   }
-  constructor(private _ser: UrlServiceService) {
+  constructor(private _ser: UrlServiceService, private router: Router) {
 
 
   }
@@ -27,7 +28,6 @@ export class AllcategoriesComponent {
   }
 
   deleteCategory(id: number): void {
-    // Use SweetAlert2 for confirmation
     Swal.fire({
       title: 'Are you sure?',
       text: 'Do you really want to delete this category?',
@@ -39,26 +39,23 @@ export class AllcategoriesComponent {
     }).then((result) => {
       if (result.isConfirmed) {
         this._ser.deleteCategory(id).subscribe(
-          () => { // No need to check the response; successful API call means it was deleted
+          () => {
             console.log('Category deleted');
-
-            // Filter out the deleted category from the array
             this.Array = this.Array.filter((item: any) => item.id !== id);
 
-            // Show success message
             Swal.fire(
               'Deleted!',
               'The category has been deleted.',
               'success'
             );
           },
-          error => {
+          (error) => {
             console.error('Error deleting category:', error);
 
-            // Show error message
+            // Show error message only if there's a confirmed issue
             Swal.fire(
               'Error!',
-              'There was a problem deleting the category.',
+              'There was a problem deleting the category. Please try again later.',
               'error'
             );
           }

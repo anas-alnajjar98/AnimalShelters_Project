@@ -1,4 +1,18 @@
-<div class="container">
+
+
+<section class="header-inner bg-dark text-center">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 ">
+
+        <h2 class="inner-banner-title">Adobtion Form</h2>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<div class="adoption-form-container">
   <h1>Animal Adoption Form</h1>
 
   <form [formGroup]="myform" (ngSubmit)="FormSubmit()">
@@ -81,6 +95,6 @@
       </div>
     </fieldset>
 
-    <button type="submit">Submit Adoption Form</button>
+    <button class="btn btn-success" type="submit">Submit Adoption Form</button>
   </form>
 </div>

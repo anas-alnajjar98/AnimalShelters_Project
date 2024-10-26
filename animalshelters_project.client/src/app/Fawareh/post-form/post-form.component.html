@@ -1,18 +1,22 @@
-
-
 <!-- Header Section with Pet Background -->
-<header style="background-image: url('your-pet-background.jpg'); background-size: cover; background-position: center; height: 300px; position: relative;">
-  <div style="background-color: steelblue; height: 100%; display: flex; justify-content: center; align-items: center;">
-    <h1 style="color: white; font-size: 3rem; text-align: center;">Share Your Success Pet Story</h1>
+
+<section class="header-inner bg-dark text-center">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 ">
+
+        <h2 class="inner-banner-title">Share Your  Pet Story</h2>
+      </div>
+    </div>
   </div>
-</header>
+</section>
 
 
 <section class="space-ptb login">
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-8 col-sm-10">
-        <h2 class="text-center mb-4">Post Your Success Pet Story</h2>
+     
         <div class="tab-content" id="myTabContent">
           <div class="tab-pane fade show active" id="register" role="tabpanel" aria-labelledby="register-tab">
             <form #addNewPost="ngForm" (ngSubmit)="addPost(addNewPost.value)" class="row mt-4 mb-5 align-items-center">

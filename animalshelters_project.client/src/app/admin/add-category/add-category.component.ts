@@ -35,7 +35,7 @@ export class AddCategoryComponent {
         text: 'The category has been added successfully',
         confirmButtonText: 'OK'
       }).then(() => {
-        this._router.navigate(['AdminDashBoard/AllCategories']);
+        this._router.navigate(['adminDashBoard/AllCategories']);
       });
     }, error => {
       Swal.fire({

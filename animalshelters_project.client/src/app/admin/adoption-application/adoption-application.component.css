@@ -37,3 +37,26 @@
     text-decoration: none;
     cursor: pointer;
   }
+
+
+a {
+  font-size: 15px;
+  outline: medium none !important;
+  color: #214d63;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  text-decoration: none !important;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.table td {
+  vertical-align: middle;
+  height: 100px;
+}
+
+.table th {
+  vertical-align: middle;
+  height: 50px;
+  background-color: #214d63
+}

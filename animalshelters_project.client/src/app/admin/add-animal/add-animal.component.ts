@@ -54,7 +54,7 @@ export class AddAnimalComponent {
           text: 'The animal has been added successfully!',
           confirmButtonText: 'OK'
         }).then(() => {
-          this._router.navigate(['AdminDashBoard/AllAnimal']);
+          this._router.navigate(['adminDashBoard/AllAnimal']);
         });
       },
       (error) => {

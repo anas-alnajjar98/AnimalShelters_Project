@@ -37,7 +37,7 @@ export class AdminLoginComponent implements OnInit {
 
         this.isLoading = false;
         this.loginError = '';
-        this.router.navigate(['/adminDashBoard']);
+        this.router.navigate(['/adminDashBoard/allUsers']);
       } catch (error) {
         this.isLoading = false;
         this.loginError = 'Login failed. Please check your credentials.';

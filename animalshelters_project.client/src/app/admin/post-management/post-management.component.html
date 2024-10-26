@@ -19,12 +19,12 @@
         <td>{{ post.content }}</td>
         <td><img src="https://localhost:7208/api/Fawareh/getImage/{{ post.image }}" alt="Post Image" class="post-image"></td>
         <td>
-          <span class="accepted-status" *ngIf="post.flag">Accepted</span>
-          <span class="rejected-status" *ngIf="!post.flag">Rejected</span>
+          <span class="accepted-status" *ngIf="post.flag">Published</span>
+          <span class="rejected-status" *ngIf="!post.flag">Unpublished</span>
         </td>
         <td>
           <button (click)="togglePostStatus(post.id)" class="toggle-btn">
-            {{ post.flag ? 'Reject' : 'Accept' }}
+            {{ post.flag ? 'Unpublish' : 'Publish' }}
           </button>
         </td>
       </tr>

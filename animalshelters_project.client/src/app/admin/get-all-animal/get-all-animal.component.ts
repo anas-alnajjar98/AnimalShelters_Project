@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { UrlServiceService } from '../../url-service.service';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-get-all-animal',
@@ -14,7 +15,7 @@ export class GetAllAnimalComponent {
 
     this.GetAnimalAdmin();
   }
-  constructor(private _ser: UrlServiceService) {
+  constructor(private _ser: UrlServiceService, private router: Router) {
 
 
   }
@@ -34,11 +35,10 @@ export class GetAllAnimalComponent {
   //  console.log('Edit animal with ID:', animalId);
     
   //}
-
-  deleteAnimal(animalId: number) {
+  deleteAnimal(animalId: number): void {
     Swal.fire({
       title: 'Are you sure?',
-      text: "You won't be able to undo this!",
+      text: "Do you really want to delete this animal?",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -47,27 +47,27 @@ export class GetAllAnimalComponent {
     }).then((result) => {
       if (result.isConfirmed) {
         this._ser.DeleteAnimalByID(animalId).subscribe(
-          (response) => {
-            console.log('Delete animal with ID:', animalId);
+          () => {
+            console.log('Animal deleted with ID:', animalId);
+            // Remove the deleted animal from the Array
+            this.Array = this.Array.filter((item: any) => item.animalId !== animalId);
 
-            Swal.fire({
-              icon: 'success',
-              title: 'Deleted!',
-              text: 'The animal has been deleted successfully.'
-            });
+            Swal.fire(
+              'Deleted!',
+              'The animal has been deleted successfully.',
+              'success'
+            );
           },
           (error) => {
-            Swal.fire({
-              icon: 'error',
-              title: 'Failed',
-              text: 'There was an error deleting the animal. Please try again later.'
-            });
             console.error('Error deleting animal:', error);
+            Swal.fire(
+              'Error!',
+              'There was a problem deleting the animal. Please try again later.',
+              'error'
+            );
           }
         );
       }
     });
   }
-
-
 }

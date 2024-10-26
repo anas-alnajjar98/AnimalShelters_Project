@@ -14,7 +14,9 @@
         <td>{{ app.applicantName }}</td>
         <td>{{ app.animalName }}</td>
         <td>
-          <button class="btn btn-info" (click)="openModal(app)">More Information</button>
+          <!--<button class="btn btn-info" (click)="openModal(app)">More Information</button>-->
+          <a href="javascript:void(0)" (click)="openModal(app)">More Information</a>
+
         </td>
         <td>
           <button class="btn btn-success" (click)="acceptApplication(app.applicationId)">Accept</button>

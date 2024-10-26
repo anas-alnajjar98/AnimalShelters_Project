@@ -66,7 +66,7 @@ namespace AnimalShelters_Project.Server.Controllers
         public IActionResult AnimalsCat(int id)
         {
 
-            var animals = _context.Animals.Where(a => a.CategoryId == id).ToList();
+            var animals = _context.Animals.Where(a => a.CategoryId == id&&a.AdoptionStatus== "Available").ToList();
 
             if (id <= 0)
             {
@@ -442,21 +442,67 @@ namespace AnimalShelters_Project.Server.Controllers
          
 
         }
-        [HttpDelete("DeletCategoryById/{id}")]
-        public async Task<IActionResult> DeletCategoryById(int id) {
-            if (id <= 0) { return BadRequest("id can't be zero or less"); }
-            var category=_context.Categories.FirstOrDefault(c => c.Id == id);
-            if (category != null) {
+        //[HttpDelete("DeletCategoryById/{id}")]
+        //public async Task<IActionResult> DeletCategoryById(int id) {
+        //    if (id <= 0) { return BadRequest("id can't be zero or less"); }
+        //    var category=_context.Categories.FirstOrDefault(c => c.Id == id);
+        //    if (category != null) {
 
-                var animal =  _context.Animals.Where(x => x.CategoryId == id).ToList();
-                if (animal.Any()) {
-                    _context.Animals.RemoveRange(animal);
-                }
+        //        var animal =  _context.Animals.Where(x => x.CategoryId == id).ToList();
+        //        if (animal.Any()) {
+        //            _context.Animals.RemoveRange(animal);
+        //        }
+        //    }
+        //    _context.Categories.Remove(category);
+        //    _context.SaveChanges();
+        //    return Ok(category);
+        //}
+
+
+        [HttpDelete("DeletCategoryById/{id}")]
+        public async Task<IActionResult> DeletCategoryById(int id)
+        {
+            if (id <= 0)
+            {
+                return BadRequest("id can't be zero or less");
             }
-            _context.Categories.Remove(category);
-            _context.SaveChanges();
-            return Ok(category);
+
+            var category = await _context.Categories.FirstOrDefaultAsync(c => c.Id == id);
+            if (category != null)
+            {
+            
+                var animals = _context.Animals.Where(x => x.CategoryId == id).ToList();
+
+                if (animals.Any())
+                {
+                    foreach (var animal in animals)
+                    {
+                      
+                        var adoptions = _context.AdoptionApplications.Where(a => a.AnimalId == animal.AnimalId).ToList();
+                        if (adoptions.Any())
+                        {
+                            _context.AdoptionApplications.RemoveRange(adoptions);
+                        }
+                    }
+                   
+                    _context.Animals.RemoveRange(animals);
+                }
+
+               
+                _context.Categories.Remove(category);
+                await _context.SaveChangesAsync();
+                return Ok(category);
+            }
+
+            return NotFound("Category not found.");
         }
+
+
+
+
+
+
+
         [HttpGet("GetAnimalDetailsById/{id}")]
         public async Task<IActionResult> GetAnimalDetailsById(int id)
         {
@@ -584,7 +630,8 @@ namespace AnimalShelters_Project.Server.Controllers
                 otherApp.Status = "rejected";
                 otherApp.UpdatedAt = DateTime.Now;
             }
-
+            var animal = await _context.Animals.Where(x => x.AnimalId == application.AnimalId).FirstAsync();
+            animal.AdoptionStatus = "Taken";
            
             await _context.SaveChangesAsync();
 
