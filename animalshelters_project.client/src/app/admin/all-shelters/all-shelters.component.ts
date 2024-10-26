@@ -40,13 +40,12 @@ export class AllSheltersComponent {
         this._ser.deleteShelter(id).subscribe(
           () => {
             console.log('Shelter deleted');
-            // Update the Array to remove the deleted shelter
-            this.Array = this.Array.filter((item: any) => item.id !== id);
             Swal.fire(
               'Deleted!',
               'The shelter has been deleted successfully.',
               'success'
             );
+            this.GetShelterAdmin(); // Re-fetch the list to get updated data
           },
           error => {
             console.error('Error deleting shelter:', error);

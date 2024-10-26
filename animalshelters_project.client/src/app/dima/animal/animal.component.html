@@ -14,21 +14,26 @@
   <div class="filter-container">
     <div class="form-group">
       <label for="breedFilter">Filter by Breed:</label>
-      <input type="text" id="breedFilter" [(ngModel)]="breedFilter" class="form-control" placeholder="Enter breed" />
+      <input type="text" id="breedFilter" [(ngModel)]="breedFilter" class="form-control" placeholder="Enter breed" (input)="applyFilters()" />
     </div>
 
-    <div class="form-group">
-      <label for="minAgeFilter">Min Age:</label>
-      <input type="number" id="minAgeFilter" [(ngModel)]="minAgeFilter" class="form-control" placeholder="Enter minimum age" />
-    </div>
+
 
     <div class="form-group">
-      <label for="maxAgeFilter">Max Age:</label>
-      <input type="number" id="maxAgeFilter" [(ngModel)]="maxAgeFilter" class="form-control" placeholder="Enter maximum age" />
+      <label>Age Range:</label>
+      <div class="slider-container">
+        <label>Min Age:</label>
+        <input type="range" [(ngModel)]="minAgeFilter" min="0" max="20" (input)="onMinAgeChange()" class="slider" />
+        <label>Max Age:</label>
+        <input type="range" [(ngModel)]="maxAgeFilter" min="0" max="20" (input)="onMaxAgeChange()" class="slider" />
+      </div>
+      <div class="slider-values">
+        <span>{{ minAgeFilter }} years</span> - <span>{{ maxAgeFilter }} years</span>
+      </div>
     </div>
 
     <button class="btn btn-primary" (click)="applyFilters()">Apply Filters</button>
-</div>
+  </div>
 
 
 
@@ -54,4 +59,4 @@
         </div>
       </div>
     </div>
-
+ </div>
