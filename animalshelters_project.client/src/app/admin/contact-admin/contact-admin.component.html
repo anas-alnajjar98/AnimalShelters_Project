@@ -8,7 +8,6 @@
           <th>Name</th>
           <th>Email</th>
           <th>Message</th>
-          <th>Reply</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -18,9 +17,8 @@
           <td>{{ contact.name }}</td>
           <td>{{ contact.email }}</td>
           <td>{{ contact.message }}</td>
-          <td>{{ contact.reply }}</td>
           <td>
-            <button class="btn btn-success" >Reply</button>
+            <a class="btn btn-success" href="mailto:{{contact.email}}">Reply</a>
           </td>
         </tr>
       </tbody>

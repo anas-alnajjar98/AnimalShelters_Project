@@ -1,30 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { UrlServiceService } from '../../url-service.service';
-import { Router } from '@angular/router';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-@Component({
-  selector: 'app-admin-dashboard',
-  templateUrl: './admin-dashboard.component.html',
-  styleUrls: ['./admin-dashboard.component.css'] 
-})
-export class AdminDashboardComponent implements OnInit {
+import { ContactAdminComponent } from './contact-admin.component';
 
-  contactAdminData: any[] = []; 
+describe('ContactAdminComponent', () => { // Updated name
+  let component: ContactAdminComponent;
+  let fixture: ComponentFixture<ContactAdminComponent>;
 
-  constructor(private _ser: UrlServiceService, private _router: Router) { }
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [ContactAdminComponent]
+    })
+      .compileComponents();
 
-  ngOnInit() {
-    this.ContactAdmin();
-  }
+    fixture = TestBed.createComponent(ContactAdminComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
 
-  ContactAdmin() {
-    this._ser.ContactAdmin().subscribe(
-      (data: any[]) => {
-        this.contactAdminData = data; 
-      },
-      (error) => {
-        console.error('Error fetching contacts:', error);
-      }
-    );
-  }
-}
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

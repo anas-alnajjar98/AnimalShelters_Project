@@ -72,7 +72,7 @@ import { ContactAdminComponent } from './admin/contact-admin/contact-admin.compo
     AddCategoryComponent,
     AdoptionFormComponent,
     UpdateCategoryComponent,
-    
+    ContactAdminComponent,
     ProfileComponent,
     AllSheltersComponent,
     UpdateShelterComponent,
